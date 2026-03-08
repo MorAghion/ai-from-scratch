@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext, useContext } from 'react'
+import { useState, useEffect, useCallback, createContext, useContext } from 'react'
 import { themes } from './data/themes'
 import { notebooks } from './data/notebooks'
 import { getNotebookChapters } from './data/chapters'
@@ -30,17 +30,59 @@ function applyThemeVars(theme) {
 export default function App() {
   const [themeId, setThemeId] = useState(() => localStorage.getItem('theme') || 'warm')
   const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'he')
-  const [currentView, setCurrentView] = useState('landing') // 'landing' | 'notebook'
-  const [activeNotebookId, setActiveNotebookId] = useState(null)
-  const [activeChapter, setActiveChapter] = useState(0)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [view, setView] = useState('chapter') // 'chapter' | 'glossary'
 
   const theme = themes[themeId]
   const dir = lang === 'he' ? 'rtl' : 'ltr'
 
+  // Parse hash to derive navigation state
+  function parseHash() {
+    const hash = window.location.hash.replace(/^#\/?/, '')
+    if (!hash) return { notebookId: null, chapterId: null }
+    const [notebookId, chapterId] = hash.split('/')
+    return { notebookId: notebooks[notebookId] ? notebookId : null, chapterId: chapterId || null }
+  }
+
+  const [navState, setNavState] = useState(parseHash)
+
+  const activeNotebookId = navState.notebookId
   const activeNotebook = activeNotebookId ? notebooks[activeNotebookId] : null
   const notebookChapters = activeNotebook ? getNotebookChapters(activeNotebook) : []
+  const currentView = activeNotebookId ? 'notebook' : 'landing'
+
+  // Derive active chapter index from chapterId in hash
+  const activeChapter = (() => {
+    if (!navState.chapterId || notebookChapters.length === 0) return 0
+    const idx = notebookChapters.findIndex(ch => ch.id === navState.chapterId)
+    return idx !== -1 ? idx : 0
+  })()
+
+  // Update hash when navigating
+  const setActiveChapter = useCallback((indexOrFn) => {
+    setNavState(prev => {
+      const chapters = prev.notebookId ? getNotebookChapters(notebooks[prev.notebookId]) : []
+      const currentIdx = prev.chapterId ? chapters.findIndex(ch => ch.id === prev.chapterId) : 0
+      const resolvedIdx = typeof indexOrFn === 'function' ? indexOrFn(currentIdx >= 0 ? currentIdx : 0) : indexOrFn
+      const chapter = chapters[resolvedIdx]
+      if (chapter && prev.notebookId) {
+        window.history.replaceState(null, '', `#/${prev.notebookId}/${chapter.id}`)
+        return { ...prev, chapterId: chapter.id }
+      }
+      return prev
+    })
+  }, [])
+
+  // Listen to hash changes (browser back/forward)
+  useEffect(() => {
+    const onHashChange = () => {
+      setNavState(parseHash())
+      setView('chapter')
+      setSidebarOpen(false)
+    }
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
 
   useEffect(() => {
     applyThemeVars(theme)
@@ -57,15 +99,14 @@ export default function App() {
   const toggleLang = () => setLang(l => (l === 'he' ? 'en' : 'he'))
 
   const handleSelectNotebook = (notebookId) => {
-    setActiveNotebookId(notebookId)
-    setActiveChapter(0)
+    const chapters = getNotebookChapters(notebooks[notebookId])
+    const firstChapterId = chapters.length > 0 ? chapters[0].id : ''
+    window.location.hash = `#/${notebookId}/${firstChapterId}`
     setView('chapter')
-    setCurrentView('notebook')
   }
 
   const handleHome = () => {
-    setCurrentView('landing')
-    setActiveNotebookId(null)
+    window.location.hash = ''
     setSidebarOpen(false)
   }
 

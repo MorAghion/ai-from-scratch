@@ -18,6 +18,7 @@ import {
   TreeStructure,
   UsersThree,
   Gear,
+  Flag,
 } from '@phosphor-icons/react'
 
 const iconMap = {
@@ -39,6 +40,7 @@ const iconMap = {
   TreeStructure,
   UsersThree,
   Gear,
+  Flag,
 }
 
 export default function ChapterIcon({ name, color, size = 28, weight = 'duotone' }) {

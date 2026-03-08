@@ -28,16 +28,30 @@ export default function LandingPage({ onSelectNotebook }) {
       </h1>
       <p style={{
         fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
-        fontSize: 'clamp(14px, 2.5vw, 18px)',
+        fontSize: 'clamp(14px, 2.5vw, 17px)',
         color: 'var(--text-soft)',
-        marginBottom: 48,
+        marginBottom: 12,
         textAlign: 'center',
-        maxWidth: 500,
-        lineHeight: 1.6,
+        maxWidth: 560,
+        lineHeight: 1.7,
       }}>
         {lang === 'he'
-          ? 'בחרו מחברת כדי להתחיל ללמוד'
-          : 'Choose a notebook to start learning'}
+          ? 'מחברת לימוד אינטראקטיבית שנבנתה מאפס — מרשתות נוירונים ועד סוכני AI, עם אנימציות, תרגילים, ומילון מונחים.'
+          : 'An interactive learning notebook built from scratch — from neural networks to AI agents, with animations, exercises, and a glossary.'}
+      </p>
+      <p style={{
+        fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
+        fontSize: 'clamp(13px, 2vw, 15px)',
+        color: 'var(--text-soft)',
+        marginBottom: 40,
+        textAlign: 'center',
+        maxWidth: 560,
+        lineHeight: 1.6,
+        opacity: 0.7,
+      }}>
+        {lang === 'he'
+          ? 'בחרו מחברת כדי להתחיל:'
+          : 'Choose a notebook to begin:'}
       </p>
 
       {/* Notebook cards */}
@@ -104,7 +118,7 @@ export default function LandingPage({ onSelectNotebook }) {
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
                 <h2 style={{
                   fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-heading)',
-                  fontSize: 20,
+                  fontSize: 'clamp(18px, 3vw, 22px)',
                   fontWeight: 700,
                   color: 'var(--heading)',
                 }}>
@@ -129,9 +143,9 @@ export default function LandingPage({ onSelectNotebook }) {
               {/* Subtitle */}
               <p style={{
                 fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
-                fontSize: 14,
+                fontSize: 15,
                 color: 'var(--text-soft)',
-                lineHeight: 1.5,
+                lineHeight: 1.6,
                 marginBottom: 16,
               }}>
                 {nb.subtitle[lang]}

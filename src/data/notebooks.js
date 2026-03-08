@@ -11,13 +11,12 @@ export const notebooks = {
       'prologue', 'science', 'prompt-engineering', 'first-agent', 'agents-function-calling',
       'memory-tokens', 'vector-db', 'rag', 'integrity',
       'api', 'mcp', 'n8n-docker',
-      'detective',
+      'epilogue',
     ],
     arcs: [
       { label: { he: 'הכירו את ה-AI', en: 'Meet AI & Communicate' }, startIndex: 0, endIndex: 4 },
       { label: { he: 'ידע ואמינות', en: 'Knowledge & Trust' }, startIndex: 5, endIndex: 8 },
-      { label: { he: 'חיבור לעולם האמיתי', en: 'Connect to the Real World' }, startIndex: 9, endIndex: 11 },
-      { label: { he: 'נספח', en: 'Appendix' }, startIndex: 12, endIndex: 12 },
+      { label: { he: 'חיבור לעולם האמיתי', en: 'Connect to the Real World' }, startIndex: 9, endIndex: 12 },
     ],
   },
   'vibe-coding': {

@@ -47,7 +47,7 @@ export default function Header({ onMenuToggle, onHome, notebook, showMenu }) {
           <span style={{
             fontFamily: 'var(--font-heading)',
             fontWeight: 700,
-            fontSize: 17,
+            fontSize: 18,
             letterSpacing: '-0.02em',
           }}>
             AI From Scratch

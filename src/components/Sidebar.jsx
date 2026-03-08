@@ -1,3 +1,4 @@
+import React from 'react'
 import { useLang } from '../App'
 import { BookOpen } from '@phosphor-icons/react'
 import ChapterIcon from './ChapterIcon'
@@ -69,33 +70,39 @@ export default function Sidebar({ chapters, notebook, activeChapter, onSelect, o
           {/* Chapters in this arc */}
           {chapters.slice(arc.startIndex, arc.endIndex + 1).map((ch, localIdx) => {
             const i = arc.startIndex + localIdx
+            const isEpilogue = ch.id === 'epilogue'
             return (
-              <button
-                key={ch.id}
-                onClick={() => onSelect(i)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 10,
-                  width: '100%',
-                  padding: '10px 12px',
-                  borderRadius: 8,
-                  border: 'none',
-                  background: i === activeChapter ? 'var(--accent-soft)' : 'transparent',
-                  color: i === activeChapter ? 'var(--accent)' : 'var(--text-soft)',
-                  fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
-                  fontSize: 14,
-                  fontWeight: i === activeChapter ? 600 : 400,
-                  cursor: 'pointer',
-                  textAlign: lang === 'he' ? 'right' : 'left',
-                  direction: lang === 'he' ? 'rtl' : 'ltr',
-                  transition: 'all 0.15s ease',
-                  marginBottom: 2,
-                }}
-              >
-                <span style={{ flexShrink: 0 }}><ChapterIcon name={ch.icon} color={ch.iconColor} size={20} /></span>
-                <span style={{ flex: 1, lineHeight: 1.4 }}>{ch.title[lang] || ch.title.he}</span>
-              </button>
+              <React.Fragment key={ch.id}>
+                {isEpilogue && (
+                  <div style={{ borderTop: '1px solid var(--border)', margin: '8px 8px 4px' }} />
+                )}
+                <button
+                  onClick={() => onSelect(i)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    width: '100%',
+                    padding: '10px 12px',
+                    borderRadius: 8,
+                    border: 'none',
+                    background: i === activeChapter ? 'var(--accent-soft)' : 'transparent',
+                    color: isEpilogue ? 'var(--border)' : i === activeChapter ? 'var(--accent)' : 'var(--text-soft)',
+                    fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
+                    fontSize: 14,
+                    fontWeight: i === activeChapter ? 600 : 400,
+                    cursor: 'pointer',
+                    opacity: isEpilogue ? 0.5 : 1,
+                    textAlign: lang === 'he' ? 'right' : 'left',
+                    direction: lang === 'he' ? 'rtl' : 'ltr',
+                    transition: 'all 0.15s ease',
+                    marginBottom: 2,
+                  }}
+                >
+                  <span style={{ flexShrink: 0 }}><ChapterIcon name={ch.icon} color={ch.iconColor} size={20} /></span>
+                  <span style={{ flex: 1, lineHeight: 1.4 }}>{ch.title[lang] || ch.title.he}</span>
+                </button>
+              </React.Fragment>
             )
           })}
         </div>

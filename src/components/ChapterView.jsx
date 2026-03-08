@@ -73,7 +73,7 @@ function splitCodeBlocks(text) {
 // Render text with inline **bold**, [text](url) external links, and [text](#chapter:id:section) internal links
 function renderTextWithLinks(text, onNavigate) {
   const inlineIconMap = { MagicWand }
-  const inlineRegex = /::icon:(\w+)::|{(#[0-9a-fA-F]{6}):([^}]+)\}|\*\*([^*]+)\*\*|\[([^\]]+)\]\((https?:\/\/[^)]+)\)|\[([^\]]+)\]\(#chapter:([^):]+)(?::([^)]+))?\)/g
+  const inlineRegex = /::icon:(\w+)::|{(#[0-9a-fA-F]{6}):([^}]+)\}|\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\((https?:\/\/[^)]+)\)|\[([^\]]+)\]\(#chapter:([^):]+)(?::([^)]+))?\)/g
   const parts = []
   let lastIdx = 0
   let match
@@ -89,22 +89,25 @@ function renderTextWithLinks(text, onNavigate) {
     } else if (match[4]) {
       parts.push(<strong key={match.index} style={{ color: 'var(--heading)', fontWeight: 600 }}>{match[4]}</strong>)
     } else if (match[5]) {
+      // *italic* — single asterisk
+      parts.push(<em key={match.index} style={{ fontStyle: 'italic' }}>{match[5]}</em>)
+    } else if (match[6]) {
       parts.push(
-        <a key={match.index} href={match[6]} target="_blank" rel="noopener noreferrer"
+        <a key={match.index} href={match[7]} target="_blank" rel="noopener noreferrer"
           style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3 }}>
-          {match[5]}
+          {match[6]}
         </a>
       )
-    } else if (match[7] && match[8]) {
-      const chapterId = match[8]
-      const sectionSlug = match[9] || null
+    } else if (match[8] && match[9]) {
+      const chapterId = match[9]
+      const sectionSlug = match[10] || null
       parts.push(
         <a key={match.index} href="#" onClick={(e) => {
           e.preventDefault()
           onNavigate?.(chapterId, sectionSlug)
         }}
           style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3, cursor: 'pointer' }}>
-          {match[7]}
+          {match[8]}
         </a>
       )
     }
@@ -175,10 +178,10 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
         }}>
           <span style={{
             fontFamily: 'var(--font-code)',
-            fontSize: 12,
+            fontSize: 13,
             color: 'var(--accent)',
             fontWeight: 500,
-            letterSpacing: 1,
+            letterSpacing: 1.2,
             textTransform: 'uppercase',
           }}>
             {chapterIndex === 0
@@ -192,7 +195,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
 
         <h1 style={{
           fontFamily: 'var(--font-heading)',
-          fontSize: 32,
+          fontSize: 'clamp(26px, 4vw, 36px)',
           fontWeight: 700,
           color: 'var(--heading)',
           lineHeight: 1.3,
@@ -217,7 +220,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             style={{
-              padding: '10px 20px',
+              padding: '10px 16px',
               border: 'none',
               borderBottom: activeTab === tab.id ? '2px solid var(--accent)' : '2px solid transparent',
               marginBottom: -2,
@@ -297,7 +300,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                   return (
                     <h2 key={i} id={`section-${headingSlug(section.content)}`} style={{
                       fontFamily: 'var(--font-heading)',
-                      fontSize: 22,
+                      fontSize: 'clamp(20px, 3vw, 24px)',
                       fontWeight: 600,
                       color: 'var(--heading)',
                       marginTop: 32,
@@ -350,7 +353,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                       ) : (
                         <div key={j} style={{
                           fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
-                          fontSize: 15,
+                          fontSize: 16,
                           lineHeight: 1.85,
                           color: 'var(--text)',
                           whiteSpace: 'pre-line',

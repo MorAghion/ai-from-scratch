@@ -136,6 +136,17 @@ const chapterMeta = [
     exercise: null,
   },
 
+  // === Epilogue ===
+  {
+    id: 'epilogue',
+    icon: 'Flag',
+    iconColor: '#C2652A',
+    title: { he: 'אפילוג: מה הלאה?', en: 'Epilogue: What\'s Next?' },
+    status: 'done',
+    videos: [],
+    exercise: null,
+  },
+
   // === Arc 4: Frameworks & Orchestration ===
   {
     id: 'frameworks',
