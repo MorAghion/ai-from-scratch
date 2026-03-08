@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, createContext, useContext } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import { themes } from './data/themes'
 import { notebooks } from './data/notebooks'
 import { getNotebookChapters } from './data/chapters'
@@ -186,6 +187,7 @@ export default function App() {
           )}
         </div>
       </LangContext.Provider>
+      <Analytics />
     </ThemeContext.Provider>
   )
 }
