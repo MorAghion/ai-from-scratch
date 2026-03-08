@@ -1,0 +1,73 @@
+נספח: תרגיל ״סוכן בלשי״
+
+אנחנו נבנה סוכן שיודע לקחת תיאור של זירת פשע ולנתח אותה כמו בלש מקצועי.
+
+## תרגול הנדסת פרומפטים:
+
+אנחנו נבנה סקריפט ב-Python (אל תדאגי, קלוד יכתוב את הקוד, את רק צריכה להנחות אותו) שיוכל לנתח זירות פשע בסגנון הבלשים שאת אוהבת.
+
+בהסתמך על עקרונות הנדסת הפרומפטים שכתבנו, יצרתי את הפרומפט הבא:
+
+1. System prompt - הגדרת התפקיד, המשימה, הוראות ברורות
+
+Role: You are a world-renowned detective, expert in solving difficult and clueless crime scenes. Your personality is like Benoit Blanc (Knives Out) - polite, dramatic and sharp.
+
+Task: Solve a murder crime scene with multiple evidence sources.
+
+Instructions:
+
+1\. Chain of thoughts - before you conclude, briefly describe your suspicion for every character
+
+2\. Motives - every character has a potential motive
+
+3\. Ranking - rank the suspicion probability (1-10) for every suspect. Give a higher weight for characters that are more close to the victim (family/business relation), and how likely they would murder the victim
+
+4\. Weapon - try to understand the weapon used
+
+2. הפרומפט שבו השתמשתי ליצירת הקובץ crime_scene.txt שעליו הסוכן הבלשי יעבוד:
+
+*Create a file named "crime_scene.txt". Inside it, write a complex crime scene description involving 4 suspects who were at a dinner party in a secluded mansion. Make sure to include their relationships to the victim and some subtle clues about the surroundings, but don't reveal the killer*.
+
+>
+
+3. Build Command - יצירת ה״מנוע״ - הסקריפט שבעצם יעבד את ״זירת הרצח״.
+
+> בעצם אני צריכה לעטוף את מה שכתבת בהוראה של "תבנה לי קובץ".
+
+*"Create a Python script named detective.py. The script should:*
+
+1. *Read the content of crime_scene.txt.*
+
+2. *Send that content to Claude using the following System Prompt: \system prompt\*
+
+3. *Display the output in the terminal."*
+
+>
+
+## תרגול RAG מרובה קבצים
+
+במקום קובץ אחד של זירת רצח, ניצור "תיקיות חקירה". בכל תיקייה יהיה קובץ על חשוד אחר (פרופיל אישי, עבר פלילי וכו'). אנחנו נבקש מהבלש לסרוק את כל התיקייה ולבנות תמונה מלאה.
+
+1. *create a new folder named evidence.*
+
+2. *Inside the new folder, create 3 text files: 2 files for each suspect: Victoria and Catherine, and another text file named autopsy_report which is the death report of the victim - including time of death, weapon, and whatever we need to know.*
+
+3. *You can make up details your own, and include also contradictions in the evidences and report*
+
+נבקש מהסוכן לעדכן את הסקריפט שכבר קיים כך שיהיה יותר מתוחכם, יבדוק את כל הקבצים ויחפש סתירות בעדויות של החשודים*:*
+
+*Update detective.py to be more sophisticated:*
+
+1. *it should now read also all of the files within /evidence folder*
+
+2. *it should ensure the system prompt of Benoit Blanc remains, including the ranking system.*
+
+3. *add to the script: contradictions analysis e.g. times mismatch between evidences*
+
+### טיפ קטן לשדרוג הפרומפט:
+
+כדאי להוסיף משפט אחד שמוודא שהסקריפט לא רק קורא את הקבצים, אלא גם מציג אותם למודל בצורה מאורגנת. משהו בסגנון:
+
+> *"When sending the data to the AI, clearly label which content comes from which file (e.g., 'File: autopsy_report.txt - \Content\')."*
+
+זה יעזור לבלש "להצביע" על השקרן המדויק (למשל: "ויקטוריה טוענת X בתיק שלה, אבל הדוח הרפואי אומר Y").

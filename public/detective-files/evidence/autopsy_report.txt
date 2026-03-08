@@ -1,0 +1,127 @@
+OFFICE OF THE MEDICAL EXAMINER
+County of Westchester, New York
+
+AUTOPSY REPORT - CONFIDENTIAL
+Case Number: ME-2024-1847
+Decedent: BLACKWOOD, Jonathan Michael
+Date of Birth: March 12, 1968
+Date of Death: November 14, 2024
+Date of Autopsy: November 15, 2024, 9:00 AM
+Prosector: Dr. Elizabeth Chen, MD, Chief Medical Examiner
+Assistant: Dr. Raymond Foster
+
+EXTERNAL EXAMINATION:
+
+The body is that of a well-developed, well-nourished 56-year-old white male measuring 72 inches in length and weighing 185 pounds. The body was received in a dark blue suit with burgundy tie. Rigor mortis is fully developed. Livor mortis is fixed and consistent with the body position as found.
+
+PRELIMINARY TIME OF DEATH: Between 10:30 PM and 11:00 PM on November 14, 2024
+(Based on: body temperature, rigor mortis, stomach contents, and witness discovery time)
+
+**CONTRADICTION #1:** Rectal temperature and rigor suggest death closer to 10:15-10:30 PM, but stomach contents (partially digested dinner) indicate 10:45-11:00 PM. Possible reason: variation in individual metabolic rate or ambient room temperature affecting calculations.
+
+INJURIES AND MARKS:
+
+1. No signs of trauma, struggle, or defensive wounds
+2. Small bruise on right forearm (approximately 2 hours old) - consistent with minor bump, not assault
+3. Slight abrasion on left palm - appears older (1-2 days)
+4. Petechial hemorrhaging in eyes (mild) - consistent with cyanide poisoning
+
+INTERNAL EXAMINATION:
+
+TOXICOLOGY (Preliminary):
+
+Blood Sample: POSITIVE for cyanide - 3.5 mg/L (LETHAL concentration, >2.5 mg/L is typically fatal)
+Stomach Contents: Port wine (approximately 60ml), partially digested dinner, bread
+Additional Finding: Elevated levels of Zolpidem (Ambien) - 0.15 mg/L (therapeutic range is 0.08-0.15 mg/L)
+
+**CONTRADICTION #2:** The combination of Ambien and alcohol would cause severe drowsiness within 15-30 minutes. However, crime scene indicates victim was at his desk working on documents when he died - upright position, pen in hand. This level of Ambien + alcohol should have rendered him too drowsy to work.
+
+STOMACH CONTENTS ANALYSIS:
+
+- Last meal consumed approximately 2-2.5 hours before death
+- Port wine in stomach matches decanter in study
+- **CONTRADICTION #3:** Chemical analysis shows TWO different types of port wine in stomach:
+  * Type A: 1963 Taylor Fladgate (matches decanter in study) - NO cyanide detected
+  * Type B: Unknown vintage (possibly same, possibly different) - HIGH cyanide content
+  * This suggests victim drank from two different glasses/sources
+
+CAUSE OF DEATH:
+
+PRIMARY: Acute cyanide poisoning
+MECHANISM: Cellular hypoxia leading to cardiac arrest
+MANNER: HOMICIDE
+
+ESTIMATED TIMELINE OF POISONING:
+
+- Cyanide ingested: approximately 10:25-10:35 PM
+- Symptoms onset: 2-5 minutes after ingestion
+- Loss of consciousness: 5-10 minutes after ingestion
+- Death: 10-20 minutes after ingestion
+- **Most likely time of death: 10:35-10:45 PM**
+
+ADDITIONAL FINDINGS:
+
+1. Liver shows signs of chronic alcohol consumption (mild cirrhosis, early stage)
+2. Prescription medications found in bathroom: Zolpidem (Ambien) prescribed to "J. Blackwood"
+3. **CONTRADICTION #4:** Fingerprints on the fatal wine glass (broken, found on floor):
+   - Victim's prints (expected)
+   - ONE unidentified partial print on the stem
+   - Glass appears to have been wiped partially clean (smudging pattern consistent with cloth)
+
+4. **CONTRADICTION #5:** Lividity pattern shows victim slumped LEFT in chair, but body was found slumped RIGHT. Suggests body was moved or repositioned AFTER death but BEFORE rigor mortis set in (within 2-4 hours).
+
+FORENSIC CONCERNS:
+
+⚠️ The locked study door was found locked from the INSIDE
+⚠️ However, this type of lock can be manipulated from outside with a thin tool
+⚠️ Small tool marks found on interior lock mechanism - someone may have locked it from outside
+
+TRACE EVIDENCE:
+
+- Navy blue fiber (likely from clothing) found on victim's right shoulder - does NOT match victim's suit
+- Jasmine scent detected on victim's collar and right sleeve (perfume analysis pending)
+- Small amount of mud/soil on victim's desk blotter - composition analysis shows garden soil matching Blackwood Manor east garden
+- **CONTRADICTION #6:** Pearl dust/particles found in victim's hair and right hand - suggests contact with broken/damaged pearl jewelry, BUT the pearl earring found under chair was intact with no damage
+
+BLOOD ANALYSIS:
+
+Blood Alcohol Content: 0.08% (legal limit for impairment)
+Combined with Ambien: Would produce significant cognitive and motor impairment
+
+**CRITICAL QUESTION:** How did victim remain conscious and functional enough to be working at desk with this level of intoxication and sedation?
+
+ALTERNATIVE THEORY NOTED:
+
+The physical evidence suggests either:
+A) Two different poisoning attempts (Ambien first, then cyanide)
+B) Victim was already unconscious when positioned at desk
+C) Time of death calculations are compromised by unknown factors
+
+CONCLUSION:
+
+Jonathan Blackwood died from acute cyanide poisoning delivered via port wine. However, multiple contradictory findings suggest a complex scenario involving possible staging of the crime scene. The presence of Ambien, the repositioned body, the wiped glass, and the victim's improbable working position all indicate premeditation and sophisticated planning.
+
+Further investigation required into:
+- Source of the cyanide-laced port (separate from decanter)
+- Identity of partial fingerprint on glass
+- Explanation for body repositioning
+- Source of Ambien (prescription bottle shows 15 pills remaining out of 30 - 15 unaccounted for)
+
+SIGNED:
+Dr. Elizabeth Chen, MD
+Chief Medical Examiner
+November 15, 2024, 2:45 PM
+
+---
+
+ADDENDUM (Added November 15, 2024, 6:30 PM):
+
+Re-examination of stomach contents reveals victim consumed the cyanide-laced wine FIRST (found in deeper stomach layer), followed by clean wine from decanter (found in upper stomach layer). This suggests:
+
+1. Victim was poisoned earlier than initially thought (possibly 10:15-10:25 PM)
+2. Victim then drank from decanter afterward (while already dying)
+3. This contradicts witness who claims to have seen victim "alive and well" at 10:35 PM
+
+**This timeline makes several witness statements physically impossible.**
+
+Dr. E. Chen

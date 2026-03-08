@@ -1,0 +1,76 @@
+/* Reset & base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme CSS variables — set by JS */
+:root {
+  --bg: #FAF7F2;
+  --surface: #FFFFFF;
+  --text: #3D3229;
+  --text-soft: #8B7E74;
+  --heading: #2C1810;
+  --accent: #C2652A;
+  --accent-soft: rgba(194, 101, 42, 0.08);
+  --accent-hover: rgba(194, 101, 42, 0.15);
+  --border: #E8E0D6;
+  --code-bg: #F5F0E8;
+  --nav: #2C1810;
+  --nav-text: #FAF7F2;
+  --term-bg: #FDF5ED;
+  --term-border: #E8C9A8;
+  --bubble-video: #4A6B8A;
+  --bubble-video-bg: rgba(74, 107, 138, 0.06);
+  --bubble-exercise: #4A7C59;
+  --bubble-exercise-bg: rgba(74, 124, 89, 0.06);
+  --bubble-deep-dive: #C2652A;
+  --bubble-deep-dive-bg: rgba(194, 101, 42, 0.06);
+
+  --font-heading: 'Fraunces', serif;
+  --font-body: 'Atkinson Hyperlegible', sans-serif;
+  --font-code: 'IBM Plex Mono', monospace;
+  --font-hebrew: 'Heebo', sans-serif;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+/* Selection */
+::selection {
+  background: var(--accent-hover);
+  color: var(--heading);
+}
+
+/* Focus outlines */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Utility: smooth transitions for theme switching */
+.theme-transition,
+.theme-transition * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
