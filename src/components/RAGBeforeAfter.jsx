@@ -830,7 +830,7 @@ export default function RAGBeforeAfter() {
       }}>
         <canvas
           ref={canvasRef}
-          style={{ width: W, height: h, maxWidth: '100%' }}
+          style={{ width: '100%', maxWidth: W, height: 'auto', aspectRatio: `${W} / ${h}` }}
         />
         <button
           onClick={togglePause}

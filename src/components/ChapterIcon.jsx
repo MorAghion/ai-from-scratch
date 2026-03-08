@@ -13,6 +13,11 @@ import {
   Detective,
   File,
   Usb,
+  Cube,
+  CodeBlock,
+  TreeStructure,
+  UsersThree,
+  Gear,
 } from '@phosphor-icons/react'
 
 const iconMap = {
@@ -29,6 +34,11 @@ const iconMap = {
   Plugs,
   Detective,
   Usb,
+  Cube,
+  CodeBlock,
+  TreeStructure,
+  UsersThree,
+  Gear,
 }
 
 export default function ChapterIcon({ name, color, size = 28, weight = 'duotone' }) {

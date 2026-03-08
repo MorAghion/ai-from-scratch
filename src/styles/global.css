@@ -74,3 +74,24 @@ body {
 .theme-transition * {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+  .sidebar-desktop {
+    display: none !important;
+  }
+  .sidebar-mobile {
+    display: block !important;
+  }
+  .sidebar-overlay {
+    display: block !important;
+  }
+}
+
+/* Prevent horizontal overflow on all screen sizes */
+body {
+  overflow-x: clip;
+}

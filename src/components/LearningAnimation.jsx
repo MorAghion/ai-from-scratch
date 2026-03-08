@@ -309,7 +309,7 @@ export default function LearningAnimation() {
     }}>
       <canvas
         ref={canvasRef}
-        style={{ width: W, height: H }}
+        style={{ width: '100%', maxWidth: W, height: 'auto', aspectRatio: `${W} / ${H}` }}
       />
     </div>
   )

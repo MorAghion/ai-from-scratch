@@ -1,9 +1,10 @@
-import { useTheme } from '../App'
-import { Brain, Moon, Sun, List, HeadCircuitIcon } from '@phosphor-icons/react'
+import { useTheme, useLang } from '../App'
+import { Moon, Sun, List, HeadCircuit, CaretRight, CaretLeft } from '@phosphor-icons/react'
 
-export default function Header({ onMenuToggle }) {
-  const { theme, themeId, toggleTheme } = useTheme()
-  // lang toggle disabled until EN content is ready
+export default function Header({ onMenuToggle, onHome, notebook, showMenu }) {
+  const { themeId, toggleTheme } = useTheme()
+  const { lang } = useLang()
+  const Caret = lang === 'he' ? CaretLeft : CaretRight
 
   return (
     <header style={{
@@ -18,34 +19,58 @@ export default function Header({ onMenuToggle }) {
       alignItems: 'center',
       borderBottom: '1px solid var(--border)',
     }}>
-      {/* Left: logo + menu */}
+      {/* Left: menu + logo + breadcrumb */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        {showMenu && (
+          <button
+            onClick={onMenuToggle}
+            className="mobile-menu-btn"
+            style={{
+              background: 'none', border: 'none', color: 'var(--nav-text)',
+              fontSize: 20, cursor: 'pointer', padding: 4,
+              display: 'none', // shown via CSS media query
+            }}
+            aria-label="Menu"
+          >
+            <List size={22} weight="bold" />
+          </button>
+        )}
+
         <button
-          onClick={onMenuToggle}
+          onClick={onHome}
           style={{
             background: 'none', border: 'none', color: 'var(--nav-text)',
-            fontSize: 20, cursor: 'pointer', padding: 4,
-            display: 'none', // Hidden on desktop, shown via media query
+            cursor: 'pointer', padding: 0,
+            display: 'flex', alignItems: 'center', gap: 8,
           }}
-          className="mobile-menu-btn"
-          aria-label="Menu"
         >
-          <List size={22} weight="bold" />
+          <span style={{
+            fontFamily: 'var(--font-heading)',
+            fontWeight: 700,
+            fontSize: 17,
+            letterSpacing: '-0.02em',
+          }}>
+            AI From Scratch
+          </span>
+          <HeadCircuit size={24} weight="duotone" color="pink" />
         </button>
-        <span style={{
-          fontFamily: 'var(--font-heading)',
-          fontWeight: 700,
-          fontSize: 17,
-          letterSpacing: '-0.02em',
-        }}>
-          AI From Scratch
-        </span>
-        <HeadCircuitIcon size={24} weight="duotone" color="pink" />
+
+        {notebook && (
+          <>
+            <Caret size={14} weight="bold" style={{ opacity: 0.4 }} />
+            <span style={{
+              fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
+              fontSize: 14,
+              opacity: 0.8,
+            }}>
+              {notebook.title[lang]}
+            </span>
+          </>
+        )}
       </div>
 
       {/* Right: controls */}
       <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-        {/* Theme toggle */}
         <button
           onClick={toggleTheme}
           style={{
@@ -69,7 +94,6 @@ export default function Header({ onMenuToggle }) {
           }
         </button>
 
-        {/* Language toggle — disabled until EN content is ready */}
         <button
           disabled
           style={{

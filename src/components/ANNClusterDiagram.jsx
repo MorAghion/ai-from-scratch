@@ -268,7 +268,7 @@ export default function ANNClusterDiagram() {
     <div style={{ margin: '20px 0', display: 'flex', justifyContent: 'center' }}>
       <canvas
         ref={canvasRef}
-        style={{ width: W, height: H, borderRadius: 10, border: '1px solid var(--border)' }}
+        style={{ width: '100%', maxWidth: W, height: 'auto', aspectRatio: `${W} / ${H}`, borderRadius: 10, border: '1px solid var(--border)' }}
       />
     </div>
   )

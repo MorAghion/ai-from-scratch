@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import { MagnifyingGlass } from '@phosphor-icons/react'
 import { useLang } from '../App'
-import { chapters } from '../data/chapters'
-
-export default function Glossary({ onNavigateToChapter }) {
+export default function Glossary({ chapters, onNavigateToChapter }) {
   const { lang } = useLang()
   const [search, setSearch] = useState('')
 

@@ -190,3 +190,10 @@ export const chapters = chapterMeta.map(meta => {
     detectiveFiles: meta.detectiveFiles || [],
   }
 })
+
+// Get ordered chapters for a specific notebook
+export function getNotebookChapters(notebook) {
+  return notebook.chapterIds
+    .map(id => chapters.find(ch => ch.id === id))
+    .filter(Boolean)
+}

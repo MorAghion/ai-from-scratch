@@ -164,7 +164,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
   }
 
   return (
-    <article style={{ maxWidth: 720 }}>
+    <article style={{ maxWidth: 720, width: '100%', overflowX: 'hidden' }}>
       {/* Chapter header */}
       <div style={{ marginBottom: 32 }}>
         <div style={{
@@ -324,7 +324,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                 }
                 if (section.type === 'component') {
                   const Comp = componentRegistry[section.name]
-                  return Comp ? <Comp key={i} /> : null
+                  return Comp ? <div key={i} style={{ maxWidth: '100%', overflowX: 'auto' }}><Comp /></div> : null
                 }
                 const blocks = splitCodeBlocks(section.content)
                 return (
@@ -451,7 +451,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
             }
             if (section.type === 'component') {
               const Comp = componentRegistry[section.name]
-              return Comp ? <Comp key={i} /> : null
+              return Comp ? <div key={i} style={{ maxWidth: '100%', overflowX: 'auto' }}><Comp /></div> : null
             }
             if (!section.content) return null
             const blocks = splitCodeBlocks(section.content)
@@ -535,10 +535,10 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
         borderTop: '1px solid var(--border)',
       }}>
         <button
-          onClick={onPrev}
-          disabled={chapterIndex === 0}
+          onClick={handlePrev}
+          disabled={chapterIndex === 0 && visibleTabs.findIndex(t => t.id === activeTab) === 0}
           style={{
-            padding: '10px 20px',
+            padding: '10px 16px',
             borderRadius: 8,
             border: '1px solid var(--border)',
             background: 'var(--surface)',
@@ -546,18 +546,18 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
             fontSize: 14,
             fontWeight: 600,
             color: 'var(--text-soft)',
-            cursor: chapterIndex === 0 ? 'default' : 'pointer',
-            opacity: chapterIndex === 0 ? 0.3 : 1,
+            cursor: 'pointer',
+            opacity: (chapterIndex === 0 && visibleTabs.findIndex(t => t.id === activeTab) === 0) ? 0.3 : 1,
             transition: 'all 0.15s ease',
           }}
         >
           {dir === 'rtl' ? '→' : '←'} {lang === 'he' ? 'הקודם' : 'Previous'}
         </button>
         <button
-          onClick={onNext}
-          disabled={chapterIndex === totalChapters - 1}
+          onClick={handleNext}
+          disabled={chapterIndex === totalChapters - 1 && visibleTabs.findIndex(t => t.id === activeTab) === visibleTabs.length - 1}
           style={{
-            padding: '10px 20px',
+            padding: '10px 16px',
             borderRadius: 8,
             border: 'none',
             background: 'var(--accent)',
@@ -565,8 +565,8 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
             fontSize: 14,
             fontWeight: 600,
             color: '#fff',
-            cursor: chapterIndex === totalChapters - 1 ? 'default' : 'pointer',
-            opacity: chapterIndex === totalChapters - 1 ? 0.3 : 1,
+            cursor: 'pointer',
+            opacity: (chapterIndex === totalChapters - 1 && visibleTabs.findIndex(t => t.id === activeTab) === visibleTabs.length - 1) ? 0.3 : 1,
             transition: 'all 0.15s ease',
           }}
         >

@@ -1,10 +1,12 @@
 import { useState, useEffect, createContext, useContext } from 'react'
 import { themes } from './data/themes'
-import { chapters } from './data/chapters'
+import { notebooks } from './data/notebooks'
+import { getNotebookChapters } from './data/chapters'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import ChapterView from './components/ChapterView'
 import Glossary from './components/Glossary'
+import LandingPage from './components/LandingPage'
 
 // Contexts
 export const ThemeContext = createContext()
@@ -28,12 +30,17 @@ function applyThemeVars(theme) {
 export default function App() {
   const [themeId, setThemeId] = useState(() => localStorage.getItem('theme') || 'warm')
   const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'he')
+  const [currentView, setCurrentView] = useState('landing') // 'landing' | 'notebook'
+  const [activeNotebookId, setActiveNotebookId] = useState(null)
   const [activeChapter, setActiveChapter] = useState(0)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [view, setView] = useState('chapter') // 'chapter' | 'glossary'
 
   const theme = themes[themeId]
   const dir = lang === 'he' ? 'rtl' : 'ltr'
+
+  const activeNotebook = activeNotebookId ? notebooks[activeNotebookId] : null
+  const notebookChapters = activeNotebook ? getNotebookChapters(activeNotebook) : []
 
   useEffect(() => {
     applyThemeVars(theme)
@@ -48,6 +55,19 @@ export default function App() {
 
   const toggleTheme = () => setThemeId(t => (t === 'warm' ? 'dusk' : 'warm'))
   const toggleLang = () => setLang(l => (l === 'he' ? 'en' : 'he'))
+
+  const handleSelectNotebook = (notebookId) => {
+    setActiveNotebookId(notebookId)
+    setActiveChapter(0)
+    setView('chapter')
+    setCurrentView('notebook')
+  }
+
+  const handleHome = () => {
+    setCurrentView('landing')
+    setActiveNotebookId(null)
+    setSidebarOpen(false)
+  }
 
   return (
     <ThemeContext.Provider value={{ theme, themeId, toggleTheme }}>
@@ -64,56 +84,65 @@ export default function App() {
         >
           <Header
             onMenuToggle={() => setSidebarOpen(!sidebarOpen)}
+            onHome={handleHome}
+            notebook={activeNotebook}
+            showMenu={currentView === 'notebook'}
           />
 
-          <div style={{
-            display: 'flex',
-            maxWidth: 1200,
-            margin: '0 auto',
-            padding: '0 20px',
-            gap: 32,
-          }}>
-            <Sidebar
-              chapters={chapters}
-              activeChapter={activeChapter}
-              onSelect={(i) => { setActiveChapter(i); setView('chapter'); setSidebarOpen(false) }}
-              onGlossary={() => { setView('glossary'); setSidebarOpen(false) }}
-              isOpen={sidebarOpen}
-              onClose={() => setSidebarOpen(false)}
-            />
+          {currentView === 'landing' ? (
+            <LandingPage onSelectNotebook={handleSelectNotebook} />
+          ) : (
+            <div style={{
+              display: 'flex',
+              maxWidth: 1200,
+              margin: '0 auto',
+              padding: '0 20px',
+              gap: 32,
+            }}>
+              <Sidebar
+                chapters={notebookChapters}
+                notebook={activeNotebook}
+                activeChapter={activeChapter}
+                onSelect={(i) => { setActiveChapter(i); setView('chapter'); setSidebarOpen(false) }}
+                onGlossary={() => { setView('glossary'); setSidebarOpen(false) }}
+                isOpen={sidebarOpen}
+                onClose={() => setSidebarOpen(false)}
+              />
 
-            <main style={{ flex: 1, minWidth: 0, paddingTop: 24, paddingBottom: 80 }}>
-              {view === 'glossary' ? (
-                <Glossary
-                  onNavigateToChapter={(chapterIndex, tab) => {
-                    setActiveChapter(chapterIndex)
-                    setView('chapter')
-                  }}
-                />
-              ) : (
-                <ChapterView
-                  chapter={chapters[activeChapter]}
-                  chapterIndex={activeChapter}
-                  totalChapters={chapters.length}
-                  onPrev={() => setActiveChapter(i => Math.max(0, i - 1))}
-                  onNext={() => setActiveChapter(i => Math.min(chapters.length - 1, i + 1))}
-                  onNavigate={(chapterId, sectionSlug) => {
-                    const idx = chapters.findIndex(c => c.id === chapterId)
-                    if (idx !== -1) {
-                      setActiveChapter(idx)
+              <main style={{ flex: 1, minWidth: 0, paddingTop: 24, paddingBottom: 80 }}>
+                {view === 'glossary' ? (
+                  <Glossary
+                    chapters={notebookChapters}
+                    onNavigateToChapter={(chapterIndex, tab) => {
+                      setActiveChapter(chapterIndex)
                       setView('chapter')
-                      if (sectionSlug) {
-                        setTimeout(() => {
-                          const el = document.getElementById(`section-${sectionSlug}`)
-                          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                        }, 100)
+                    }}
+                  />
+                ) : (
+                  <ChapterView
+                    chapter={notebookChapters[activeChapter]}
+                    chapterIndex={activeChapter}
+                    totalChapters={notebookChapters.length}
+                    onPrev={() => setActiveChapter(i => Math.max(0, i - 1))}
+                    onNext={() => setActiveChapter(i => Math.min(notebookChapters.length - 1, i + 1))}
+                    onNavigate={(chapterId, sectionSlug) => {
+                      const idx = notebookChapters.findIndex(c => c.id === chapterId)
+                      if (idx !== -1) {
+                        setActiveChapter(idx)
+                        setView('chapter')
+                        if (sectionSlug) {
+                          setTimeout(() => {
+                            const el = document.getElementById(`section-${sectionSlug}`)
+                            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                          }, 100)
+                        }
                       }
-                    }
-                  }}
-                />
-              )}
-            </main>
-          </div>
+                    }}
+                  />
+                )}
+              </main>
+            </div>
+          )}
         </div>
       </LangContext.Provider>
     </ThemeContext.Provider>
