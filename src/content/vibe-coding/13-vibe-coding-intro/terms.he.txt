@@ -5,7 +5,7 @@ definition: גישה לפיתוח תוכנה שבה מתארים לـ-AI מה ר
 ---
 term: AI Pair Programming
 full: תכנות זוגי עם AI
-definition: עבודה עם AI כשותף לקידוד — אתם מתארים, הוא כותב, אתם בודקים ומתקנים.
+definition: עבודה עם AI כשותף לקידוד - אתם מתארים, הוא כותב, אתם בודקים ומתקנים.
 ---
 term: Code Generation
 full: יצירת קוד אוטומטית

@@ -11,12 +11,12 @@ definition: האפליקציה שהמשתמש עובד בה (Claude Desktop, VS 
 ---
 term: Client
 full: לקוח
-definition: מודל ה-AI עצמו — הוא זה שמבקש להשתמש בכלים חיצוניים דרך שרתי MCP.
+definition: מודל ה-AI עצמו - הוא זה שמבקש להשתמש בכלים חיצוניים דרך שרתי MCP.
 
 ---
 term: MCP Server
 full: שרת MCP
-definition: ה"מתרגם" — קוד קטן שיושב בין ה-AI לבין המידע. כל שרת מתמחה בדבר אחד (קבצים, GitHub, Google Drive).
+definition: ה"מתרגם" - קוד קטן שיושב בין ה-AI לבין המידע. כל שרת מתמחה בדבר אחד (קבצים, GitHub, Google Drive).
 
 ---
 term: Sandboxing
@@ -26,4 +26,4 @@ definition: עקרון אבטחה שבו מגדירים בדיוק לאילו מ
 ---
 term: Protocol
 full: פרוטוקול
-definition: סט כללים אחיד שמגדיר איך שני צדדים מדברים ביניהם. MCP הוא פרוטוקול — כמו ש-HTTP הוא פרוטוקול.
+definition: סט כללים אחיד שמגדיר איך שני צדדים מדברים ביניהם. MCP הוא פרוטוקול - כמו ש-HTTP הוא פרוטוקול.

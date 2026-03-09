@@ -1,20 +1,20 @@
-עד עכשיו הבלש שלנו קרא קבצים דרך Python — פתחנו, קראנו, שלחנו ל-API. עכשיו ניתן לסוכן לקרוא את הקבצים **בעצמו**, בלי שנכתוב שורת קוד.
+עד עכשיו הבלש שלנו קרא קבצים דרך Python - פתחנו, קראנו, שלחנו ל-API. עכשיו ניתן לסוכן לקרוא את הקבצים **בעצמו**, בלי שנכתוב שורת קוד.
 
-**בחרו את הכלי שלכם** — הנה שלוש דרכים לעשות את זה:
+**בחרו את הכלי שלכם** - הנה שלוש דרכים לעשות את זה:
 
 ---
 
 **אפשרות א׳: Claude Code (טרמינל)**
 
-אם התקנתם Claude Code, זה הכי פשוט — הוא כבר יודע לקרוא קבצים:
+אם התקנתם Claude Code, זה הכי פשוט - הוא כבר יודע לקרוא קבצים:
 
 1. פתחו טרמינל בתיקיית detective-ai/
 2. הקלידו `claude` כדי להפעיל את Claude Code
 3. שלחו לו:
 
-*"You are Benoit Blanc, a brilliant detective. Read all files in the evidence/ folder. For each file, note the source. Then cross-reference the evidence, find contradictions, and rank each suspect 1-10. Only use information from the files — do not invent facts."*
+*"You are Benoit Blanc, a brilliant detective. Read all files in the evidence/ folder. For each file, note the source. Then cross-reference the evidence, find contradictions, and rank each suspect 1-10. Only use information from the files - do not invent facts."*
 
-4. צפו — Claude Code קורא כל קובץ בעצמו (תראו את קריאות ה-`Read` בפלט), מצליב, ונותן ניתוח מלא.
+4. צפו - Claude Code קורא כל קובץ בעצמו (תראו את קריאות ה-`Read` בפלט), מצליב, ונותן ניתוח מלא.
 
 ---
 
@@ -48,7 +48,7 @@
 
 *"You are Benoit Blanc, a brilliant detective. Use the filesystem tools to read all files in the evidence/ folder. Cross-reference the evidence, find contradictions, and rank each suspect 1-10. Only cite facts from the files."*
 
-6. שימו לב — Claude מבקש אישור לקרוא כל קובץ. זה ה-Host (השומר) בפעולה.
+6. שימו לב - Claude מבקש אישור לקרוא כל קובץ. זה ה-Host (השומר) בפעולה.
 
 ---
 
@@ -57,18 +57,18 @@
 1. פתחו את תיקיית detective-ai/ ב-Cursor (או VS Code עם Copilot)
 2. ב-Cursor: Settings → MCP Servers → הוסיפו שרת filesystem עם הנתיב לתיקייה
 3. פתחו את ה-Chat ושלחו את אותו פרומפט של בנואה בלאנק
-4. הסוכן יקרא את הקבצים דרך MCP — בדיוק כמו באפשרויות הקודמות
+4. הסוכן יקרא את הקבצים דרך MCP - בדיוק כמו באפשרויות הקודמות
 
 ---
 
 **מה השתנה?**
 
 השוו את התוצאה ל-detective.py שבניתם בפרק 5:
-- **detective.py** — אתם כתבתם את הקוד שקורא קבצים, בונה פרומפט, ושולח ל-API
-- **עם MCP** — הסוכן עושה את הכל בעצמו. אותה תוצאה, **אפס קוד**
+- **detective.py** - אתם כתבתם את הקוד שקורא קבצים, בונה פרומפט, ושולח ל-API
+- **עם MCP** - הסוכן עושה את הכל בעצמו. אותה תוצאה, **אפס קוד**
 
-זה ההבדל בין "USB ייעודי" (סקריפט שבניתם) ל-"USB אוניברסלי" (MCP) — הסוכן לא צריך כלי קריאה מותאם, כי הפרוטוקול מספק את זה.
+זה ההבדל בין "USB ייעודי" (סקריפט שבניתם) ל-"USB אוניברסלי" (MCP) - הסוכן לא צריך כלי קריאה מותאם, כי הפרוטוקול מספק את זה.
 
 ---
 
-בתיק שלי, פתחתי Claude Code בתיקיית detective-ai/ ושלחתי את הפרומפט. הוא קרא 4 קבצים, מצא שהעדות של ויקטוריה סותרת את דוח הנתיחה, ודירג אותה 8/10 — בלי ששורה אחת של Python רצה.
+בתיק שלי, פתחתי Claude Code בתיקיית detective-ai/ ושלחתי את הפרומפט. הוא קרא 4 קבצים, מצא שהעדות של ויקטוריה סותרת את דוח הנתיחה, ודירג אותה 8/10 - בלי ששורה אחת של Python רצה.

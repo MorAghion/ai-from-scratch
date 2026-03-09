@@ -88,7 +88,7 @@ function splitCodeBlocks(text) {
 // Render text with inline **bold**, [text](url) external links, [text](#chapter:id:section) internal links, and [text](#tab:tabId) tab links
 function renderTextWithLinks(text, onNavigate, onTabSwitch) {
   const inlineIconMap = { MagicWand, Heart }
-  const inlineRegex = /::icon:(\w+)::|{(#[0-9a-fA-F]{6}):([^}]+)\}|{big:([^}]+)\}|\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\((https?:\/\/[^)]+)\)|\[([^\]]+)\]\(#chapter:([^):]+)(?::([^)]+))?\)|\[([^\]]+)\]\(#tab:([^)]+)\)/g
+  const inlineRegex = /::icon:(\w+)::|{(#[0-9a-fA-F]{6}):([^}]+)\}|{big:([^}]+)\}|`([^`]+)`|\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\((https?:\/\/[^)]+)\)|\[([^\]]+)\]\(#chapter:([^):]+)(?::([^)]+))?\)|\[([^\]]+)\]\(#tab:([^)]+)\)/g
   const parts = []
   let lastIdx = 0
   let match
@@ -105,32 +105,35 @@ function renderTextWithLinks(text, onNavigate, onTabSwitch) {
       // {big:text} — slightly larger inline text
       parts.push(<span key={match.index} style={{ fontSize: '1.15em', fontWeight: 600, color: 'var(--heading)' }}>{match[4]}</span>)
     } else if (match[5]) {
-      parts.push(<strong key={match.index} style={{ color: 'var(--heading)', fontWeight: 600 }}>{match[5]}</strong>)
+      // `code` — inline code
+      parts.push(<code key={match.index} style={{ fontFamily: 'var(--font-code)', fontSize: '0.9em', background: 'var(--code-bg, #f3f0ea)', padding: '2px 6px', borderRadius: 4, direction: 'ltr', unicodeBidi: 'embed' }}>{match[5]}</code>)
     } else if (match[6]) {
-      // *italic* — single asterisk
-      parts.push(<em key={match.index} style={{ fontStyle: 'italic' }}>{match[6]}</em>)
+      parts.push(<strong key={match.index} style={{ color: 'var(--heading)', fontWeight: 600 }}>{match[6]}</strong>)
     } else if (match[7]) {
+      // *italic* — single asterisk
+      parts.push(<em key={match.index} style={{ fontStyle: 'italic' }}>{match[7]}</em>)
+    } else if (match[8]) {
       parts.push(
-        <a key={match.index} href={match[8]} target="_blank" rel="noopener noreferrer"
+        <a key={match.index} href={match[9]} target="_blank" rel="noopener noreferrer"
           style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3 }}>
-          {match[7]}
+          {match[8]}
         </a>
       )
-    } else if (match[9] && match[10]) {
-      const chapterId = match[10]
-      const sectionSlug = match[11] || null
+    } else if (match[10] && match[11]) {
+      const chapterId = match[11]
+      const sectionSlug = match[12] || null
       parts.push(
         <a key={match.index} href="#" onClick={(e) => {
           e.preventDefault()
           onNavigate?.(chapterId, sectionSlug)
         }}
           style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3, cursor: 'pointer' }}>
-          {match[9]}
+          {match[10]}
         </a>
       )
-    } else if (match[12] && match[13]) {
+    } else if (match[13] && match[14]) {
       // [text](#tab:tabId) — switch tab within current chapter
-      const tabId = match[13]
+      const tabId = match[14]
       parts.push(
         <a key={match.index} href="#" onClick={(e) => {
           e.preventDefault()
@@ -138,7 +141,7 @@ function renderTextWithLinks(text, onNavigate, onTabSwitch) {
           window.scrollTo(0, 0)
         }}
           style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3, cursor: 'pointer' }}>
-          {match[12]}
+          {match[13]}
         </a>
       )
     }
