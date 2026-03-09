@@ -24,6 +24,7 @@ import APIRequestDiagram from './APIRequestDiagram'
 import YeggeFigures, { YeggeFiguresEpilogue } from './YeggeFigures'
 import MCPArchitectureDiagram from './MCPArchitectureDiagram'
 import RestaurantAPIDiagram from './RestaurantAPIDiagram'
+import AgentFileView from './AgentFileView'
 import BeforeAfterTable from './BeforeAfterTable'
 import PricingTable from './PricingTable'
 import VibingDays from './VibingDays'
@@ -53,6 +54,7 @@ const componentRegistry = {
   YeggeFiguresEpilogue,
   MCPArchitectureDiagram,
   RestaurantAPIDiagram,
+  AgentFileView,
   BeforeAfterTable,
   PricingTable,
   VibingDays,
@@ -83,10 +85,10 @@ function splitCodeBlocks(text) {
   return parts
 }
 
-// Render text with inline **bold**, [text](url) external links, and [text](#chapter:id:section) internal links
-function renderTextWithLinks(text, onNavigate) {
+// Render text with inline **bold**, [text](url) external links, [text](#chapter:id:section) internal links, and [text](#tab:tabId) tab links
+function renderTextWithLinks(text, onNavigate, onTabSwitch) {
   const inlineIconMap = { MagicWand, Heart }
-  const inlineRegex = /::icon:(\w+)::|{(#[0-9a-fA-F]{6}):([^}]+)\}|\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\((https?:\/\/[^)]+)\)|\[([^\]]+)\]\(#chapter:([^):]+)(?::([^)]+))?\)/g
+  const inlineRegex = /::icon:(\w+)::|{(#[0-9a-fA-F]{6}):([^}]+)\}|\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\((https?:\/\/[^)]+)\)|\[([^\]]+)\]\(#chapter:([^):]+)(?::([^)]+))?\)|\[([^\]]+)\]\(#tab:([^)]+)\)/g
   const parts = []
   let lastIdx = 0
   let match
@@ -121,6 +123,19 @@ function renderTextWithLinks(text, onNavigate) {
         }}
           style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3, cursor: 'pointer' }}>
           {match[8]}
+        </a>
+      )
+    } else if (match[11] && match[12]) {
+      // [text](#tab:tabId) — switch tab within current chapter
+      const tabId = match[12]
+      parts.push(
+        <a key={match.index} href="#" onClick={(e) => {
+          e.preventDefault()
+          onTabSwitch?.(tabId)
+          window.scrollTo(0, 0)
+        }}
+          style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3, cursor: 'pointer' }}>
+          {match[11]}
         </a>
       )
     }
@@ -299,7 +314,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                     color: 'var(--text)',
                     whiteSpace: 'pre-line',
                   }}>
-                    {renderTextWithLinks(section.content, onNavigate)}
+                    {renderTextWithLinks(section.content, onNavigate, setActiveTab)}
                   </div>
                 )
               })}
@@ -357,7 +372,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                       marginTop: 32,
                       marginBottom: 12,
                     }}>
-                      {renderTextWithLinks(section.content, onNavigate)}
+                      {renderTextWithLinks(section.content, onNavigate, setActiveTab)}
                     </h2>
                   )
                 }
@@ -409,7 +424,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                           color: 'var(--text)',
                           whiteSpace: 'pre-line',
                         }}>
-                          {renderTextWithLinks(block.content, onNavigate)}
+                          {renderTextWithLinks(block.content, onNavigate, setActiveTab)}
                         </div>
                       )
                     )}
@@ -457,7 +472,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                   marginTop: i === 0 ? 0 : 32,
                   marginBottom: 12,
                 }}>
-                  {renderTextWithLinks(section.content, onNavigate)}
+                  {renderTextWithLinks(section.content, onNavigate, setActiveTab)}
                 </h2>
               )
             }
@@ -537,7 +552,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                       color: 'var(--text)',
                       whiteSpace: 'pre-line',
                     }}>
-                      {renderTextWithLinks(block.content, onNavigate)}
+                      {renderTextWithLinks(block.content, onNavigate, setActiveTab)}
                     </div>
                   )
                 )}
