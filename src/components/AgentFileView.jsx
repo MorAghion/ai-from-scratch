@@ -292,6 +292,12 @@ const agents = [
   },
 ]
 
+const fileTabColors = {
+  'agent.py': '#F59E0B',       // amber — system prompt + router + loop
+  'tools.py': '#3B82F6',       // blue — tools
+  'tools_schema.py': '#EC4899', // pink — schema
+  '💡': '#10B981',              // green — execution flow
+}
 const fileNames = ['agent.py', 'tools.py', 'tools_schema.py', '💡']
 
 export default function AgentFileView() {
@@ -299,7 +305,7 @@ export default function AgentFileView() {
   const isRtl = lang === 'he'
   const fontFamily = isRtl ? 'var(--font-hebrew)' : 'var(--font-body)'
   const [agentIdx, setAgentIdx] = useState(0)
-  const [activeFile, setActiveFile] = useState('agent.py')
+  const [activeFile, setActiveFile] = useState('💡')
   const [collapsed, setCollapsed] = useState(false)
 
   const agent = agents[agentIdx]
@@ -331,7 +337,7 @@ export default function AgentFileView() {
         {agents.map((a, i) => (
           <button
             key={a.id}
-            onClick={() => { setAgentIdx(i); setActiveFile('agent.py'); if (collapsed) setCollapsed(false) }}
+            onClick={() => { setAgentIdx(i); setActiveFile('💡'); if (collapsed) setCollapsed(false) }}
             style={{
               flex: 1,
               padding: '10px 14px',
@@ -418,9 +424,10 @@ export default function AgentFileView() {
         background: '#1e1e1e',
         direction: 'ltr',
       }}>
-        {fileNames.map(name => {
+        {fileNames.map((name, fi) => {
           const isActive = activeFile === name
           const isRun = name === '💡'
+          const tabColor = fileTabColors[name]
           return (
             <button
               key={name}
@@ -428,17 +435,14 @@ export default function AgentFileView() {
               style={{
                 padding: '8px 16px',
                 border: 'none',
-                borderBottom: isActive
-                  ? `2px solid ${isRun ? green : '#569CD6'}`
-                  : '2px solid transparent',
+                borderBottom: `2px solid ${isActive ? tabColor : `${tabColor}40`}`,
+                borderRight: fi < fileNames.length - 1 && !isRun ? '1px solid #FAF7F244' : 'none',
                 marginBottom: -1,
                 background: isActive ? '#1e1e1e' : '#2d2d2d',
                 fontFamily: 'var(--font-code)',
                 fontSize: 12,
                 fontWeight: isActive ? 600 : 400,
-                color: isActive
-                  ? (isRun ? green : '#D4D4D4')
-                  : (isRun ? '#6A9955' : '#808080'),
+                color: isActive ? tabColor : '#999',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
                 marginInlineStart: isRun ? 'auto' : 0,
@@ -518,6 +522,7 @@ export default function AgentFileView() {
         <div style={{
           padding: '16px 18px',
           minHeight: 200,
+          border: '1px solid #1e1e1e',
         }}>
           {/* Description */}
           <p style={{
@@ -535,8 +540,8 @@ export default function AgentFileView() {
           {/* Flow timeline */}
           <div style={{
             borderRadius: 8,
-            border: `1px solid ${green}22`,
-            background: `${green}06`,
+            border: '1px solid #1e1e1e22',
+            background: '#1e1e1e06',
             padding: '12px 14px',
           }}>
             <div style={{

@@ -15,7 +15,25 @@ export default function LandingPage({ onSelectNotebook }) {
       justifyContent: 'center',
       padding: '40px 20px',
       direction: dir,
+      position: 'relative',
+      overflow: 'hidden',
     }}>
+      {/* Decorative illustration — hidden for now, needs color matching */}
+      {/* <img
+        src="/images/Gemini_Generated_Image_pa4opa4opa4opa4o.png"
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          width: '50%',
+          opacity: 0.9,
+          mixBlendMode: 'multiply',
+          pointerEvents: 'none',
+          userSelect: 'none',
+        }}
+      /> */}
       <h1 style={{
         fontFamily: 'var(--font-heading)',
         fontSize: 'clamp(28px, 5vw, 42px)',
