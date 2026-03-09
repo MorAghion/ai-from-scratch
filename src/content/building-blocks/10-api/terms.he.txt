@@ -1,0 +1,28 @@
+---
+term: API
+full: Application Programming Interface
+definition: ממשק שמאפשר לתוכנות לדבר אחת עם השנייה — דרך הודעות טקסט מובנות לכתובת מוסכמת.
+---
+term: Endpoint
+full: נקודת קצה
+definition: הכתובת הספציפית ב-API שאליה שולחים בקשה. כל שירות חושף כמה Endpoints לפעולות שונות.
+---
+term: Request / Response
+full: בקשה / תשובה
+definition: המחזור הבסיסי — שולחים בקשה (method + endpoint + body) ומקבלים תשובה (status code + data).
+---
+term: JSON
+full: JavaScript Object Notation
+definition: פורמט טקסט מובנה לזוגות מפתח-ערך. השפה המשותפת שבה רוב ה-APIs מדברים.
+---
+term: API Key
+full: מפתח API
+definition: מחרוזת ייחודית שמזהה אתכם מול השרת — תעודת זהות שמאפשרת גישה ומגבילה שימוש.
+---
+term: REST
+full: Representational State Transfer
+definition: סט כללים לבניית API — כתובות למשאבים, methods סטנדרטיים, בקשות עצמאיות, ופורמט אחיד.
+---
+term: Status Code
+full: קוד סטטוס
+definition: מספר שהשרת מחזיר שאומר מה קרה — 200 הכל בסדר, 404 לא נמצא, 401 לא מורשה, 500 שגיאה בשרת.

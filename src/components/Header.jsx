@@ -35,7 +35,7 @@ export default function Header({ onMenuToggle, onHome, notebook, showMenu }) {
             <List size={22} weight="bold" />
           </button>
         )}
-
+        <HeadCircuit size={24} weight="duotone" color="pink" />
         <button
           onClick={onHome}
           style={{
@@ -50,9 +50,8 @@ export default function Header({ onMenuToggle, onHome, notebook, showMenu }) {
             fontSize: 18,
             letterSpacing: '-0.02em',
           }}>
-            AI From Scratch
+            AI מההתחלה
           </span>
-          <HeadCircuit size={24} weight="duotone" color="pink" />
         </button>
 
         {notebook && (

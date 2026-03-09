@@ -16,7 +16,6 @@ export default function LandingPage({ onSelectNotebook }) {
       padding: '40px 20px',
       direction: dir,
     }}>
-      {/* Title */}
       <h1 style={{
         fontFamily: 'var(--font-heading)',
         fontSize: 'clamp(28px, 5vw, 42px)',
@@ -24,7 +23,7 @@ export default function LandingPage({ onSelectNotebook }) {
         marginBottom: 8,
         textAlign: 'center',
       }}>
-        AI From Scratch
+        AI מההתחלה
       </h1>
       <p style={{
         fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
@@ -36,7 +35,7 @@ export default function LandingPage({ onSelectNotebook }) {
         lineHeight: 1.7,
       }}>
         {lang === 'he'
-          ? 'מחברת לימוד אינטראקטיבית שנבנתה מאפס — מרשתות נוירונים ועד סוכני AI, עם אנימציות, תרגילים, ומילון מונחים.'
+          ? 'המסע שלי לעולם הבינה המלאכותית'
           : 'An interactive learning notebook built from scratch — from neural networks to AI agents, with animations, exercises, and a glossary.'}
       </p>
       <p style={{

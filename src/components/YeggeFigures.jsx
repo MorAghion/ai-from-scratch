@@ -29,7 +29,11 @@ const titles = {
   en: "Yegge's 8 Figures — From Where to Where",
 }
 
-export default function YeggeFigures() {
+export function YeggeFiguresEpilogue() {
+  return <YeggeFigures variant="epilogue" />
+}
+
+export default function YeggeFigures({ variant } = {}) {
   const { lang } = useLang()
   const t = figures[lang] || figures.he
   const title = titles[lang] || titles.he
@@ -64,9 +68,39 @@ export default function YeggeFigures() {
               }}>
                 {f.num}
               </span>
-              <div style={{ flex: 1 }}>
-                <span style={{ fontWeight: 600, color: 'var(--heading)' }}>{f.title}</span>
-                <span style={{ color: 'var(--text-soft)', marginInlineStart: 6, fontSize: 13 }}>— {f.desc}</span>
+              <div style={{ flex: 1, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
+                <span>
+                  <span style={{ fontWeight: 600, color: 'var(--heading)' }}>{f.title}</span>
+                  <span style={{ color: 'var(--text-soft)', marginInlineStart: 6, fontSize: 13 }}>— {f.desc}</span>
+                </span>
+                {f.num === 1 && variant !== 'epilogue' && (
+                  <span style={{
+                    background: '#EF4444',
+                    color: '#fff',
+                    fontFamily: 'var(--font-code)',
+                    fontSize: 10,
+                    fontWeight: 700,
+                    padding: '2px 8px',
+                    borderRadius: 4,
+                    whiteSpace: 'nowrap',
+                  }}>
+                    {isRtl ? '← התחלתי כאן' : 'I started here →'}
+                  </span>
+                )}
+                {f.num === 2 && variant === 'epilogue' && (
+                  <span style={{
+                    background: '#8B5CF6',
+                    color: '#fff',
+                    fontFamily: 'var(--font-code)',
+                    fontSize: 10,
+                    fontWeight: 700,
+                    padding: '2px 8px',
+                    borderRadius: 4,
+                    whiteSpace: 'nowrap',
+                  }}>
+                    {isRtl ? '← אני כאן' : 'I am here →'}
+                  </span>
+                )}
               </div>
             </div>
           ))}

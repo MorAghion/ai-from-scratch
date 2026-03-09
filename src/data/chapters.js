@@ -147,30 +147,61 @@ const chapterMeta = [
     exercise: null,
   },
 
-  // === Arc 4: Frameworks & Orchestration ===
+  // === Vibe Coding — Arc 1: Getting Ready ===
   {
-    id: 'frameworks',
+    id: 'vibe-coding-intro',
+    icon: 'Rocket',
+    iconColor: '#178d33',
+    title: { he: 'מה זה Vibe Coding', en: 'What is Vibe Coding' },
+    status: 'not-started',
+    videos: [],
+    exercise: null,
+  },
+  {
+    id: 'getting-started',
+    icon: 'Wrench',
+    iconColor: '#e9a00e',
+    title: { he: 'ערכת ההתחלה — כלים, מנויים ומפתחות', en: 'The Starter Kit — Tools, Subscriptions & Keys' },
+    status: 'not-started',
+    videos: [],
+    exercise: null,
+  },
+
+  // === Vibe Coding — Arc 2: Building HomeHub ===
+  {
+    id: 'homehub-mvp',
+    icon: 'Waves',
+    iconColor: '#11b1f0',
+    title: { he: 'Just Vibing — מ-0 ל-MVP', en: 'Just Vibing — From Zero to MVP' },
+    status: 'not-started',
+    videos: [],
+    exercise: null,
+  },
+  {
+    id: 'homehub-leveling-up',
+    icon: 'TrendUp',
+    iconColor: '#cb3c7a',
+    title: { he: 'Leveling Up — תכנון, ביצוע, מולטי-אייג׳נט', en: 'Leveling Up — Plan, Execute, Multi-Agent' },
+    status: 'not-started',
+    videos: [],
+    exercise: null,
+  },
+
+  // === Vibe Coding — Arc 3: Mini Gas Town ===
+  {
+    id: 'orchestration',
     icon: 'TreeStructure',
     iconColor: '#8B5CF6',
-    title: { he: 'פריימוורקים — LangChain, LangGraph, CrewAI', en: 'Frameworks — LangChain, LangGraph, CrewAI' },
+    title: { he: 'תזמור ופריימוורקים', en: 'Orchestration & Frameworks' },
     status: 'not-started',
     videos: [],
     exercise: null,
   },
   {
-    id: 'multi-agent',
-    icon: 'UsersThree',
-    iconColor: '#F59E0B',
-    title: { he: 'תיאום ריבוי סוכנים', en: 'Multi-Agent Orchestration' },
-    status: 'not-started',
-    videos: [],
-    exercise: null,
-  },
-  {
-    id: 'agent-system',
-    icon: 'Gear',
+    id: 'mini-gastown',
+    icon: 'Compass',
     iconColor: '#EF4444',
-    title: { he: 'בניית מערכת סוכנים — POC', en: 'Building an Agent System — POC' },
+    title: { he: 'ה-Gas Town הקטן שלי', en: 'My Mini Gas Town' },
     status: 'not-started',
     videos: [],
     exercise: null,

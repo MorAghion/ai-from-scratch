@@ -1,0 +1,31 @@
+עד עכשיו הרצנו את detective.py והוא עבד. אבל מה בעצם קורה כשהסקריפט רץ? הוא שולח בקשת API.
+
+**הניסוי**:
+
+פתחו את detective.py והסתכלו על השורה שקוראת ל-Claude (או Gemini). זו קריאת API. בואו נפרק אותה:
+
+**1. Request** — הסקריפט שולח בקשה שמכילה:
+
+**Endpoint** — הכתובת של Anthropic/Google
+(למשל `https://api.anthropic.com/v1/messages`)
+**API Key** — המפתח שלכם ב-Headers
+**Body** — ה-System Prompt + תוכן הראיות בפורמט JSON
+
+**2. Response** — השרת מחזיר:
+
+**Status Code** — 200 אם הכל בסדר
+**Body** — התשובה של הבלש, גם בפורמט JSON
+
+כדי לראות את זה בפעולה, בקשו מה-AI להוסיף שורת print שמדפיסה את ה-Response המלא:
+
+*"Add a line to detective.py that prints the raw API response before extracting the text content. I want to see the full JSON response"*.
+
+הריצו — תראו את ה-JSON המלא: metadata, usage (כמה טוקנים השתמשתם), stop_reason, ואת התוכן עצמו.
+
+**מה למדנו**:
+
+כל פעם שהבלש שלנו "חושב" — זו בקשת API. המילצר (API) לוקח את ההזמנה שלנו (Prompt + Evidence), מעביר למטבח (המודל), ומביא חזרה את התשובה. עכשיו אתם מבינים בדיוק מה קורה מאחורי הקלעים.
+
+---
+
+בתיק שלי, ה-Response הראה שהניתוח של 3 קבצי ראיות צרך כ-2,400 טוקנים בקלט ו-800 בפלט — מידע שעוזר להבין למה שיחות ארוכות עם סוכן עולות יותר.

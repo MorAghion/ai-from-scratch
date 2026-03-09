@@ -1,5 +1,6 @@
 import {
   RocketLaunch,
+  Rocket,
   Atom,
   Robot,
   PencilLine,
@@ -19,10 +20,15 @@ import {
   UsersThree,
   Gear,
   Flag,
+  Wrench,
+  TrendUp,
+  Compass,
+  Waves,
 } from '@phosphor-icons/react'
 
 const iconMap = {
   RocketLaunch,
+  Rocket,
   Atom,
   Robot,
   PencilLine,
@@ -41,6 +47,10 @@ const iconMap = {
   UsersThree,
   Gear,
   Flag,
+  Wrench,
+  TrendUp,
+  Compass,
+  Waves,
 }
 
 export default function ChapterIcon({ name, color, size = 28, weight = 'duotone' }) {

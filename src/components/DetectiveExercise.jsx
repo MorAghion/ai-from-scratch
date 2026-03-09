@@ -289,7 +289,7 @@ function FilePreviewCard({ file, lang }) {
               {lang === 'he' ? 'טוען...' : 'Loading...'}
             </span>
           ) : (
-            <pre style={{
+            <pre dir="ltr" style={{
               fontFamily: 'var(--font-code)',
               fontSize: 12,
               lineHeight: 1.6,
@@ -297,6 +297,7 @@ function FilePreviewCard({ file, lang }) {
               margin: 0,
               whiteSpace: 'pre-wrap',
               wordBreak: 'break-word',
+              textAlign: 'left',
             }}>
               {content}
             </pre>

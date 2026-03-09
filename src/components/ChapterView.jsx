@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { MagicWand } from '@phosphor-icons/react'
+import { MagicWand, Heart } from '@phosphor-icons/react'
 import { useLang } from '../App'
 import CollapsibleBubble from './CollapsibleBubble'
 import ChapterIcon from './ChapterIcon'
@@ -21,9 +21,15 @@ import CosineSimilarityDiagram from './CosineSimilarityDiagram'
 import RAGPipelineDiagram from './RAGPipelineDiagram'
 import ChunkSizeTradeoff from './ChunkSizeTradeoff'
 import APIRequestDiagram from './APIRequestDiagram'
-import YeggeFigures from './YeggeFigures'
+import YeggeFigures, { YeggeFiguresEpilogue } from './YeggeFigures'
 import MCPArchitectureDiagram from './MCPArchitectureDiagram'
 import RestaurantAPIDiagram from './RestaurantAPIDiagram'
+import BeforeAfterTable from './BeforeAfterTable'
+import PricingTable from './PricingTable'
+import VibingDays from './VibingDays'
+import CostBreakdown from './CostBreakdown'
+import CommitTimeline from './CommitTimeline'
+import WaveTable from './WaveTable'
 
 // Registry of embeddable components (referenced via @@component:Name in .txt files)
 const componentRegistry = {
@@ -44,8 +50,15 @@ const componentRegistry = {
   ChunkSizeTradeoff,
   APIRequestDiagram,
   YeggeFigures,
+  YeggeFiguresEpilogue,
   MCPArchitectureDiagram,
   RestaurantAPIDiagram,
+  BeforeAfterTable,
+  PricingTable,
+  VibingDays,
+  CostBreakdown,
+  CommitTimeline,
+  WaveTable,
 }
 
 // Generate a stable slug from heading text (supports Hebrew + English)
@@ -72,7 +85,7 @@ function splitCodeBlocks(text) {
 
 // Render text with inline **bold**, [text](url) external links, and [text](#chapter:id:section) internal links
 function renderTextWithLinks(text, onNavigate) {
-  const inlineIconMap = { MagicWand }
+  const inlineIconMap = { MagicWand, Heart }
   const inlineRegex = /::icon:(\w+)::|{(#[0-9a-fA-F]{6}):([^}]+)\}|\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\((https?:\/\/[^)]+)\)|\[([^\]]+)\]\(#chapter:([^):]+)(?::([^)]+))?\)/g
   const parts = []
   let lastIdx = 0
@@ -242,16 +255,54 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
       {activeTab === 'content' && (
         <>
           {/* Hook — personal narrative */}
-          {ch.hook && ch.hook[lang] && (
-            <div style={{
-              fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
-              fontSize: 16,
-              lineHeight: 1.85,
-              color: 'var(--text)',
-              marginBottom: 28,
-              whiteSpace: 'pre-line',
-            }}>
-              {renderTextWithLinks(ch.hook[lang], onNavigate)}
+          {ch.hook && ch.hook[lang] && ch.hook[lang].length > 0 && (
+            <div style={{ marginBottom: 28 }}>
+              {ch.hook[lang].map((section, i) => {
+                if (section.type === 'image') {
+                  const isGastown = section.src.includes('gastown')
+                  return (
+                    <div key={i} style={{ position: 'relative', marginBottom: 20, marginTop: 12 }}>
+                      <img src={section.src} alt={section.alt} style={{ width: '100%', borderRadius: 10, border: '1px solid var(--border)' }} />
+                      {isGastown && (
+                        <span style={{
+                          position: 'absolute',
+                          top: '2%',
+                          left: ch.id === 'epilogue' ? '27%' : '2%',
+                          background: '#EF4444',
+                          color: '#fff',
+                          fontFamily: 'var(--font-code)',
+                          fontSize: 11,
+                          fontWeight: 700,
+                          padding: '3px 8px',
+                          borderRadius: 4,
+                          whiteSpace: 'nowrap',
+                          pointerEvents: 'none',
+                        }}>
+                          {ch.id === 'epilogue'
+                            ? (lang === 'he' ? 'אני כאן ↓' : 'I am here ↓')
+                            : (lang === 'he' ? 'התחלתי כאן ↓' : 'I started here ↓')
+                          }
+                        </span>
+                      )}
+                    </div>
+                  )
+                }
+                if (section.type === 'component') {
+                  const Comp = componentRegistry[section.name]
+                  return Comp ? <div key={i} style={{ maxWidth: '100%', overflowX: 'auto' }}><Comp /></div> : null
+                }
+                return (
+                  <div key={i} style={{
+                    fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
+                    fontSize: 16,
+                    lineHeight: 1.85,
+                    color: 'var(--text)',
+                    whiteSpace: 'pre-line',
+                  }}>
+                    {renderTextWithLinks(section.content, onNavigate)}
+                  </div>
+                )
+              })}
             </div>
           )}
 
@@ -366,7 +417,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                 )
               })}
             </div>
-          ) : !ch.hook?.[lang] ? (
+          ) : !(ch.hook?.[lang]?.length > 0) ? (
             <div style={{
               padding: '32px 0',
               borderTop: '1px solid var(--border)',
@@ -556,25 +607,48 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
         >
           {dir === 'rtl' ? '→' : '←'} {lang === 'he' ? 'הקודם' : 'Previous'}
         </button>
-        <button
-          onClick={handleNext}
-          disabled={chapterIndex === totalChapters - 1 && visibleTabs.findIndex(t => t.id === activeTab) === visibleTabs.length - 1}
-          style={{
-            padding: '10px 16px',
-            borderRadius: 8,
-            border: 'none',
-            background: 'var(--accent)',
-            fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
-            fontSize: 14,
-            fontWeight: 600,
-            color: '#fff',
-            cursor: 'pointer',
-            opacity: (chapterIndex === totalChapters - 1 && visibleTabs.findIndex(t => t.id === activeTab) === visibleTabs.length - 1) ? 0.3 : 1,
-            transition: 'all 0.15s ease',
-          }}
-        >
-          {lang === 'he' ? 'הבא' : 'Next'} {dir === 'rtl' ? '←' : '→'}
-        </button>
+        {ch.id === 'epilogue' && visibleTabs.findIndex(t => t.id === activeTab) === visibleTabs.length - 1 ? (
+          <button
+            onClick={() => { window.location.hash = '#/vibe-coding/vibe-coding-intro' }}
+            style={{
+              padding: '12px 28px',
+              borderRadius: 10,
+              border: 'none',
+              background: '#8B5CF6',
+              fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
+              fontSize: 15,
+              fontWeight: 700,
+              color: '#fff',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+              letterSpacing: lang === 'he' ? 0 : 0.3,
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = '#7C3AED'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = '#8B5CF6'; e.currentTarget.style.transform = 'translateY(0)' }}
+          >
+            {lang === 'he' ? 'למחברת Vibe Coding' : 'To the Vibe Coding Notebook'} {dir === 'rtl' ? '←' : '→'}
+          </button>
+        ) : (
+          <button
+            onClick={handleNext}
+            disabled={chapterIndex === totalChapters - 1 && visibleTabs.findIndex(t => t.id === activeTab) === visibleTabs.length - 1}
+            style={{
+              padding: '10px 16px',
+              borderRadius: 8,
+              border: 'none',
+              background: 'var(--accent)',
+              fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
+              fontSize: 14,
+              fontWeight: 600,
+              color: '#fff',
+              cursor: 'pointer',
+              opacity: (chapterIndex === totalChapters - 1 && visibleTabs.findIndex(t => t.id === activeTab) === visibleTabs.length - 1) ? 0.3 : 1,
+              transition: 'all 0.15s ease',
+            }}
+          >
+            {lang === 'he' ? 'הבא' : 'Next'} {dir === 'rtl' ? '←' : '→'}
+          </button>
+        )}
       </div>
     </article>
   )

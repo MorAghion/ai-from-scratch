@@ -22,15 +22,19 @@ export const notebooks = {
   'vibe-coding': {
     id: 'vibe-coding',
     title: { he: 'Vibe Coding', en: 'Vibe Coding' },
-    subtitle: { he: 'פריימוורקים, סוכנים, ובניית מערכות', en: 'Frameworks, agents, and building systems' },
+    subtitle: { he: 'מלומדת לבונה — המסע מרמה 2 לרמה 6', en: 'From learner to builder — the journey from level 2 to level 6' },
     icon: 'CodeBlock',
     color: '#8B5CF6',
     comingSoon: true,
     chapterIds: [
-      'frameworks', 'multi-agent', 'agent-system',
+      'vibe-coding-intro', 'getting-started',
+      'homehub-mvp', 'homehub-leveling-up',
+      'orchestration', 'mini-gastown',
     ],
     arcs: [
-      { label: { he: 'פריימוורקים ותזמור', en: 'Frameworks & Orchestration' }, startIndex: 0, endIndex: 2 },
+      { label: { he: 'להתכונן', en: 'Getting Ready' }, startIndex: 0, endIndex: 1 },
+      { label: { he: 'בונים את HomeHub', en: 'Building HomeHub' }, startIndex: 2, endIndex: 3 },
+      { label: { he: 'ה-Gas Town הקטן שלי', en: 'My Mini Gas Town' }, startIndex: 4, endIndex: 5 },
     ],
   },
 }

@@ -93,10 +93,11 @@ function parseTerms(raw) {
 const chapterContent = {}
 
 for (const [path, raw] of Object.entries(allFiles)) {
-  // path: /src/content/01-prologue/story.he.txt
+  // path: /src/content/building-blocks/01-prologue/story.he.txt
+  // or:   /src/content/vibe-coding/13-vibe-coding-intro/story.he.txt
   const parts = path.split('/')
-  const folder = parts[3] // e.g. '01-prologue'
-  const filename = parts[4] // e.g. 'story.he.txt'
+  const filename = parts[parts.length - 1] // e.g. 'story.he.txt'
+  const folder = parts[parts.length - 2] // e.g. '01-prologue'
   const id = folderToId(folder)
   const fileType = filename.split('.')[0] // story, content, terms, detective
 
@@ -113,7 +114,11 @@ for (const [path, raw] of Object.entries(allFiles)) {
   const lang = filename.split('.')[1] // he or en
 
   if (fileType === 'story') {
-    chapterContent[id].story[lang] = raw.trim()
+    // Parse story into sections (supports images and components)
+    const trimmed = raw.trim()
+    const sections = []
+    pushTextAndImages(sections, trimmed)
+    chapterContent[id].story[lang] = sections
   } else if (fileType === 'content') {
     chapterContent[id].content[lang] = parseContent(raw)
   } else if (fileType === 'brief') {

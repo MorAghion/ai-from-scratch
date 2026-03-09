@@ -21,41 +21,43 @@ export default function Sidebar({ chapters, notebook, activeChapter, onSelect, o
         {lang === 'he' ? 'פרקים' : 'Chapters'}
       </div>
 
-      {/* Glossary button */}
-      <button
-        onClick={onGlossary}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 10,
-          width: '100%',
-          padding: '10px 12px',
-          borderRadius: 8,
-          border: '1px dashed var(--border)',
-          background: 'transparent',
-          color: 'var(--accent)',
-          fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
-          fontSize: 14,
-          fontWeight: 500,
-          cursor: 'pointer',
-          textAlign: lang === 'he' ? 'right' : 'left',
-          direction: lang === 'he' ? 'rtl' : 'ltr',
-          marginBottom: 12,
-        }}
-      >
-        <BookOpen size={18} weight="duotone" color='green'/>
-        <span>{lang === 'he' ? 'מילון מונחים' : 'Glossary'}</span>
-      </button>
+      {/* Glossary button — only for notebooks with terms */}
+      {notebook?.id !== 'vibe-coding' && (
+        <button
+          onClick={onGlossary}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+            width: '100%',
+            padding: '10px 12px',
+            borderRadius: 8,
+            border: '1px dashed var(--border)',
+            background: 'transparent',
+            color: 'var(--accent)',
+            fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
+            fontSize: 14,
+            fontWeight: 500,
+            cursor: 'pointer',
+            textAlign: lang === 'he' ? 'right' : 'left',
+            direction: lang === 'he' ? 'rtl' : 'ltr',
+            marginBottom: 12,
+          }}
+        >
+          <BookOpen size={18} weight="duotone" color='green'/>
+          <span>{lang === 'he' ? 'מילון מונחים' : 'Glossary'}</span>
+        </button>
+      )}
 
       {arcs.map((arc, arcIdx) => (
         <div key={arcIdx} style={{ marginBottom: 16 }}>
           {/* Arc header */}
           <div style={{
-            fontSize: 11,
-            fontFamily: 'var(--font-code)',
+            fontSize: 12,
+            fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
             color: 'var(--accent)',
-            textTransform: 'uppercase',
-            letterSpacing: 1,
+            fontWeight: 600,
+            letterSpacing: lang === 'he' ? 0 : 0.5,
             padding: '8px 8px 4px',
             marginTop: arcIdx > 0 ? 4 : 0,
             borderTop: arcIdx > 0 ? '1px solid var(--border)' : 'none',
@@ -87,12 +89,12 @@ export default function Sidebar({ chapters, notebook, activeChapter, onSelect, o
                     borderRadius: 8,
                     border: 'none',
                     background: i === activeChapter ? 'var(--accent-soft)' : 'transparent',
-                    color: isEpilogue ? 'var(--border)' : i === activeChapter ? 'var(--accent)' : 'var(--text-soft)',
+                    color: i === activeChapter ? 'var(--accent)' : 'var(--text-soft)',
                     fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
                     fontSize: 14,
                     fontWeight: i === activeChapter ? 600 : 400,
                     cursor: 'pointer',
-                    opacity: isEpilogue ? 0.5 : 1,
+                    opacity: 1,
                     textAlign: lang === 'he' ? 'right' : 'left',
                     direction: lang === 'he' ? 'rtl' : 'ltr',
                     transition: 'all 0.15s ease',
