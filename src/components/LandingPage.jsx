@@ -27,33 +27,28 @@ export default function LandingPage({ onSelectNotebook }) {
 
   return (
     <div style={{
-      height: 'calc(100vh - 60px)',
+      minHeight: 'calc(100vh - 60px)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'flex-start',
-      padding: '40px 20px 20px',
+      padding: '40px 20px 80px',
       direction: dir,
       position: 'relative',
-      overflow: 'hidden',
+      backgroundImage: 'url(/images/watercolor.jpg)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center 20%',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'scroll',
     }}>
-      <img
-        src="/images/watercolor.jpg"
-        alt=""
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center 20%',
-          opacity: 0.3,
-          pointerEvents: 'none',
-          userSelect: 'none',
-        }}
-      />
+      {/* Semi-transparent overlay to fade the background */}
+      <div style={{
+        position: 'absolute',
+        top: 0, left: 0, right: 0, bottom: 0,
+        background: 'var(--bg)',
+        opacity: 0.7,
+        pointerEvents: 'none',
+      }} />
       <h1 style={{
         position: 'relative', zIndex: 1,
         fontFamily: 'var(--font-heading)',
@@ -274,14 +269,15 @@ export default function LandingPage({ onSelectNotebook }) {
         })}
       </div>
 
-      {/* Author — bottom right */}
+      {/* Author — bottom */}
       <div style={{
-        position: 'absolute',
-        bottom: 16,
-        right: 24,
+        marginTop: 'auto',
+        paddingTop: 24,
         display: 'flex',
         alignItems: 'center',
         gap: 10,
+        position: 'relative',
+        zIndex: 1,
       }}>
         <img
           src="/images/profile.jpeg"
