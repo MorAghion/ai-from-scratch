@@ -289,7 +289,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                         <span style={{
                           position: 'absolute',
                           top: '2%',
-                          left: ch.id === 'epilogue' ? '27%' : '2%',
+                          left: ch.id === 'epilogue' ? '57%' : '2%',
                           background: '#EF4444',
                           color: '#fff',
                           fontFamily: 'var(--font-code)',
