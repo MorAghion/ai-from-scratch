@@ -288,11 +288,11 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                       {section.src.includes('claude.png') && (
                         <div style={{
                           position: 'absolute',
-                          top: '65%',
+                          top: '51%',
                           left: '6%',
-                          width: '50%',
-                          height: '10%',
-                          background: '#282828',
+                          width: '55%',
+                          height: '20%',
+                          background: '#141923',
                           pointerEvents: 'none',
                           borderRadius: 2,
                         }} />
