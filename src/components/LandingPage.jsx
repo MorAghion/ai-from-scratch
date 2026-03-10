@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useLang } from '../App'
+import { useLang, useTheme } from '../App'
 import { notebooks, notebookOrder } from '../data/notebooks'
 import { getNotebookChapters } from '../data/chapters'
 import ChapterIcon from './ChapterIcon'
@@ -21,6 +21,8 @@ const buzzwords = [
 
 export default function LandingPage({ onSelectNotebook }) {
   const { lang, dir } = useLang()
+  const { themeId } = useTheme()
+  const isDusk = themeId === 'dusk'
   const [showBuzz, setShowBuzz] = useState(false)
 
   return (
@@ -35,23 +37,25 @@ export default function LandingPage({ onSelectNotebook }) {
       position: 'relative',
       overflow: 'hidden',
     }}>
-      {/* Decorative illustration — hidden for now, needs color matching */}
-      {/* <img
-        src="/images/Gemini_Generated_Image_pa4opa4opa4opa4o.png"
+      <img
+        src="/images/watercolor.jpg"
         alt=""
         aria-hidden="true"
         style={{
           position: 'absolute',
-          bottom: 0,
+          top: 0,
           left: 0,
-          width: '50%',
-          opacity: 0.9,
-          mixBlendMode: 'multiply',
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center 20%',
+          opacity: 0.3,
           pointerEvents: 'none',
           userSelect: 'none',
         }}
-      /> */}
+      />
       <h1 style={{
+        position: 'relative', zIndex: 1,
         fontFamily: 'var(--font-heading)',
         fontSize: 'clamp(28px, 5vw, 42px)',
         color: 'var(--heading)',
@@ -61,6 +65,7 @@ export default function LandingPage({ onSelectNotebook }) {
         AI, מההתחלה
       </h1>
       <h2 style={{
+        position: 'relative', zIndex: 1,
         fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-heading)',
         fontSize: 'clamp(16px, 3vw, 20px)',
         color: 'var(--heading)',
@@ -75,6 +80,7 @@ export default function LandingPage({ onSelectNotebook }) {
       </h2>
       {/* Fade-edge gradient divider */}
       <div style={{
+        position: 'relative', zIndex: 1,
         height: 2,
         width: 120,
         margin: '0 auto 14px',
@@ -84,13 +90,14 @@ export default function LandingPage({ onSelectNotebook }) {
       <div style={{
         fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
         fontSize: 'clamp(15px, 2.5vw, 17px)',
-        color: 'var(--text-soft)',
+        color: isDusk ? 'var(--text)' : 'var(--text-soft)',
+        fontWeight: 600,
         marginBottom: 12,
         textAlign: 'center',
         maxWidth: 600,
         lineHeight: 1.55,
         letterSpacing: '0.02em',
-        position: 'relative',
+        position: 'relative', zIndex: 1,
       }}>
         {lang === 'he' ? (<>
           <p style={{ marginBottom: 12 }}>אם אתם אנשי תוכנה, בעלי רקע טכנולוגי או פשוט סקרנים טכנולוגית לגבי עולם <span style={{ whiteSpace: 'nowrap' }}>ה-AI,</span> יש סיכוי שגם אתם קצת מוצפים מכל ההייפ ו<span
@@ -135,6 +142,7 @@ export default function LandingPage({ onSelectNotebook }) {
         </>) : 'An interactive guide from neural networks to AI agents, with animations, exercises, and a glossary.'}
       </div>
       <p style={{
+        position: 'relative', zIndex: 1,
         fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
         fontSize: 'clamp(13px, 2vw, 15px)',
         color: '#C2652A',
@@ -152,6 +160,7 @@ export default function LandingPage({ onSelectNotebook }) {
 
       {/* Notebook cards */}
       <div className="notebook-cards" style={{
+        position: 'relative', zIndex: 1,
         display: 'flex',
         gap: 24,
         flexWrap: 'wrap',
