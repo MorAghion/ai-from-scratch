@@ -48,7 +48,7 @@ export default function CostBreakdown() {
               gap: 10,
               direction: isRtl ? 'rtl' : 'ltr',
               borderBottom: i < entries.length - 1 ? '1px solid var(--border)' : 'none',
-              background: entry.milestone ? '#8B5CF608' : entry.peak ? '#EF444408' : 'transparent',
+              background: entry.milestone ? '#874B7D08' : entry.peak ? '#EF444408' : 'transparent',
             }}>
               {/* Date */}
               <span style={{
@@ -89,8 +89,8 @@ export default function CostBreakdown() {
                   <div style={{
                     height: 18,
                     borderRadius: 4,
-                    background: '#8B5CF620',
-                    border: '1px dashed #8B5CF6',
+                    background: '#874B7D20',
+                    border: '1px dashed #874B7D',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -99,7 +99,7 @@ export default function CostBreakdown() {
                       fontFamily: 'var(--font-code)',
                       fontSize: 10,
                       fontWeight: 700,
-                      color: '#8B5CF6',
+                      color: '#874B7D',
                     }}>
                       $100/mo
                     </span>
@@ -108,7 +108,7 @@ export default function CostBreakdown() {
                 <span style={{
                   fontFamily,
                   fontSize: 11,
-                  color: entry.peak ? '#EF4444' : entry.milestone ? '#8B5CF6' : 'var(--text-soft)',
+                  color: entry.peak ? '#EF4444' : entry.milestone ? '#874B7D' : 'var(--text-soft)',
                   fontWeight: entry.peak || entry.milestone ? 600 : 400,
                   lineHeight: 1.3,
                 }}>

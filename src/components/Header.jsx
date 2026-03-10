@@ -50,7 +50,7 @@ export default function Header({ onMenuToggle, onHome, notebook, showMenu }) {
             fontSize: 18,
             letterSpacing: '-0.02em',
           }}>
-            AI מההתחלה
+            AI, מההתחלה
           </span>
         </button>
 

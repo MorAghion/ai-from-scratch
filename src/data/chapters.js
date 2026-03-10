@@ -17,16 +17,16 @@ const chapterMeta = [
     id: 'science',
     icon: 'Atom',
     iconColor: '#6366F1',
-    title: { he: 'המדע — איך המוח המלאכותי עובד', en: 'The Science — How the Artificial Brain Works' },
+    title: { he: 'המדע - איך המוח המלאכותי עובד', en: 'The Science - How the Artificial Brain Works' },
     status: 'done',
     detectiveFiles: [
-      { name: 'crime_scene.txt', path: '/detective-files/crime_scene.txt', label: { he: 'זירת הפשע — תיק בלקווד', en: 'Crime Scene — Blackwood Case' } },
+      { name: 'crime_scene.txt', path: '/detective-files/crime_scene.txt', label: { he: 'זירת הפשע - תיק בלקווד', en: 'Crime Scene - Blackwood Case' } },
     ],
     videos: [
-      { url: 'https://www.youtube.com/watch?v=aircAruvnKk', title: 'But what is a neural network? | 3Blue1Brown', note: { he: 'הסרטון שהתחיל את הכל — מה זה רשת נוירונית ואיך היא עובדת.', en: '' } },
-      { url: 'https://www.3blue1brown.com/?v=backpropagation', title: 'Backpropagation | 3Blue1Brown', note: { he: 'איך הרשת לומדת מטעויות — הסבר ויזואלי מעולה.', en: '' } },
-      { url: 'https://www.3blue1brown.com/?v=mini-llm', title: 'Building a mini LLM | 3Blue1Brown', note: { he: 'בניית מודל שפה מאפס — מה קורה מתחת למכסה.', en: '' } },
-      { url: 'https://www.3blue1brown.com/?v=gpt', title: 'How GPT works | 3Blue1Brown', note: { he: 'איך GPT עובד מאחורי הקלעים — Transformer ו-Attention.', en: '' } },
+      { url: 'https://www.youtube.com/watch?v=aircAruvnKk', title: 'But what is a neural network? | 3Blue1Brown', note: { he: 'הסרטון שהתחיל את הכל - מה זה רשת נוירונית ואיך היא עובדת.', en: '' } },
+      { url: 'https://www.3blue1brown.com/?v=backpropagation', title: 'Backpropagation | 3Blue1Brown', note: { he: 'איך הרשת לומדת מטעויות - הסבר ויזואלי מעולה.', en: '' } },
+      { url: 'https://www.3blue1brown.com/?v=mini-llm', title: 'Building a mini LLM | 3Blue1Brown', note: { he: 'בניית מודל שפה מאפס - מה קורה מתחת למכסה.', en: '' } },
+      { url: 'https://www.3blue1brown.com/?v=gpt', title: 'How GPT works | 3Blue1Brown', note: { he: 'איך GPT עובד מאחורי הקלעים - Transformer ו-Attention.', en: '' } },
     ],
     exercise: null,
   },
@@ -36,7 +36,7 @@ const chapterMeta = [
     iconColor: '#F59E0B',
     title: { he: 'הנדסת פרומפטים', en: 'Prompt Engineering' },
     status: 'done',
-    videos: [{ url: 'https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/', title: 'ChatGPT Prompt Engineering for Developers — DeepLearning.AI', note: { he: 'קורס קצר וממוקד. שווה.', en: '' } }],
+    videos: [{ url: 'https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/', title: 'ChatGPT Prompt Engineering for Developers - DeepLearning.AI', note: { he: 'קורס קצר וממוקד. שווה.', en: '' } }],
     exercise: null,
   },
   {
@@ -79,26 +79,26 @@ const chapterMeta = [
   {
     id: 'vector-db',
     icon: 'Graph',
-    iconColor: '#8B5CF6',
-    title: { he: 'Vector DB — חדר הארכיון', en: 'Vector DB — The Archive Room' },
+    iconColor: '#874B7D',
+    title: { he: 'Vector DB - חדר הארכיון', en: 'Vector DB - The Archive Room' },
     status: 'done',
-    videos: [{ url: 'https://www.youtube.com/watch?v=wjZofJX0v4M&t=747s', title: 'But what is a GPT? Visual intro to Transformers | 3Blue1Brown', note: { he: 'ההסבר הטוב מתחיל ב-12:27 — איך Embeddings הופכים מילים לוקטורים במרחב סמנטי.', en: 'The good explanation starts at 12:27 — how Embeddings turn words into vectors in semantic space.' } }],
+    videos: [{ url: 'https://www.youtube.com/watch?v=wjZofJX0v4M&t=747s', title: 'But what is a GPT? Visual intro to Transformers | 3Blue1Brown', note: { he: 'ההסבר הטוב מתחיל ב-12:27 - איך Embeddings הופכים מילים לוקטורים במרחב סמנטי.', en: 'The good explanation starts at 12:27 - how Embeddings turn words into vectors in semantic space.' } }],
     exercise: null,
   },
   {
     id: 'rag',
     icon: 'MagnifyingGlass',
     iconColor: '#10B981',
-    title: { he: 'RAG — לתת למודל לקרוא את התיק שלך', en: 'RAG — Giving the Model Your Case File' },
+    title: { he: 'RAG - לתת למודל לקרוא את התיק שלך', en: 'RAG - Giving the Model Your Case File' },
     status: 'done',
-    videos: [{ url: 'https://www.freecodecamp.org/news/retrieval-augmented-generation-rag-handbook/', title: 'RAG Handbook — freeCodeCamp', note: { he: 'מדריך מקיף ומעשי.', en: '' } }],
+    videos: [{ url: 'https://www.freecodecamp.org/news/retrieval-augmented-generation-rag-handbook/', title: 'RAG Handbook - freeCodeCamp', note: { he: 'מדריך מקיף ומעשי.', en: '' } }],
     exercise: null,
   },
   {
     id: 'integrity',
     icon: 'ShieldCheck',
     iconColor: '#EF4444',
-    title: { he: 'אמינות — כשה-AI משקר', en: 'Integrity — When AI Lies' },
+    title: { he: 'אמינות - כשה-AI משקר', en: 'Integrity - When AI Lies' },
     status: 'done',
     videos: [],
     exercise: null,
@@ -109,7 +109,7 @@ const chapterMeta = [
     id: 'api',
     icon: 'Plugs',
     iconColor: '#b88114',
-    title: { he: 'API — השפה שבה מערכות מדברות', en: 'API — How Systems Talk' },
+    title: { he: 'API - השפה שבה מערכות מדברות', en: 'API - How Systems Talk' },
     status: 'in-progress',
     videos: [],
     exercise: null,
@@ -118,7 +118,7 @@ const chapterMeta = [
     id: 'mcp',
     icon: 'Usb',
     iconColor: '#5a6b6f',
-    title: { he: 'MCP — Model Context Protocol', en: 'MCP — Model Context Protocol' },
+    title: { he: 'MCP - Model Context Protocol', en: 'MCP - Model Context Protocol' },
     status: 'not-started',
     videos: [
       { url: 'https://modelcontextprotocol.io/introduction', title: 'MCP Introduction', note: { he: 'הדוקומנטציה הרשמית של הפרוטוקול.', en: '' } },
@@ -130,7 +130,7 @@ const chapterMeta = [
     id: 'n8n-docker',
     icon: 'Package',
     iconColor: '#06B6D4',
-    title: { he: 'n8n ו-Docker — אוטומציה מעשית', en: 'n8n & Docker — Practical Automation' },
+    title: { he: 'n8n ו-Docker - אוטומציה מעשית', en: 'n8n & Docker - Practical Automation' },
     status: 'in-progress',
     videos: [{ url: 'https://docs.n8n.io/courses/', title: 'n8n Courses', note: { he: 'הדוקומנטציה הרשמית.', en: '' } }],
     exercise: null,
@@ -147,7 +147,7 @@ const chapterMeta = [
     exercise: null,
   },
 
-  // === Vibe Coding — Arc 1: Getting Ready ===
+  // === Vibe Coding - Arc 1: Getting Ready ===
   {
     id: 'vibe-coding-intro',
     icon: 'Rocket',
@@ -161,18 +161,18 @@ const chapterMeta = [
     id: 'getting-started',
     icon: 'Wrench',
     iconColor: '#e9a00e',
-    title: { he: 'ערכת ההתחלה — כלים, מנויים ומפתחות', en: 'The Starter Kit — Tools, Subscriptions & Keys' },
+    title: { he: 'ערכת ההתחלה - כלים, מנויים ומפתחות', en: 'The Starter Kit - Tools, Subscriptions & Keys' },
     status: 'not-started',
     videos: [],
     exercise: null,
   },
 
-  // === Vibe Coding — Arc 2: Building HomeHub ===
+  // === Vibe Coding - Arc 2: Building HomeHub ===
   {
     id: 'homehub-mvp',
     icon: 'Waves',
     iconColor: '#11b1f0',
-    title: { he: 'Just Vibing — מ-0 ל-MVP', en: 'Just Vibing — From Zero to MVP' },
+    title: { he: 'Just Vibing - מ-0 ל-MVP', en: 'Just Vibing - From Zero to MVP' },
     status: 'not-started',
     videos: [],
     exercise: null,
@@ -181,17 +181,17 @@ const chapterMeta = [
     id: 'homehub-leveling-up',
     icon: 'TrendUp',
     iconColor: '#cb3c7a',
-    title: { he: 'Leveling Up — תכנון, ביצוע, מולטי-אייג׳נט', en: 'Leveling Up — Plan, Execute, Multi-Agent' },
+    title: { he: 'Leveling Up - תכנון, ביצוע, מולטי-אייג׳נט', en: 'Leveling Up - Plan, Execute, Multi-Agent' },
     status: 'not-started',
     videos: [],
     exercise: null,
   },
 
-  // === Vibe Coding — Arc 3: Mini Gas Town ===
+  // === Vibe Coding - Arc 3: Mini Gas Town ===
   {
     id: 'orchestration',
     icon: 'TreeStructure',
-    iconColor: '#8B5CF6',
+    iconColor: '#874B7D',
     title: { he: 'תזמור ופריימוורקים', en: 'Orchestration & Frameworks' },
     status: 'not-started',
     videos: [],

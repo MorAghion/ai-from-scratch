@@ -1,12 +1,12 @@
-// Notebook definitions — each notebook groups chapters into a themed collection
+// Notebook definitions - each notebook groups chapters into a themed collection
 
 export const notebooks = {
   'building-blocks': {
     id: 'building-blocks',
     title: { he: 'אבני הבניין', en: 'Building Blocks' },
-    subtitle: { he: 'הבסיס — מרשתות נוירונים ועד אוטומציה', en: 'Foundations — from neural networks to automation' },
+    subtitle: { he: ' מרשתות נוירונים, דרך סוכנים ועד אוטומציה', en: 'Foundations - from neural networks to automation' },
     icon: 'Cube',
-    color: '#C2652A',
+    color: '#3D8B80',
     chapterIds: [
       'prologue', 'science', 'prompt-engineering', 'first-agent', 'agents-function-calling',
       'memory-tokens', 'vector-db', 'rag', 'integrity',
@@ -22,9 +22,9 @@ export const notebooks = {
   'vibe-coding': {
     id: 'vibe-coding',
     title: { he: 'Vibe Coding', en: 'Vibe Coding' },
-    subtitle: { he: 'מלומדת לבונה — המסע מרמה 2 לרמה 6', en: 'From learner to builder — the journey from level 2 to level 6' },
+    subtitle: { he: 'רעיונות הופכים למציאות', en: 'From learner to builder - the journey from level 2 to level 6' },
     icon: 'CodeBlock',
-    color: '#8B5CF6',
+    color: '#874B7D',
     comingSoon: true,
     chapterIds: [
       'vibe-coding-intro', 'getting-started',

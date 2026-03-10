@@ -89,7 +89,7 @@ export default function YeggeFigures({ variant } = {}) {
                 )}
                 {f.num === 2 && variant === 'epilogue' && (
                   <span style={{
-                    background: '#8B5CF6',
+                    background: '#874B7D',
                     color: '#fff',
                     fontFamily: 'var(--font-code)',
                     fontSize: 10,

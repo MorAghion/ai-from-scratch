@@ -28,7 +28,7 @@ const tiers = [
   {
     key: 'premium',
     label: { he: 'מנוי פרימיום', en: 'Premium Subscription' },
-    color: '#8B5CF6',
+    color: '#874B7D',
     price: { he: '$100-200/חודש', en: '$100-200/mo' },
     items: [
       { name: 'Claude Max', price: '$100-200', note: { he: 'שימוש כבד עם Claude Code', en: 'Heavy use with Claude Code' } },

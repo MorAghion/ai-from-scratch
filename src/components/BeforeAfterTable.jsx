@@ -34,7 +34,7 @@ const rows = [
 ]
 
 const beforeColor = '#94a3b8'
-const afterColor = '#8B5CF6'
+const afterColor = '#874B7D'
 
 export default function BeforeAfterTable() {
   const { lang } = useLang()
