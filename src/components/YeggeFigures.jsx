@@ -41,6 +41,7 @@ export default function YeggeFigures({ variant } = {}) {
   const isRtl = lang === 'he'
 
   return (
+    <div id="section-yegge-diagram">
     <CollapsibleBubble type="detail" label={title}>
       <div style={{ fontFamily, fontSize: 14, lineHeight: 1.75, color: 'var(--text)', direction: isRtl ? 'rtl' : 'ltr' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -87,9 +88,9 @@ export default function YeggeFigures({ variant } = {}) {
                     {isRtl ? '← התחלתי כאן' : 'I started here →'}
                   </span>
                 )}
-                {f.num === 2 && variant === 'epilogue' && (
+                {f.num === 3 && variant === 'epilogue' && (
                   <span style={{
-                    background: '#9B4F96',
+                    background: '#EF4444',
                     color: '#fff',
                     fontFamily: 'var(--font-code)',
                     fontSize: 10,
@@ -107,5 +108,6 @@ export default function YeggeFigures({ variant } = {}) {
         </div>
       </div>
     </CollapsibleBubble>
+    </div>
   )
 }

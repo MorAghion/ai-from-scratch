@@ -3,6 +3,7 @@ import { useLang } from '../App'
 import { MagnifyingGlass, DownloadSimple, CaretDown, File, Code, ChatCircleDots } from '@phosphor-icons/react'
 import DetectiveFilesystem from './DetectiveFilesystem'
 import CollapsibleBubble from './CollapsibleBubble'
+import YeggeCallout from './YeggeCallout'
 import RAGBeforeAfter from './RAGBeforeAfter'
 
 const componentRegistry = {
@@ -101,6 +102,19 @@ function parseBlocks(text) {
       }
       blocks.push({ type: 'component', name, props })
       i++
+      continue
+    }
+
+    // Yegge callout: @@yegge / @@endyegge
+    if (line.trim() === '@@yegge') {
+      const yeggeLines = []
+      i++
+      while (i < lines.length && lines[i].trim() !== '@@endyegge') {
+        yeggeLines.push(lines[i])
+        i++
+      }
+      i++ // skip @@endyegge
+      blocks.push({ type: 'yegge', content: yeggeLines.join('\n').trim() })
       continue
     }
 
@@ -371,6 +385,14 @@ function renderBlockList(blocks, lang) {
     }
     if (block.type === 'table') {
       return <TableRenderer key={i} lines={block.lines} lang={lang} />
+    }
+    if (block.type === 'yegge') {
+      const nestedBlocks = parseBlocks(block.content)
+      return (
+        <YeggeCallout key={i}>
+          {renderBlockList(nestedBlocks, lang)}
+        </YeggeCallout>
+      )
     }
     if (block.type === 'tracks') {
       return <TrackSelector key={i} tracks={block.tracks} lang={lang} renderBlocks={(nestedBlocks) => renderBlockList(nestedBlocks, lang)} />

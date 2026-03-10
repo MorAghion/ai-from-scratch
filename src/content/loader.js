@@ -7,21 +7,36 @@ function folderToId(folderName) {
   return folderName.replace(/^\d+-/, '')
 }
 
-// Helper: push text, image, and component sections
-// Recognizes ![alt](src) for images and @@component:Name for React components
+// Helper: push text, image, component, and yegge callout sections
+// Recognizes ![alt](src) for images, @@component:Name for React components,
+// and @@yegge / @@endyegge for Yegge progression callout boxes
 function pushTextAndImages(sections, text) {
-  const specialRegex = /^(?:!\[([^\]]*)\]\(([^)]+)\)|@@component:(\w+))$/gm
+  const specialRegex = /^(?:!\[([^\]]*)\]\(([^)]+)\)|@@component:(\w+)|@@yegge)$/gm
   let lastIdx = 0
   let match
   while ((match = specialRegex.exec(text)) !== null) {
     const before = text.substring(lastIdx, match.index).trim()
     if (before) sections.push({ type: 'text', content: before })
-    if (match[3]) {
+    if (match[0] === '@@yegge') {
+      // Find the closing @@endyegge
+      const endTag = '@@endyegge'
+      const endIdx = text.indexOf(endTag, match.index + match[0].length)
+      if (endIdx !== -1) {
+        const inner = text.substring(match.index + match[0].length, endIdx).trim()
+        sections.push({ type: 'yegge', content: inner })
+        lastIdx = endIdx + endTag.length
+        // Reset regex position past the endyegge tag
+        specialRegex.lastIndex = lastIdx
+      } else {
+        lastIdx = match.index + match[0].length
+      }
+    } else if (match[3]) {
       sections.push({ type: 'component', name: match[3] })
+      lastIdx = match.index + match[0].length
     } else {
       sections.push({ type: 'image', alt: match[1], src: match[2] })
+      lastIdx = match.index + match[0].length
     }
-    lastIdx = match.index + match[0].length
   }
   const after = text.substring(lastIdx).trim()
   if (after) sections.push({ type: 'text', content: after })

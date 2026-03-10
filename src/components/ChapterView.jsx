@@ -24,6 +24,7 @@ import APIRequestDiagram from './APIRequestDiagram'
 import YeggeFigures, { YeggeFiguresEpilogue } from './YeggeFigures'
 import MCPArchitectureDiagram from './MCPArchitectureDiagram'
 import RestaurantAPIDiagram from './RestaurantAPIDiagram'
+import YeggeCallout from './YeggeCallout'
 import AgentFileView from './AgentFileView'
 import BeforeAfterTable from './BeforeAfterTable'
 import PricingTable from './PricingTable'
@@ -311,6 +312,15 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                 if (section.type === 'component') {
                   const Comp = componentRegistry[section.name]
                   return Comp ? <div key={i} style={{ maxWidth: '100%', overflowX: 'auto' }}><Comp /></div> : null
+                }
+                if (section.type === 'yegge') {
+                  return (
+                    <YeggeCallout key={i}>
+                      <span style={{ whiteSpace: 'pre-line' }}>
+                        {renderTextWithLinks(section.content, onNavigate, setActiveTab)}
+                      </span>
+                    </YeggeCallout>
+                  )
                 }
                 return (
                   <div key={i} style={{
@@ -630,7 +640,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
         </button>
         {ch.id === 'epilogue' && visibleTabs.findIndex(t => t.id === activeTab) === visibleTabs.length - 1 ? (
           <button
-            onClick={() => { window.location.hash = '#/vibe-coding/vibe-coding-intro' }}
+            disabled
             style={{
               padding: '12px 28px',
               borderRadius: 10,
@@ -640,12 +650,11 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
               fontSize: 15,
               fontWeight: 700,
               color: '#fff',
-              cursor: 'pointer',
+              cursor: 'default',
+              opacity: 0.7,
               transition: 'all 0.2s ease',
               letterSpacing: lang === 'he' ? 0 : 0.3,
             }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#7C3AED'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-            onMouseLeave={e => { e.currentTarget.style.background = '#9B4F96'; e.currentTarget.style.transform = 'translateY(0)' }}
           >
             {lang === 'he' ? 'למחברת Vibe Coding' : 'To the Vibe Coding Notebook'} {dir === 'rtl' ? '←' : '→'}
           </button>
