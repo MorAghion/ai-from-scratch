@@ -122,7 +122,7 @@ const moodColors = {
   fire: '#F59E0B',
   warning: '#EF4444',
   calm: '#10B981',
-  explosion: '#874B7D',
+  explosion: '#9B4F96',
   danger: '#EF4444',
 }
 
@@ -256,7 +256,7 @@ export default function VibingDays() {
                   inset: 0,
                   borderRadius: 4,
                   width: `${(cumulative.subscription / maxTotal) * 100}%`,
-                  background: 'linear-gradient(90deg, #874B7D60, #874B7D)',
+                  background: 'linear-gradient(90deg, #9B4F9660, #9B4F96)',
                   transition: 'width 0.4s ease',
                 }} />
                 <span style={{
@@ -283,7 +283,7 @@ export default function VibingDays() {
             fontSize: 12,
             fontWeight: 700,
             color: cumulative
-              ? cumulative.subscription > 0 ? '#874B7D' : '#F59E0B'
+              ? cumulative.subscription > 0 ? '#9B4F96' : '#F59E0B'
               : 'var(--text-soft)',
             minWidth: 45,
             textAlign: isRtl ? 'left' : 'right',
@@ -350,8 +350,8 @@ export default function VibingDays() {
                     fontFamily: 'var(--font-code)',
                     fontSize: 10,
                     fontWeight: 700,
-                    color: '#874B7D',
-                    background: '#874B7D15',
+                    color: '#9B4F96',
+                    background: '#9B4F9615',
                     padding: '2px 6px',
                     borderRadius: 4,
                   }}>

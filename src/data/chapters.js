@@ -79,7 +79,7 @@ const chapterMeta = [
   {
     id: 'vector-db',
     icon: 'Graph',
-    iconColor: '#874B7D',
+    iconColor: '#9B4F96',
     title: { he: 'Vector DB - חדר הארכיון', en: 'Vector DB - The Archive Room' },
     status: 'done',
     videos: [{ url: 'https://www.youtube.com/watch?v=wjZofJX0v4M&t=747s', title: 'But what is a GPT? Visual intro to Transformers | 3Blue1Brown', note: { he: 'ההסבר הטוב מתחיל ב-12:27 - איך Embeddings הופכים מילים לוקטורים במרחב סמנטי.', en: 'The good explanation starts at 12:27 - how Embeddings turn words into vectors in semantic space.' } }],
@@ -191,7 +191,7 @@ const chapterMeta = [
   {
     id: 'orchestration',
     icon: 'TreeStructure',
-    iconColor: '#874B7D',
+    iconColor: '#9B4F96',
     title: { he: 'תזמור ופריימוורקים', en: 'Orchestration & Frameworks' },
     status: 'not-started',
     videos: [],

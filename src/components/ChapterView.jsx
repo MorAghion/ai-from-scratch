@@ -635,7 +635,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
               padding: '12px 28px',
               borderRadius: 10,
               border: 'none',
-              background: '#874B7D',
+              background: '#9B4F96',
               fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
               fontSize: 15,
               fontWeight: 700,
@@ -645,7 +645,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
               letterSpacing: lang === 'he' ? 0 : 0.3,
             }}
             onMouseEnter={e => { e.currentTarget.style.background = '#7C3AED'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-            onMouseLeave={e => { e.currentTarget.style.background = '#874B7D'; e.currentTarget.style.transform = 'translateY(0)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = '#9B4F96'; e.currentTarget.style.transform = 'translateY(0)' }}
           >
             {lang === 'he' ? 'למחברת Vibe Coding' : 'To the Vibe Coding Notebook'} {dir === 'rtl' ? '←' : '→'}
           </button>

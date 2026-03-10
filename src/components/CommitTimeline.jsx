@@ -17,7 +17,7 @@ const phases = [
     key: 'pause',
     label: { he: 'ההפסקה', en: 'The Pause' },
     dates: { he: '18-22 בפברואר', en: 'Feb 18-22' },
-    color: '#874B7D',
+    color: '#9B4F96',
     isPause: true,
     stats: [
       { value: 'PRD', label: { he: 'מסמך דרישות', en: 'requirements doc' } },

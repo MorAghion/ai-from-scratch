@@ -196,7 +196,7 @@ export default function MCPArchitectureDiagram() {
     const srvGap = 20
     const servers = [
       { desc: t.server1Desc, color: green, icon: '📁' },
-      { desc: t.server2Desc, color: '#874B7D', icon: '🔧' },
+      { desc: t.server2Desc, color: '#9B4F96', icon: '🔧' },
       { desc: t.server3Desc, color: amber, icon: '☁️' },
     ]
 

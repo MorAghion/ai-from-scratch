@@ -35,7 +35,7 @@ const agents = [
           },
           {
             label: { he: 'הנתב — ROUTER', en: 'ROUTER' },
-            color: '#874B7D',
+            color: '#9B4F96',
             lines: [
               'def execute_tool(tool_name, tool_input):',
               '    if tool_name == "search_web":',
@@ -179,7 +179,7 @@ const agents = [
           },
           {
             label: { he: 'הנתב — ROUTER', en: 'ROUTER' },
-            color: '#874B7D',
+            color: '#9B4F96',
             lines: [
               'def execute_tool(tool_name, tool_input):',
               '    if tool_name == "get_free_evenings":',
@@ -391,8 +391,8 @@ export default function AgentFileView() {
         {[
           { text: 'run_agent()', color: '#10B981' },
           { text: 'LLM + prompt + tools_schema', color: '#EC4899' },
-          { text: 'decides to use tool', color: '#874B7D', italic: true },
-          { text: 'execute_tool()', color: '#874B7D' },
+          { text: 'decides to use tool', color: '#9B4F96', italic: true },
+          { text: 'execute_tool()', color: '#9B4F96' },
           { text: 'tools.py', color: '#3B82F6' },
         ].map((step, i, arr) => (
           <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
@@ -666,7 +666,7 @@ export default function AgentFileView() {
       }}>
         {[
           { label: { he: 'לולאה', en: 'Loop' }, color: '#10B981' },
-          { label: { he: 'נתב', en: 'Router' }, color: '#874B7D' },
+          { label: { he: 'נתב', en: 'Router' }, color: '#9B4F96' },
           { label: { he: 'כלים', en: 'Tools' }, color: '#3B82F6' },
           { label: { he: 'תפריט', en: 'Schema' }, color: '#EC4899' },
           { label: 'System Prompt', color: '#F59E0B' },

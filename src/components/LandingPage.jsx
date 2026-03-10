@@ -7,16 +7,16 @@ import ChapterIcon from './ChapterIcon'
 const buzzwords = [
   { text: 'LLM', color: '#C2652A' },
   { text: 'RAG', color: '#3D8B80' },
-  { text: 'Transformer', color: '#874B7D' },
+  { text: 'Transformer', color: '#9B4F96' },
   { text: 'Fine-Tuning', color: '#3D8B80' },
   { text: 'Embeddings', color: '#C2652A' },
-  { text: 'Attention', color: '#874B7D' },
+  { text: 'Attention', color: '#9B4F96' },
   { text: 'Tokens', color: '#3D8B80' },
   { text: 'Vector DB', color: '#C2652A' },
-  { text: 'MCP', color: '#874B7D' },
+  { text: 'MCP', color: '#9B4F96' },
   { text: 'Agentic Loop', color: '#3D8B80' },
   { text: 'Backpropagation', color: '#C2652A' },
-  { text: 'Neural Network', color: '#874B7D' },
+  { text: 'Neural Network', color: '#9B4F96' },
 ]
 
 export default function LandingPage({ onSelectNotebook }) {
@@ -79,7 +79,7 @@ export default function LandingPage({ onSelectNotebook }) {
         width: 120,
         margin: '0 auto 14px',
         borderRadius: 2,
-        background: 'linear-gradient(90deg, transparent, #3D8B80, #874B7D, transparent)',
+        background: 'linear-gradient(90deg, transparent, #3D8B80, #9B4F96, transparent)',
       }} />
       <div style={{
         fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
@@ -181,7 +181,7 @@ export default function LandingPage({ onSelectNotebook }) {
                 transition: 'all 0.2s ease',
                 position: 'relative',
                 overflow: 'hidden',
-                opacity: nb.comingSoon ? 0.6 : 1,
+                opacity: nb.comingSoon ? 0.7 : 1,
               }}
               onMouseEnter={e => {
                 if (nb.comingSoon) return

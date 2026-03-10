@@ -24,7 +24,7 @@ export const notebooks = {
     title: { he: 'Vibe Coding', en: 'Vibe Coding' },
     subtitle: { he: 'רעיונות הופכים למציאות', en: 'From learner to builder - the journey from level 2 to level 6' },
     icon: 'CodeBlock',
-    color: '#874B7D',
+    color: '#9B4F96',
     comingSoon: true,
     chapterIds: [
       'vibe-coding-intro', 'getting-started',
