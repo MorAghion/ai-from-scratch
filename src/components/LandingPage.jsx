@@ -27,15 +27,15 @@ export default function LandingPage({ onSelectNotebook }) {
 
   return (
     <div style={{
-      minHeight: 'calc(100vh - 60px)',
+      height: 'calc(100vh - 60px)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'flex-start',
-      padding: '40px 20px 80px',
+      padding: '40px 20px 20px',
       direction: dir,
       position: 'relative',
-      position: 'relative',
+      overflow: 'auto',
     }}>
       {/* Watercolor background */}
       <img
@@ -274,15 +274,16 @@ export default function LandingPage({ onSelectNotebook }) {
         })}
       </div>
 
-      {/* Author — bottom */}
+      {/* Author — bottom right */}
       <div style={{
         marginTop: 'auto',
         paddingTop: 24,
+        alignSelf: dir === 'rtl' ? 'flex-start' : 'flex-end',
         display: 'flex',
         alignItems: 'center',
         gap: 10,
-        position: 'relative',
         zIndex: 1,
+        position: 'relative',
       }}>
         <img
           src="/images/profile.jpeg"
