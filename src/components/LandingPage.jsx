@@ -176,8 +176,11 @@ export default function LandingPage({ onSelectNotebook }) {
                 border: `2px solid ${nb.color}22`,
                 background: 'var(--surface)',
                 cursor: nb.comingSoon ? 'default' : 'pointer',
-                textAlign: lang === 'he' ? 'right' : 'left',
+                textAlign: 'center',
                 direction: dir,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
                 transition: 'all 0.2s ease',
                 position: 'relative',
                 overflow: 'hidden',
@@ -211,7 +214,7 @@ export default function LandingPage({ onSelectNotebook }) {
               </div>
 
               {/* Title + badge */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginBottom: 8 }}>
                 <h2 style={{
                   fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-heading)',
                   fontSize: 'clamp(18px, 3vw, 22px)',
@@ -243,6 +246,7 @@ export default function LandingPage({ onSelectNotebook }) {
                 color: 'var(--text-soft)',
                 lineHeight: 1.6,
                 marginBottom: 16,
+                flex: 1,
               }}>
                 {nb.subtitle[lang]}
               </p>

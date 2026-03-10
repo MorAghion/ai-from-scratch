@@ -22,7 +22,7 @@ export const notebooks = {
   'vibe-coding': {
     id: 'vibe-coding',
     title: { he: 'Vibe Coding', en: 'Vibe Coding' },
-    subtitle: { he: 'רעיונות הופכים למציאות', en: 'From learner to builder - the journey from level 2 to level 6' },
+    subtitle: { he: 'רעיונות הופכים למציאות · ריבוי סוכנים · אורקסטרציה', en: 'Ideas become reality · Multi-agent · Orchestration' },
     icon: 'CodeBlock',
     color: '#9B4F96',
     comingSoon: true,
