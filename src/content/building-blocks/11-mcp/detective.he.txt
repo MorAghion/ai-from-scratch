@@ -4,7 +4,7 @@
 
 ---
 
-**אפשרות א׳: Claude Code (טרמינל)**
+**אפשרות א׳: Claude Code (טרמינל)**:
 
 אם התקנתם Claude Code, זה הכי פשוט - הוא כבר יודע לקרוא קבצים:
 
@@ -12,19 +12,23 @@
 2. הקלידו `claude` כדי להפעיל את Claude Code
 3. שלחו לו:
 
-*"You are Benoit Blanc, a brilliant detective. Read all files in the evidence/ folder. For each file, note the source. Then cross-reference the evidence, find contradictions, and rank each suspect 1-10. Only use information from the files - do not invent facts."*
+*"You are Benoit Blanc, a brilliant detective. Read all files in the evidence/ folder. For each file, note the source. Then cross-reference the evidence, find contradictions, and rank each suspect 1-10. Only use information from the files - do not invent facts"*.
 
 4. צפו - Claude Code קורא כל קובץ בעצמו (תראו את קריאות ה-`Read` בפלט), מצליב, ונותן ניתוח מלא.
 
 ---
 
-**אפשרות ב׳: Claude Desktop + Filesystem MCP**
+**אפשרות ב׳**: 
+
+**Filesystem MCP + Claude Desktop**:
 
 1. התקינו את שרת הקבצים:
 `npm install -g @modelcontextprotocol/server-filesystem`
 
 2. פתחו את קובץ ההגדרות של Claude Desktop:
+
    - **Mac**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
    - **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 
 3. הוסיפו את הבלוק הזה (שנו את הנתיב לתיקיית detective-ai/ שלכם):
@@ -46,17 +50,34 @@
 4. הפעילו מחדש את Claude Desktop
 5. פתחו שיחה חדשה ושלחו:
 
-*"You are Benoit Blanc, a brilliant detective. Use the filesystem tools to read all files in the evidence/ folder. Cross-reference the evidence, find contradictions, and rank each suspect 1-10. Only cite facts from the files."*
+*"You are Benoit Blanc, a brilliant detective. Use the filesystem tools to read all files in the evidence/ folder. Cross-reference the evidence, find contradictions, and rank each suspect 1-10. Only cite facts from the files"*.
 
 6. שימו לב - Claude מבקש אישור לקרוא כל קובץ. זה ה-Host (השומר) בפעולה.
 
 ---
 
-**אפשרות ג׳: Cursor / VS Code + MCP**
+**אפשרות ג׳: Cursor / VS Code + MCP**:
 
-1. פתחו את תיקיית detective-ai/ ב-Cursor (או VS Code עם Copilot)
-2. ב-Cursor: Settings → MCP Servers → הוסיפו שרת filesystem עם הנתיב לתיקייה
-3. פתחו את ה-Chat ושלחו את אותו פרומפט של בנואה בלאנק
+1. פתחו את תיקיית `detective-ai/` ב-Cursor (או VS Code עם Copilot)
+
+2. צרו קובץ `.cursor/mcp.json` בתיקייה (או ב-Cursor: Settings → MCP Servers):
+
+```json
+{
+  "mcpServers": {
+    "detective-files": {
+      "command": "npx",
+      "args": [
+        "-y", "@modelcontextprotocol/server-filesystem",
+        "/full/path/to/detective-ai"
+      ]
+    }
+  }
+}
+```
+
+3. פתחו את ה-Chat (Agent mode) ושלחו את אותו פרומפט של בנואה בלאנק
+
 4. הסוכן יקרא את הקבצים דרך MCP - בדיוק כמו באפשרויות הקודמות
 
 ---
