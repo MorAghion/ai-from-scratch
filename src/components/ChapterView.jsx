@@ -285,6 +285,18 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                   return (
                     <div key={i} style={{ position: 'relative', marginBottom: 20, marginTop: 12 }}>
                       <img src={section.src} alt={section.alt} style={{ width: '100%', borderRadius: 10, border: '1px solid var(--border)' }} />
+                      {section.src.includes('claude.png') && (
+                        <div style={{
+                          position: 'absolute',
+                          top: '65%',
+                          left: '6%',
+                          width: '50%',
+                          height: '10%',
+                          background: '#282828',
+                          pointerEvents: 'none',
+                          borderRadius: 2,
+                        }} />
+                      )}
                       {isGastown && (
                         <span style={{
                           position: 'absolute',

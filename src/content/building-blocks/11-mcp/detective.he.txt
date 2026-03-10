@@ -10,6 +10,7 @@
 
 1. פתחו טרמינל בתיקיית detective-ai/
 2. הקלידו `claude` כדי להפעיל את Claude Code
+
 3. שלחו לו:
 
 *"You are Benoit Blanc, a brilliant detective. Read all files in the evidence/ folder. For each file, note the source. Then cross-reference the evidence, find contradictions, and rank each suspect 1-10. Only use information from the files - do not invent facts"*.
@@ -48,6 +49,7 @@
 ```
 
 4. הפעילו מחדש את Claude Desktop
+
 5. פתחו שיחה חדשה ושלחו:
 
 *"You are Benoit Blanc, a brilliant detective. Use the filesystem tools to read all files in the evidence/ folder. Cross-reference the evidence, find contradictions, and rank each suspect 1-10. Only cite facts from the files"*.
@@ -88,7 +90,7 @@
 - **detective.py** - אתם כתבתם את הקוד שקורא קבצים, בונה פרומפט, ושולח ל-API
 - **עם MCP** - הסוכן עושה את הכל בעצמו. אותה תוצאה, **אפס קוד**
 
-זה ההבדל בין "USB ייעודי" (סקריפט שבניתם) ל-"USB אוניברסלי" (MCP) - הסוכן לא צריך כלי קריאה מותאם, כי הפרוטוקול מספק את זה.
+זה ההבדל בין "קונקטור ייעודי" (סקריפט שבניתם) ל-"USB אוניברסלי" (MCP) - הסוכן לא צריך כלי קריאה מותאם, כי הפרוטוקול מספק את זה.
 
 ---
 

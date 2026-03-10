@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { useLang } from '../App'
 
-const W = 680
-const H = 380
+const W = 720
+const H = 400
 
 const cyan = '#06B6D4'
 const accent = '#6366F1'
@@ -14,7 +14,7 @@ const labels = {
     title: 'ארכיטקטורת MCP — שלושת השחקנים',
     host: 'Host',
     hostSub: '(מארח)',
-    hostDesc: 'Claude Desktop / VS Code',
+    hostDesc: ['Claude Desktop', '/ VS Code'],
     client: 'Client',
     clientSub: '(לקוח)',
     clientDesc: 'מודל ה-AI',
@@ -25,7 +25,7 @@ const labels = {
     server3: 'MCP Server',
     server3Desc: 'Google Drive',
     ask: 'מה כתוב בקובץ?',
-    need: 'צריך כלי קבצים',
+    need: 'מבקש לקרוא קובץ',
     read: 'קרא קובץ',
     data: 'תוכן הקובץ',
     answer: 'התשובה',
@@ -35,7 +35,7 @@ const labels = {
     title: 'MCP Architecture — The Three Players',
     host: 'Host',
     hostSub: '(App)',
-    hostDesc: 'Claude Desktop / VS Code',
+    hostDesc: ['Claude Desktop', '/ VS Code'],
     client: 'Client',
     clientSub: '(AI)',
     clientDesc: 'The AI Model',
@@ -83,8 +83,8 @@ export default function MCPArchitectureDiagram() {
     ctx.fillText(t.title, W / 2, 22)
 
     // Layout
-    const boxW = 130
-    const boxH = 100
+    const boxW = 150
+    const boxH = 110
     const topY = 50
 
     // === User question (top) ===
@@ -136,7 +136,11 @@ export default function MCPArchitectureDiagram() {
     ctx.font = 'bold 12px "Heebo", sans-serif'
     ctx.fillStyle = textSoft
     ctx.fillText(t.hostSub, hcx, hostY + 78)
-    ctx.fillText(t.hostDesc, hcx, hostY + 92)
+    if (Array.isArray(t.hostDesc)) {
+      t.hostDesc.forEach((line, i) => ctx.fillText(line, hcx, hostY + 92 + i * 13))
+    } else {
+      ctx.fillText(t.hostDesc, hcx, hostY + 92)
+    }
 
     // === Client/AI box (left of Host) ===
     const clientX = hostX
@@ -190,7 +194,7 @@ export default function MCPArchitectureDiagram() {
     ctx.fillText(t.answer, midX + 12, hostY + boxH + 35)
 
     // === MCP Servers (right side, 3 stacked) ===
-    const srvX = 430
+    const srvX = 460
     const srvW = 140
     const srvH = 60
     const srvGap = 20
@@ -248,11 +252,12 @@ export default function MCPArchitectureDiagram() {
     ctx.lineWidth = 1
     const plX = hostRightX + 15
     const plY = hostY + boxH / 2 - 10
-    roundRect(ctx, plX, plY, 75, 22, 4)
+    const plW = lang === 'he' ? 95 : 85
+    roundRect(ctx, plX, plY, plW, 22, 4)
     ctx.font = 'bold 12px "Heebo", sans-serif'
     ctx.fillStyle = cyan
     ctx.textAlign = 'center'
-    ctx.fillText(t.protocol, plX + 37, plY + 16)
+    ctx.fillText(t.protocol, plX + plW / 2, plY + 16)
 
     // Flow labels on first server connection
     ctx.font = 'bold 12px "Heebo", sans-serif'
