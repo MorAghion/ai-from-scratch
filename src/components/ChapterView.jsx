@@ -288,8 +288,8 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                       {isGastown && (
                         <span style={{
                           position: 'absolute',
-                          top: '2%',
-                          left: ch.id === 'epilogue' ? '57%' : '2%',
+                          top: ch.id === 'epilogue' ? '45%' : '2%',
+                          left: ch.id === 'epilogue' ? '7%' : '2%',
                           background: '#EF4444',
                           color: '#fff',
                           fontFamily: 'var(--font-code)',

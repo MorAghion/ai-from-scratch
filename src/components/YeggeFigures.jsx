@@ -88,7 +88,7 @@ export default function YeggeFigures({ variant } = {}) {
                     {isRtl ? '← התחלתי כאן' : 'I started here →'}
                   </span>
                 )}
-                {f.num === 3 && variant === 'epilogue' && (
+                {f.num === 5 && variant === 'epilogue' && (
                   <span style={{
                     background: '#EF4444',
                     color: '#fff',
