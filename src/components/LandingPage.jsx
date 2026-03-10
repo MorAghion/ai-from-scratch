@@ -35,20 +35,24 @@ export default function LandingPage({ onSelectNotebook }) {
       padding: '40px 20px 80px',
       direction: dir,
       position: 'relative',
-      backgroundImage: 'url(/images/watercolor.jpg)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center 20%',
-      backgroundRepeat: 'no-repeat',
-      backgroundAttachment: 'scroll',
+      position: 'relative',
     }}>
-      {/* Semi-transparent overlay to fade the background */}
-      <div style={{
-        position: 'absolute',
-        top: 0, left: 0, right: 0, bottom: 0,
-        background: 'var(--bg)',
-        opacity: 0.7,
-        pointerEvents: 'none',
-      }} />
+      {/* Watercolor background */}
+      <img
+        src="/images/watercolor.jpg"
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: 0, left: 0,
+          width: '100%', height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center 20%',
+          opacity: 0.3,
+          pointerEvents: 'none',
+          userSelect: 'none',
+        }}
+      />
       <h1 style={{
         position: 'relative', zIndex: 1,
         fontFamily: 'var(--font-heading)',
@@ -97,6 +101,7 @@ export default function LandingPage({ onSelectNotebook }) {
         {lang === 'he' ? (<>
           <p style={{ marginBottom: 12 }}>אם אתם אנשי תוכנה, בעלי רקע טכנולוגי או פשוט סקרנים טכנולוגית לגבי עולם <span style={{ whiteSpace: 'nowrap' }}>ה-AI,</span> יש סיכוי שגם אתם קצת מוצפים מכל ההייפ ו<span
             style={{ display: 'inline' }}
+            onClick={() => setShowBuzz(v => !v)}
             onMouseEnter={() => setShowBuzz(true)}
             onMouseLeave={() => setShowBuzz(false)}
           >
