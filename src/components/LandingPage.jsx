@@ -3,6 +3,7 @@ import { useLang, useTheme } from '../App'
 import { notebooks, notebookOrder } from '../data/notebooks'
 import { getNotebookChapters } from '../data/chapters'
 import ChapterIcon from './ChapterIcon'
+import FloatingNodes from './FloatingNodes'
 
 const buzzwords = [
   { text: 'LLM', color: '#C2652A' },
@@ -26,7 +27,7 @@ export default function LandingPage({ onSelectNotebook }) {
   const [showBuzz, setShowBuzz] = useState(false)
 
   return (
-    <div style={{
+    <div className="landing-page" style={{
       height: 'calc(100vh - 60px)',
       display: 'flex',
       flexDirection: 'column',
@@ -35,26 +36,31 @@ export default function LandingPage({ onSelectNotebook }) {
       padding: '40px 20px 20px',
       direction: dir,
       position: 'relative',
-      overflow: 'auto',
+      overflow: 'hidden',
     }}>
-      {/* Watercolor background */}
-      <img
-        src="/images/watercolor.jpg"
-        alt=""
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: 0, left: 0,
-          width: '100%', height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center 20%',
-          opacity: 0.3,
-          pointerEvents: 'none',
-          userSelect: 'none',
-        }}
-      />
+      {/* Pastel NN background image */}
+      <div style={{
+        position: 'absolute',
+        top: 0, left: 0,
+        width: '100%', height: '100%',
+        overflow: 'hidden',
+        pointerEvents: 'none',
+        zIndex: 0,
+      }}>
+        <img
+          src="/images/Gemini_Generated_Image_cpnpo3cpnpo3cpnp.jpg"
+          alt=""
+          style={{
+            width: '100%', height: '100%',
+            objectFit: 'cover', objectPosition: 'center',
+            transform: 'scaleX(-1)',
+            opacity: 0.3,
+          }}
+        />
+      </div>
+      {/* Animated NN overlay */}
+      <FloatingNodes nnOnly />
       <h1 style={{
-        position: 'relative', zIndex: 1,
         fontFamily: 'var(--font-heading)',
         fontSize: 'clamp(28px, 5vw, 42px)',
         color: 'var(--heading)',
@@ -63,7 +69,7 @@ export default function LandingPage({ onSelectNotebook }) {
       }}>
         AI, מההתחלה
       </h1>
-      <h2 style={{
+      {/* <h2 style={{
         position: 'relative', zIndex: 1,
         fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-heading)',
         fontSize: 'clamp(16px, 3vw, 20px)',
@@ -76,14 +82,16 @@ export default function LandingPage({ onSelectNotebook }) {
         {lang === 'he'
           ? 'המסע שלי לעולם הבינה המלאכותית'
           : 'An interactive learning notebook built from scratch'}
-      </h2>
+      </h2> */}
       {/* Fade-edge gradient divider */}
       <div style={{
         position: 'relative', zIndex: 1,
-        height: 2,
+        minHeight: 3,
+        height: 3,
         width: 120,
-        margin: '0 auto 14px',
-        borderRadius: 2,
+        flexShrink: 0,
+        margin: '4px 0 14px',
+        borderRadius: 3,
         background: 'linear-gradient(90deg, transparent, #3D8B80, #9B4F96, transparent)',
       }} />
       <div style={{
@@ -99,7 +107,8 @@ export default function LandingPage({ onSelectNotebook }) {
         position: 'relative', zIndex: 1,
       }}>
         {lang === 'he' ? (<>
-          <p style={{ marginBottom: 12 }}>אם אתם אנשי תוכנה, בעלי רקע טכנולוגי או פשוט סקרנים טכנולוגית לגבי עולם <span style={{ whiteSpace: 'nowrap' }}>ה-AI,</span> יש סיכוי שגם אתם קצת מוצפים מכל ההייפ ו<span
+          <p style={{ marginBottom: 6, fontSize: 'clamp(17px, 3vw, 20px)' }}>אם אתם אנשי תוכנה, בעלי רקע טכנולוגי או פשוט סקרנים טכנולוגית לגבי עולם <span style={{ whiteSpace: 'nowrap' }}>ה-AI,</span></p>
+          <p style={{ marginBottom: 12 }}>יש סיכוי שגם אתם קצת מוצפים מכל ההייפ ו<span
             style={{ display: 'inline' }}
             onClick={() => setShowBuzz(v => !v)}
             onMouseEnter={() => setShowBuzz(true)}

@@ -89,6 +89,12 @@ body {
   .sidebar-overlay {
     display: block !important;
   }
+  .floating-nodes-canvas {
+    display: none !important;
+  }
+  .landing-page {
+    overflow: auto !important;
+  }
 }
 
 /* Prevent horizontal overflow on all screen sizes */
