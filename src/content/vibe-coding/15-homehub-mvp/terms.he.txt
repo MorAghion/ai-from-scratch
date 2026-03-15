@@ -2,23 +2,29 @@
 term: MVP
 full: מוצר מינימלי חי
 definition: הגרסה הראשונה של המוצר שכוללת רק את הפיצ׳רים ההכרחיים - מספיק כדי לבדוק שהרעיון עובד, לא יותר.
+section: מה-יצא-מזה-ה-mvp
 ---
 term: Scaffolding
 full: שלד ראשוני
 definition: הקוד הבסיסי שהסוכן יוצר בתחילת הפרויקט - מבנה תיקיות, קומפוננטות ריקות, חיבורים בסיסיים. השלד שעליו בונים.
+section: just-vibing-הימים-הראשונים
 ---
 term: Iteration
 full: איטרציה
 definition: מחזור של בנייה ← בדיקה ← תיקון ← שיפור. ב-Vibe Coding כל שיחה עם הסוכן היא בעצם איטרציה.
+section: just-vibing-הימים-הראשונים
 ---
 term: Tech Debt
 full: חוב טכני
 definition: קיצורי דרך בקוד שעובדים עכשיו אבל יגרמו לבעיות בעתיד. כמו לכתוב מחרוזות ישירות בקוד במקום להשתמש ב-i18n.
+section: לקחים-מהשלב-הזה
 ---
 term: Migration
 full: מיגרציה
 definition: מעבר של נתונים או מבנה ממערכת אחת לאחרת. למשל, מ-localStorage ל-Supabase - שינוי ששובר הרבה דברים בדרך.
+section: לקחים-מהשלב-הזה
 ---
 term: Supabase
 full: Supabase
 definition: פלטפורמת backend מוכנה עם בסיס נתונים (PostgreSQL), אימות משתמשים, אחסון קבצים, ו-API אוטומטי. האלטרנטיבה הפופולרית ל-Firebase.
+section: מה-יצא-מזה-ה-mvp

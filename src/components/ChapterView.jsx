@@ -617,7 +617,15 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
         <div>
           {ch.terms && ch.terms[lang] && ch.terms[lang].length > 0 ? (
             ch.terms[lang].map((t, i) => (
-              <TermCard key={i} term={t.term} full={t.full} definition={t.definition} />
+              <TermCard key={i} term={t.term} full={t.full} definition={t.definition} section={t.section}
+                onNavigateToSection={(slug) => {
+                  setActiveTab('content')
+                  setTimeout(() => {
+                    const el = document.getElementById(`section-${slug}`)
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                  }, 100)
+                }}
+              />
             ))
           ) : (
             <div style={{

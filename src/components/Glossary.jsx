@@ -143,7 +143,7 @@ export default function Glossary({ chapters, onNavigateToChapter }) {
                 )}
               </div>
               <button
-                onClick={() => onNavigateToChapter(t.chapterIndex, 'terms')}
+                onClick={() => onNavigateToChapter(t.chapterIndex, t.section)}
                 style={{
                   fontFamily: 'var(--font-code)',
                   fontSize: 11,

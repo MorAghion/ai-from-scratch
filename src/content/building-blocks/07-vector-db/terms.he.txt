@@ -2,39 +2,49 @@
 term: Tokenizer
 full: מפרק טקסט
 definition: התוכנה שמפרקת טקסט לטוקנים - היחידות שהמודל מסוגל לעבד. כל מודל משתמש ב-Tokenizer שלו.
+section: מ-token-id-ל-embedding-איך-המודל-מבין-מילים
 ---
 term: Token ID
 full: מזהה טוקן
 definition: המספר הסידורי הפשוט שכל טוקן מקבל (למשל 12,543). חסר משמעות סמנטית - רק מזהה.
+section: מ-token-id-ל-embedding-איך-המודל-מבין-מילים
 ---
 term: Embedding Vector
 full: וקטור הטמעה
 definition: רשימה של 4,096 מספרים עשרוניים שמייצגת את "פרופיל המשמעות" של מילה. כל מספר מייצג תכונה שהמודל למד.
+section: embedding-פרופיל-המשמעות
 ---
 term: Semantic Space
 full: מרחב סמנטי
 definition: המרחב הרב-ממדי שבו כל מילה היא נקודה. מילים קרובות במשמעות קרובות זו לזו במרחב.
+section: semantic-space-מרחב-המשמעות
 ---
 term: Dimensions
 full: ממדים
 definition: כל אחד מ-4,096 המספרים ב-Embedding. כל ממד מייצג "תכונה" שהמודל למד בעצמו (למשל: רעילות, נזילות).
+section: embedding-פרופיל-המשמעות
 ---
 term: Similarity Search
 full: חיפוש דמיון
 definition: השוואת "חצים" (וקטורים) במרחב במקום חיפוש מילים - חיפוש לפי משמעות.
+section: vector-db-חדר-הארכיון
 ---
 term: Cosine Similarity
 full: דמיון קוסינוס
 definition: המדד המתמטי לקרבה בין וקטורים - מדידת הזווית בין ה"חצים". ככל שהזווית קטנה יותר, המשמעות קרובה יותר.
+section: איך-ה-vector-db-מחפש-cosine-similarity
 ---
 term: ANN
 full: Approximate Nearest Neighbor
 definition: טכניקת חיפוש מהירה שמחלקת את הוקטורים ל"שכונות" (Clusters) כדי לא לסרוק את כל בסיס הנתונים.
+section: הבעיה-והפתרון-ann
 ---
 term: Indexing
 full: אינדוקס
 definition: תהליך ארגון הוקטורים ל"שכונות" בזיכרון ה-RAM - מה שמאפשר חיפוש מהיר.
+section: הבעיה-והפתרון-ann
 ---
 term: Top-K Results
 full: K התוצאות המובילות
 definition: מספר התוצאות הרלוונטיות ביותר שה-Vector DB מחזיר. למשל Top-3 = שלושת המסמכים הקרובים ביותר.
+section: vector-db-חדר-הארכיון

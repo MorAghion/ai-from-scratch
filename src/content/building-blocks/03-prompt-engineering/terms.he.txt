@@ -2,35 +2,44 @@
 term: Prompt
 full: פרומפט
 definition: הטקסט שנשלח למודל - שאלה, הוראה, או בקשה. האיכות שלו קובעת את איכות התשובה.
+section: system-prompt-חוקי-המשחק
 ---
 term: Prompt Engineering
 full: הנדסת פרומפטים
 definition: האומנות של לנסח פרומפטים בצורה שמפיקה מהמודל את התוצאה הטובה ביותר.
+section: system-prompt-חוקי-המשחק
 ---
 term: System Prompt
 full: הנחיית העל
 definition: הנחיה שרצה ברקע ומגדירה את זהות המודל, סגנונו ומגבלותיו לפני כל שיחה.
+section: system-prompt-חוקי-המשחק
 ---
 term: User Prompt
 full: הנחיית המשתמש
 definition: ההודעה הספציפית שהמשתמש שולח - השאלה או הבקשה הנוכחית.
+section: user-prompt-מה-אתם-רוצים-עכשיו
 ---
 term: Few-Shot Learning
 full: למידה מדוגמאות
 definition: טכניקה שבה נותנים למודל 2-3 דוגמאות של קלט ופלט רצוי כדי שיבין את הדפוס.
+section: few-shot-תנו-דוגמאות
 ---
 term: Zero-Shot
 full: ללא דוגמאות
 definition: שליחת הוראה למודל בלי דוגמאות - סתם לתאר מה רוצים ולקוות לטוב.
+section: few-shot-תנו-דוגמאות
 ---
 term: Chain of Thought
 full: שרשרת חשיבה
 definition: טכניקה שמבקשת מהמודל לפרט את שלבי החשיבה לפני התשובה - משפרת דיוק משמעותית.
+section: chain-of-thought-תנו-למודל-לחשוב-בקול
 ---
 term: Temperature
 full: טמפרטורה
 definition: פרמטר שקובע כמה אקראיות בתשובות. נמוך = צפוי ומדויק, גבוה = יצירתי ומגוון.
+section: temperature-כמה-יצירתי-המודל
 ---
 term: Role Play
 full: משחק תפקידים
 definition: טכניקה שבה נותנים למודל דמות או תפקיד כדי לכוון אותו לסגנון ותחום ידע ספציפי.
+section: role-play-תנו-למודל-דמות

@@ -150,7 +150,7 @@ export default function App() {
                 notebook={activeNotebook}
                 activeChapter={activeChapter}
                 onSelect={(i) => { setActiveChapter(i); setView('chapter'); setSidebarOpen(false) }}
-                onGlossary={() => { setView('glossary'); setSidebarOpen(false) }}
+                onGlossary={() => { setView('glossary'); setSidebarOpen(false); window.scrollTo(0, 0) }}
                 isOpen={sidebarOpen}
                 onClose={() => setSidebarOpen(false)}
               />
@@ -159,9 +159,15 @@ export default function App() {
                 {view === 'glossary' ? (
                   <Glossary
                     chapters={notebookChapters}
-                    onNavigateToChapter={(chapterIndex, tab) => {
+                    onNavigateToChapter={(chapterIndex, sectionSlug) => {
                       setActiveChapter(chapterIndex)
                       setView('chapter')
+                      if (sectionSlug) {
+                        setTimeout(() => {
+                          const el = document.getElementById(`section-${sectionSlug}`)
+                          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                        }, 300)
+                      }
                     }}
                   />
                 ) : (

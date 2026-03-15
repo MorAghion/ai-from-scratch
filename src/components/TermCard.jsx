@@ -1,6 +1,6 @@
 import { useLang } from '../App'
 
-export default function TermCard({ term, full, definition }) {
+export default function TermCard({ term, full, definition, section, onNavigateToSection }) {
   const { lang } = useLang()
 
   return (
@@ -10,7 +10,10 @@ export default function TermCard({ term, full, definition }) {
       border: '1px solid var(--term-border)',
       borderRadius: 10,
       marginBottom: 12,
-    }}>
+      cursor: section && onNavigateToSection ? 'pointer' : undefined,
+    }}
+      onClick={section && onNavigateToSection ? () => onNavigateToSection(section) : undefined}
+    >
       <div style={{
         display: 'flex',
         alignItems: 'baseline',

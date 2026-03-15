@@ -2,15 +2,19 @@
 term: Vibe Coding
 full: קידוד לפי תחושה
 definition: גישה לפיתוח תוכנה שבה מתארים לـ-AI מה רוצים במקום לכתוב קוד ידנית. המונח נטבע ע״י אנדריי קרפאטי.
+section: מה-זה-vibe-coding
 ---
 term: AI Pair Programming
 full: תכנות זוגי עם AI
 definition: עבודה עם AI כשותף לקידוד - אתם מתארים, הוא כותב, אתם בודקים ומתקנים.
+section: מה-זה-vibe-coding
 ---
 term: Code Generation
 full: יצירת קוד אוטומטית
 definition: היכולת של מודל שפה לכתוב קוד תוכנה על סמך תיאור בשפה טבעית.
+section: מה-זה-vibe-coding
 ---
 term: Agentic Coding Loop
 full: לולאת קידוד סוכנית
 definition: מחזור עבודה אוטומטי של סוכן AI: תכנון ← כתיבת קוד ← הרצה ← ראיית שגיאות ← תיקון ← חזרה.
+section: מה-זה-vibe-coding

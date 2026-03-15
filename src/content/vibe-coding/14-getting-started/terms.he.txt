@@ -2,35 +2,44 @@
 term: API Key
 full: מפתח API
 definition: מזהה ייחודי (כמו סיסמה) שמאפשר לקוד שלכם לגשת לשירות AI. נוצר בדף ההגדרות של הספק.
+section: api-keys-מה-זה-ולמה-צריך
 ---
 term: .env
 full: קובץ משתני סביבה
 definition: קובץ שמכיל סודות כמו מפתחות API. נשמר רק במחשב המקומי ולעולם לא עולה ל-Git.
+section: ניהול-secrets
 ---
 term: .gitignore
 full: קובץ התעלמות של Git
 definition: קובץ שאומר ל-Git אילו קבצים לא לעקוב אחריהם - כמו .env, node_modules, וקבצים זמניים.
+section: git-github
 ---
 term: Environment Variable
 full: משתנה סביבה
 definition: ערך שנשמר ברמת מערכת ההפעלה ולא בתוך הקוד. דרך בטוחה להעביר מפתחות וסודות לאפליקציה.
+section: ניהול-secrets
 ---
 term: Free Tier
 full: שכבה חינמית
 definition: רמת שימוש בסיסית בשירות ללא תשלום - בדרך כלל מוגבלת בכמות שאילתות או בגודל המודל.
+section: מנויים-ועלויות
 ---
 term: Rate Limit
 full: מגבלת קצב
 definition: הגבלה על כמות הבקשות שאפשר לשלוח ל-API בפרק זמן מסוים. כשעוברים את המגבלה - מקבלים שגיאה.
+section: api-keys-מה-זה-ולמה-צריך
 ---
 term: Token Cost
 full: עלות טוקן
 definition: המחיר לכל טוקן בשימוש ב-API. נמדד בדרך כלל לכל מיליון טוקנים. טוקני קלט זולים יותר מטוקני פלט.
+section: מנויים-ועלויות
 ---
 term: Cursor
 full: Cursor
 definition: IDE (עורך קוד) מבוסס VS Code עם סוכן AI מובנה שרואה את הפרויקט ויכול לכתוב ולערוך קבצים.
+section: סקירת-כלים
 ---
 term: Claude Code
 full: Claude Code
 definition: סוכן AI שרץ בטרמינל (CLI). קורא קבצים, כותב קוד, מריץ פקודות ומתקן שגיאות - הכל באופן עצמאי.
+section: סקירת-כלים

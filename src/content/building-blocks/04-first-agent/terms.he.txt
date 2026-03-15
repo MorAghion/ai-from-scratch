@@ -2,23 +2,29 @@
 term: Agent
 full: סוכן
 definition: LLM שקיבל גישה לכלים ויכולת להחליט מתי להשתמש בהם - לא רק מדבר, אלא פועל.
+section: צאט-לעומת-סוכן-מה-ההבדל
 ---
 term: Tools
 full: כלים
 definition: הפונקציות שסוכן יכול להפעיל - קריאת קבצים, הרצת קוד, חיפוש באינטרנט, גישה ל-API.
+section: מה-זה-tools
 ---
 term: Agentic Loop
 full: לולאה סוכנית
 definition: מחזור חשיבה ← פעולה ← תצפית ← חשיבה שהסוכן רץ בו עד שהמשימה הושלמה.
+section: הלולאה-הסוכנית-agentic-loop
 ---
 term: CLI
 full: Command Line Interface
 definition: ממשק שורת הפקודה - הטרמינל שדרכו מפעילים כלים כמו Claude Code.
+section: סוכנים-שאני-עובדת-איתם
 ---
 term: IDE
 full: Integrated Development Environment
 definition: סביבת פיתוח כמו VS Code שמשלבת עורך קוד, טרמינל, ניפוי שגיאות וסוכני AI.
+section: סוכנים-שאני-עובדת-איתם
 ---
 term: Code Agent
 full: סוכן קוד
 definition: סוכן AI שמתמחה בכתיבה ועריכה של קוד - כמו Claude Code, Cursor, או GitHub Copilot.
+section: סוכנים-שאני-עובדת-איתם

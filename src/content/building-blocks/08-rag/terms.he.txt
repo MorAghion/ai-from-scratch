@@ -2,31 +2,39 @@
 term: RAG
 full: Retrieval-Augmented Generation
 definition: תהליך שליפת מידע רלוונטי מבסיס נתונים והזרקתו לתוך הפרומפט - כדי שהמודל יענה על סמך עובדות ולא ניחושים.
+section: מה-זה-rag
 ---
 term: Chunking
 full: פירוק למקטעים
 definition: פירוק מסמכים ארוכים לחתיכות קטנות (200–500 טוקנים) כדי שכל חתיכה תייצג נושא ממוקד אחד.
+section: שלב-0-indexing-סידור-הספרייה
 ---
 term: Overlap
 full: חפיפה
 definition: חפיפה של 50–100 טוקנים בין חתיכות שכנות - כדי שמשפט שנחצה בין שתי חתיכות לא יאבד.
+section: שלב-0-indexing-סידור-הספרייה
 ---
 term: Prompt Augmentation
 full: העשרת פרומפט
 definition: הרכבת "סנדוויץ'" מידע: הוראות למודל + מידע שנשלף מהקבצים + שאלת המשתמש. זה הלב של RAG.
+section: שלב-2-f59e0baugmentation-הסנדוויץ
 ---
 term: Multi-file Reasoning
 full: הצלבת מידע ממקורות
 definition: יכולת המודל להצליב מידע מכמה מסמכים שונים ולהסיק מסקנות שאף מקור בודד לא נותן.
+section: איך-סוכן-משתמש-ב-rag
 ---
 term: Fine-Tuning
 full: כיוונון עדין
 definition: אימון מחדש של המודל על נתונים ספציפיים. משנה את ההתנהגות/סגנון, אבל יקר, לא שקוף, וקשה לעדכן.
+section: מה-זה-rag
 ---
 term: Retrieval
 full: שליפה
 definition: השלב שבו המערכת מחפשת ב-Vector DB את החתיכות הרלוונטיות ביותר לשאלת המשתמש.
+section: שלב-1-10b981retrieval-הספרן-הזריז
 ---
 term: Generation
 full: ייצור תשובה
 definition: השלב שבו המודל מקבל את המידע שנשלף וכותב תשובה מבוססת עובדות.
+section: שלב-3-6366f1generation-הבלש-כותב-דוח

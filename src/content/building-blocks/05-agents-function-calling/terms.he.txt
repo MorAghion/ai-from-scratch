@@ -2,23 +2,29 @@
 term: Function Calling
 full: קריאה לפונקציות
 definition: מנגנון שמאפשר למודל לייצר בקשה מובנית להפעלת פונקציה חיצונית - הדרך שבה LLM "עושה" דברים בעולם האמיתי.
+section: function-calling-ארבעת-חלקי-הבניין
 ---
 term: JSON
 full: JavaScript Object Notation
 definition: פורמט טקסט מובנה שמשמש כ"שפה משותפת" בין המודל למערכת - הגשר בין שפה טבעית לקוד.
+section: function-calling-ארבעת-חלקי-הבניין
 ---
 term: Tool Definition
 full: הגדרת כלי
 definition: התיאור שנותנים למודל על פונקציה זמינה - שם, תיאור, ופרמטרים. כמו תפריט שהמודל בוחר ממנו.
+section: function-calling-ארבעת-חלקי-הבניין
 ---
 term: Structured Output
 full: פלט מובנה
 definition: היכולת לגרום למודל לייצר תשובה בפורמט מוגדר (כמו JSON) במקום טקסט חופשי.
+section: structured-output-לא-רק-function-calling
 ---
 term: API Call
 full: קריאת API
 definition: בקשה בודדת שנשלחת לשרת המודל. כל "צעד" של סוכן הוא API call נפרד עם כל ההיסטוריה.
+section: stateless-המודל-לא-זוכר
 ---
 term: Stateless
 full: חסר מצב
 definition: המודל לא שומר זיכרון בין קריאות - בכל פעם הוא מקבל את כל השיחה מההתחלה ומחליט מה הצעד הבא.
+section: stateless-המודל-לא-זוכר

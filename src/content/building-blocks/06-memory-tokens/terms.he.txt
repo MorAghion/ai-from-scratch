@@ -2,39 +2,49 @@
 term: Context Window
 full: חלון הקשר
 definition: "שולחן העבודה" של המודל - כל המידע שהוא יכול לראות בבת אחת. מוגבל בגודלו (128K-1M טוקנים).
+section: context-window-שולחן-העבודה
 ---
 term: Context Injection
 full: הזרקת הקשר
 definition: הזרקת מידע קבוע (העדפות, רקע) לכל הודעה מחדש - כי המודל לא זוכר בין קריאות.
+section: מה-נשלח-למודל-בכל-הודעה
 ---
 term: Chat History
 full: היסטוריית שיחה
 definition: כל ההודעות הקודמות בשיחה. נשמרת בדאטבייס, אבל המודל רואה רק מה שנכנס ב-Context Window.
+section: מה-נשלח-למודל-בכל-הודעה
 ---
 term: Summarization
 full: סיכום
 definition: דחיסת חלקים ישנים בשיחה לפסקה קצרה כדי לפנות מקום ב-Context Window.
+section: כשהשולחן-מתמלא-ניהול-זיכרון
 ---
 term: Sliding Window
 full: חלון מתגלגל
 definition: שיטה שבה מידע ישן "נופל" אוטומטית כשנכנס מידע חדש - פשוט אבל מסוכן.
+section: כשהשולחן-מתמלא-ניהול-זיכרון
 ---
 term: Anchor Preservation
 full: שמירת עוגנים
 definition: רכיבים שלעולם לא נמחקים - System Prompt וההודעות האחרונות נשארים תמיד.
+section: איך-המודל-מחליט-מה-לסכם
 ---
 term: Attention Weights
 full: משקלי קשב
 definition: המדד שקובע כמה כל מילה בטקסט "חשובה" להבנת ההקשר. מילים קריטיות (שמות, פעולות) מקבלות משקל גבוה.
+section: איך-המודל-מחליט-מה-לסכם
 ---
 term: Capacity Threshold
 full: סף קיבולת
 definition: "הקו האדום" (למשל 90% מהזיכרון) שמפעיל את פעולת הסיכום כדי למנוע קריסה.
+section: הטריגרים-מתי-מפעילים-את-הניקוי
 ---
 term: Context Compression
 full: דחיסת הקשר
 definition: תהליך שבו טקסט ארוך ומפורט הופך לפסקת סיכום קצרה - השם הטכני לפעולת הסיכום.
+section: איך-המודל-מחליט-מה-לסכם
 ---
 term: Trade-off
 full: פשרה
 definition: כל החלטה טכנולוגית כרוכה בוויתור - סיכום חוסך מקום אבל מאבד פרטים, למשל.
+section: trade-offs-למה-לא-לסכם-כל-הזמן

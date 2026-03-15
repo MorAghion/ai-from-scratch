@@ -97,6 +97,7 @@ function parseTerms(raw) {
         term: term.term,
         full: term.full || '',
         definition: term.definition || '',
+        section: term.section || '',
       })
     }
   }

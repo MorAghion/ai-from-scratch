@@ -2,28 +2,34 @@
 term: MCP
 full: Model Context Protocol
 definition: פרוטוקול אחיד ("ה-USB של עולם ה-AI") שמאפשר לכל מודל AI להתחבר לכל מקור מידע או כלי חיצוני בצורה סטנדרטית.
+section: מה-זה-mcp
 
 ---
 term: Host
 full: מארח
 definition: האפליקציה שהמשתמש עובד בה (Claude Desktop, VS Code). מנהלת את החיבורים ומחליטה למי מותר לגשת למה.
+section: שלושת-השחקנים
 
 ---
 term: Client
 full: לקוח
 definition: מודל ה-AI עצמו - הוא זה שמבקש להשתמש בכלים חיצוניים דרך שרתי MCP.
+section: שלושת-השחקנים
 
 ---
 term: MCP Server
 full: שרת MCP
 definition: ה"מתרגם" - קוד קטן שיושב בין ה-AI לבין המידע. כל שרת מתמחה בדבר אחד (קבצים, GitHub, Google Drive).
+section: שלושת-השחקנים
 
 ---
 term: Sandboxing
 full: בידוד
 definition: עקרון אבטחה שבו מגדירים בדיוק לאילו משאבים מותר לשרת MCP לגשת. כל השאר חסום.
+section: אבטחה-למה-mcp-בטוח
 
 ---
 term: Protocol
 full: פרוטוקול
 definition: סט כללים אחיד שמגדיר איך שני צדדים מדברים ביניהם. MCP הוא פרוטוקול - כמו ש-HTTP הוא פרוטוקול.
+section: מה-זה-mcp
