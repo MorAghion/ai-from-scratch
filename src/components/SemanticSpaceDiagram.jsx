@@ -13,7 +13,7 @@ const blue = '#3B82F6'
 const labels = {
   he: {
     title: 'Semantic Space — מרחב המשמעות',
-    axisX: 'נוזליות →',
+    axisX: 'קשר לפשע →',
     axisY: '← רעילות',
     cyanide: 'ציאניד',
     poison: 'רעל',
@@ -26,7 +26,7 @@ const labels = {
   },
   en: {
     title: 'Semantic Space — Meaning Space',
-    axisX: 'Liquidity →',
+    axisX: 'Crime Connection →',
     axisY: '← Toxicity',
     cyanide: 'Cyanide',
     poison: 'Poison',
@@ -41,12 +41,12 @@ const labels = {
 
 // Word positions in normalized space (0-1), mapped to plot area
 const words = [
-  { key: 'cyanide', x: 0.12, y: 0.08, color: red },
-  { key: 'poison', x: 0.22, y: 0.15, color: red },
-  { key: 'knife', x: 0.08, y: 0.52, color: amber },
-  { key: 'bloodStain', x: 0.18, y: 0.58, color: amber },
-  { key: 'portWine', x: 0.82, y: 0.85, color: green },
-  { key: 'water', x: 0.92, y: 0.78, color: blue },
+  { key: 'cyanide', x: 0.82, y: 0.92, color: red },
+  { key: 'poison', x: 0.75, y: 0.88, color: red },
+  { key: 'knife', x: 0.70, y: 0.15, color: amber },
+  { key: 'bloodStain', x: 0.78, y: 0.10, color: amber },
+  { key: 'portWine', x: 0.10, y: 0.08, color: green },
+  { key: 'water', x: 0.05, y: 0.05, color: blue },
 ]
 
 export default function SemanticSpaceDiagram() {
@@ -142,8 +142,8 @@ export default function SemanticSpaceDiagram() {
     ctx.restore()
 
     // Dashed circle around cyanide+poison cluster (Y is flipped: 1-y)
-    const cx1 = plotX + 0.17 * plotW
-    const cy1 = plotY + (1 - 0.115) * plotH
+    const cx1 = plotX + 0.785 * plotW
+    const cy1 = plotY + (1 - 0.90) * plotH
     ctx.strokeStyle = red + '50'
     ctx.lineWidth = 1.5
     ctx.setLineDash([4, 4])
@@ -159,8 +159,8 @@ export default function SemanticSpaceDiagram() {
     ctx.fillText(t.close, cx1, cy1 + 52)
 
     // Dashed circle around knife+bloodStain cluster (Y is flipped: 1-y)
-    const cx2 = plotX + 0.13 * plotW
-    const cy2 = plotY + (1 - 0.55) * plotH
+    const cx2 = plotX + 0.74 * plotW
+    const cy2 = plotY + (1 - 0.125) * plotH
     ctx.strokeStyle = amber + '50'
     ctx.lineWidth = 1.5
     ctx.setLineDash([4, 4])

@@ -223,14 +223,15 @@ export default function RAGPipelineDiagram() {
 
     ctx.font = "bold 14px 'Heebo', sans-serif"
     ctx.fillStyle = amber
-    ctx.textAlign = 'start'
+    ctx.textAlign = 'left'
     ctx.fillText(t.sandwich, swX, swY)
     ctx.font = "bold 12px 'Heebo', sans-serif"
     ctx.fillStyle = textSoft
-    ctx.fillText(t.sandwichEx, swX + ctx.measureText(t.sandwich).width + 8, swY)
+    ctx.textAlign = 'left'
+    ctx.fillText(t.sandwichEx, swX, swY + 16)
 
     // Sandwich slices
-    const sl1y = swY + 10
+    const sl1y = swY + 24
     drawSlice(ctx, swX, sl1y, swW, sliceH, accent + '12', accent + '40', accent, t.layer1)
     const sl2y = sl1y + sliceH + 4
     drawSlice(ctx, swX, sl2y, swW, sliceH, blue + '12', blue + '40', blue, t.layer2)

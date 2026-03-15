@@ -66,7 +66,7 @@ const componentRegistry = {
 
 // Generate a stable slug from heading text (supports Hebrew + English)
 function headingSlug(text) {
-  return text.replace(/[^\w\u0590-\u05FF\s-]/g, '').trim().replace(/\s+/g, '-').toLowerCase()
+  return text.replace(/[^\w\u0590-\u05FF\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-{2,}/g, '-').toLowerCase()
 }
 
 // Split text into regular paragraphs and fenced code blocks
@@ -89,52 +89,55 @@ function splitCodeBlocks(text) {
 // Render text with inline **bold**, [text](url) external links, [text](#chapter:id:section) internal links, and [text](#tab:tabId) tab links
 function renderTextWithLinks(text, onNavigate, onTabSwitch) {
   const inlineIconMap = { MagicWand, Heart }
-  const inlineRegex = /::icon:(\w+)::|{(#[0-9a-fA-F]{6}):([^}]+)\}|{big:([^}]+)\}|`([^`]+)`|\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\((https?:\/\/[^)]+)\)|\[([^\]]+)\]\(#chapter:([^):]+)(?::([^)]+))?\)|\[([^\]]+)\]\(#tab:([^)]+)\)/g
+  const inlineRegex = /@@ltr:([^@]+)@@|::icon:(\w+)::|{(#[0-9a-fA-F]{6}):([^}]+)\}|{big:([^}]+)\}|`([^`]+)`|\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\((https?:\/\/[^)]+)\)|\[([^\]]+)\]\(#chapter:([^):]+)(?::([^)]+))?\)|\[([^\]]+)\]\(#tab:([^)]+)\)/g
   const parts = []
   let lastIdx = 0
   let match
   while ((match = inlineRegex.exec(text)) !== null) {
     if (match.index > lastIdx) parts.push(text.substring(lastIdx, match.index))
     if (match[1]) {
+      // @@ltr:text@@ — force LTR direction for embedded English in RTL paragraphs
+      parts.push(<span key={match.index} dir="ltr" style={{ display: 'inline-block', unicodeBidi: 'bidi-override' }}>{renderTextWithLinks(match[1], onNavigate, onTabSwitch)}</span>)
+    } else if (match[2]) {
       // ::icon:Name:: — inline Phosphor icon
-      const Icon = inlineIconMap[match[1]]
+      const Icon = inlineIconMap[match[2]]
       if (Icon) parts.push(<Icon key={match.index} size={18} weight="duotone" style={{ verticalAlign: 'middle', marginInline: 2 }} />)
-    } else if (match[2] && match[3]) {
+    } else if (match[3] && match[4]) {
       // {#color:text} — colored inline text
-      parts.push(<span key={match.index} style={{ color: match[2], fontWeight: 700 }}>{match[3]}</span>)
-    } else if (match[4]) {
-      // {big:text} — slightly larger inline text
-      parts.push(<span key={match.index} style={{ fontSize: '1.15em', fontWeight: 600, color: 'var(--heading)' }}>{match[4]}</span>)
+      parts.push(<span key={match.index} style={{ color: match[3], fontWeight: 700 }}>{match[4]}</span>)
     } else if (match[5]) {
-      // `code` — inline code
-      parts.push(<code key={match.index} style={{ fontFamily: 'var(--font-code)', fontSize: '0.9em', background: 'var(--code-bg, #f3f0ea)', padding: '2px 6px', borderRadius: 4, direction: 'ltr', unicodeBidi: 'embed' }}>{match[5]}</code>)
+      // {big:text} — slightly larger inline text
+      parts.push(<span key={match.index} style={{ fontSize: '1.15em', fontWeight: 600, color: 'var(--heading)' }}>{match[5]}</span>)
     } else if (match[6]) {
-      parts.push(<strong key={match.index} style={{ color: 'var(--heading)', fontWeight: 600 }}>{match[6]}</strong>)
+      // `code` — inline code
+      parts.push(<code key={match.index} style={{ fontFamily: 'var(--font-code)', fontSize: '0.9em', background: 'var(--code-bg, #f3f0ea)', padding: '2px 6px', borderRadius: 4, direction: 'ltr', unicodeBidi: 'embed' }}>{match[6]}</code>)
     } else if (match[7]) {
-      // *italic* — single asterisk
-      parts.push(<em key={match.index} style={{ fontStyle: 'italic' }}>{match[7]}</em>)
+      parts.push(<strong key={match.index} style={{ color: 'var(--heading)', fontWeight: 600 }}>{match[7]}</strong>)
     } else if (match[8]) {
+      // *italic* — single asterisk
+      parts.push(<em key={match.index} style={{ fontStyle: 'italic' }}>{match[8]}</em>)
+    } else if (match[9]) {
       parts.push(
-        <a key={match.index} href={match[9]} target="_blank" rel="noopener noreferrer"
+        <a key={match.index} href={match[10]} target="_blank" rel="noopener noreferrer"
           style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3 }}>
-          {match[8]}
+          {match[9]}
         </a>
       )
-    } else if (match[10] && match[11]) {
-      const chapterId = match[11]
-      const sectionSlug = match[12] || null
+    } else if (match[11] && match[12]) {
+      const chapterId = match[12]
+      const sectionSlug = match[13] || null
       parts.push(
         <a key={match.index} href="#" onClick={(e) => {
           e.preventDefault()
           onNavigate?.(chapterId, sectionSlug)
         }}
           style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3, cursor: 'pointer' }}>
-          {match[10]}
+          {match[11]}
         </a>
       )
-    } else if (match[13] && match[14]) {
+    } else if (match[14] && match[15]) {
       // [text](#tab:tabId) — switch tab within current chapter
-      const tabId = match[14]
+      const tabId = match[15]
       parts.push(
         <a key={match.index} href="#" onClick={(e) => {
           e.preventDefault()
@@ -142,7 +145,7 @@ function renderTextWithLinks(text, onNavigate, onTabSwitch) {
           window.scrollTo(0, 0)
         }}
           style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3, cursor: 'pointer' }}>
-          {match[13]}
+          {match[14]}
         </a>
       )
     }
@@ -155,7 +158,7 @@ function renderTextWithLinks(text, onNavigate, onTabSwitch) {
 
 const allTabs = [
   { id: 'content', label: { he: 'תוכן', en: 'Content' } },
-  { id: 'brief', label: { he: 'על המחברת', en: 'Brief' } },
+  { id: 'brief', label: { he: 'על מדריך זה', en: 'Brief' } },
   { id: 'terms', label: { he: 'מונחים', en: 'Terms' } },
   { id: 'detective', label: { he: 'תרגיל הבלש', en: 'Detective' } },
 ]
@@ -399,6 +402,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                       color: 'var(--heading)',
                       marginTop: 32,
                       marginBottom: 12,
+                      scrollMarginTop: 70,
                     }}>
                       {renderTextWithLinks(section.content, onNavigate, setActiveTab)}
                     </h2>
@@ -668,7 +672,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
               letterSpacing: lang === 'he' ? 0 : 0.3,
             }}
           >
-            {lang === 'he' ? 'למחברת Vibe Coding' : 'To the Vibe Coding Notebook'} {dir === 'rtl' ? '←' : '→'}
+            {lang === 'he' ? 'למדריך Vibe Coding' : 'To the Vibe Coding Notebook'} {dir === 'rtl' ? '←' : '→'}
           </button>
         ) : (
           <button

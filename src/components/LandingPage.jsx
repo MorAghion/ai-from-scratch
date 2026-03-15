@@ -28,7 +28,7 @@ export default function LandingPage({ onSelectNotebook }) {
 
   return (
     <div className="landing-page" style={{
-      height: 'calc(100vh - 60px)',
+      minHeight: 'calc(100vh - 60px)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -36,7 +36,8 @@ export default function LandingPage({ onSelectNotebook }) {
       padding: '40px 20px 20px',
       direction: dir,
       position: 'relative',
-      overflow: 'hidden',
+      overflowX: 'hidden',
+      overflowY: 'auto',
     }}>
       {/* Pastel NN background image */}
       <div style={{

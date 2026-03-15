@@ -1,6 +1,6 @@
 ## מה זה API?
 
-**API** (**Application Programming Interface**) הוא הדרך שבה תוכנות מדברות אחת עם השנייה. לא דרך מסך, לא דרך עכבר - דרך **הודעות טקסט מובנות**.
+**Application Programming Interface** - **API** הוא הדרך שבה תוכנות מדברות אחת עם השנייה. לא דרך מסך, לא דרך עכבר - דרך **הודעות טקסט מובנות**.
 
 תחשבו על מסעדה. אתם לא נכנסים למטבח ומבשלים לבד. אתם יושבים בשולחן, מזמינים מהתפריט, והמלצר מביא את האוכל. ה-**API** הוא המלצר - הממשק בין מה שאתם רוצים לבין מה שהמטבח יודע לעשות.
 
@@ -24,7 +24,7 @@
 
 ## JSON - השפה המשותפת
 
-**JSON** (JavaScript Object Notation) הוא הפורמט שבו רוב ה-APIs מדברים. הוא נראה ככה:
+JavaScript Object Notation - **JSON** הוא הפורמט שבו רוב ה-APIs מדברים. הוא נראה ככה:
 
 ```json
 {
@@ -42,7 +42,7 @@
 
 ```
 GET  /users       → קבל רשימת משתמשים
-GET  /users/42    → קבל את המשתמש עם ID 42
+GET  /users/42    → ID 42 קבל את המשתמש עם
 POST /messages    → שלח הודעה חדשה
 ```
 
@@ -61,7 +61,7 @@ POST /messages    → שלח הודעה חדשה
 
 ## איך הסוכן משתמש ב-API?
 
-זוכרים את ה-[Function Calling](#chapter:agents-function-calling:function-calling-לתת-לסוכן-כלים) מפרק 5? שם למדנו שהסוכן "קורא לפונקציות". עכשיו אפשר לחבר את הנקודות: **הפונקציות האלה הן קריאות API**.
+זוכרים את ה-[Function Calling](#chapter:agents-function-calling:function-calling-ארבעת-חלקי-הבניין) מפרק 5? שם למדנו שהסוכן "קורא לפונקציות". עכשיו אפשר לחבר את הנקודות: **הפונקציות האלה הן קריאות API**.
 
 כשהסוכן מחליט לבדוק את מזג האוויר, הוא לא גולש לאתר. הוא שולח:
 
@@ -76,7 +76,7 @@ Authorization: Bearer sk-abc123...
 
 ## REST - הסטנדרט
 
-רוב ה-APIs שתפגשו הם **REST APIs** (Representational State Transfer). REST הוא לא טכנולוגיה - הוא **סט כללים**:
+רוב ה-APIs שתפגשו הם **REST APIs** .Representational State Transfer - REST הוא לא טכנולוגיה - הוא **סט כללים**:
 
 1. כל משאב יש לו **כתובת** (URL)
 2. משתמשים ב-**Methods** סטנדרטיים (GET, POST, PUT, DELETE)

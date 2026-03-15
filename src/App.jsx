@@ -82,7 +82,11 @@ export default function App() {
       setSidebarOpen(false)
     }
     window.addEventListener('hashchange', onHashChange)
-    return () => window.removeEventListener('hashchange', onHashChange)
+    window.addEventListener('popstate', onHashChange)
+    return () => {
+      window.removeEventListener('hashchange', onHashChange)
+      window.removeEventListener('popstate', onHashChange)
+    }
   }, [])
 
   useEffect(() => {
@@ -170,13 +174,17 @@ export default function App() {
                     onNavigate={(chapterId, sectionSlug) => {
                       const idx = notebookChapters.findIndex(c => c.id === chapterId)
                       if (idx !== -1) {
-                        setActiveChapter(idx)
+                        const chapter = notebookChapters[idx]
+                        if (activeNotebookId && chapter) {
+                          window.history.pushState(null, '', `#/${activeNotebookId}/${chapter.id}`)
+                          setNavState(prev => ({ ...prev, chapterId: chapter.id }))
+                        }
                         setView('chapter')
                         if (sectionSlug) {
                           setTimeout(() => {
                             const el = document.getElementById(`section-${sectionSlug}`)
                             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                          }, 100)
+                          }, 300)
                         }
                       }
                     }}

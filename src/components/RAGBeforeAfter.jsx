@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useLang } from '../App'
 
-const W = 580
+const W = 660
 const H_BEFORE = 300
-const H_AFTER = 490
+const H_AFTER = 510
 const STEP_MS = 2400
 
 const accent = '#6366F1'
@@ -32,7 +32,7 @@ const labels = {
     step5Label: '⑤ 3 חתיכות רלוונטיות חוזרות',
     step6Label: '⑥ נבנה פרומפט מוגבר',
     step7Label: '⑦ המודל עונה רק על סמך הראיות',
-    doneLabel: '1 שאילתה → 3 chunks → תשובה מדויקת',
+    doneLabel: '1 שאילתה ← 3 chunks ← תשובה מדויקת',
 
     // Chunks (short labels for the scatter plot)
     chunks: [
@@ -634,10 +634,10 @@ export default function RAGBeforeAfter() {
 
       // Top-K chunks (step 6)
       if (stepIdx >= 6) {
-        const tkX = 20, tkW = 120, tkH = 22, tkGap = 4
+        const tkX = 30, tkW = 130, tkH = 22, tkGap = 4
         ctx.font = "bold 12px 'Heebo', sans-serif"
         ctx.fillStyle = green + 'aa'
-        ctx.textAlign = 'start'
+        ctx.textAlign = 'left'
         ctx.fillText('Top-K:', tkX, r3y - 4)
 
         for (let i = 0; i < matchedChunks.length; i++) {
@@ -663,12 +663,12 @@ export default function RAGBeforeAfter() {
 
       // Sandwich (step 7)
       if (stepIdx >= 7) {
-        const swX = 158, swW = 180, sliceH = 20
+        const swX = 190, swW = 210, sliceH = 20
         const swY = r3y
 
         ctx.font = "bold 12px 'Heebo', sans-serif"
         ctx.fillStyle = amber
-        ctx.textAlign = 'start'
+        ctx.textAlign = 'left'
         ctx.fillText(t.sandwich, swX, swY - 4)
 
         const colors = [accent, green, pink]
@@ -689,23 +689,23 @@ export default function RAGBeforeAfter() {
 
         // Arrow: Top-K → Sandwich
         if (stepIdx === 7 && inStep < 0.5) {
-          drawArrow(142, r3y + 30, swX - 2, r3y + 30, inStep * 2, green)
+          drawArrow(162, r3y + 30, swX - 2, r3y + 30, inStep * 2, green)
         } else if (stepIdx > 7) {
-          drawStaticArrow(144, r3y + 30, swX - 2, r3y + 30, green + '30')
+          drawStaticArrow(164, r3y + 30, swX - 2, r3y + 30, green + '30')
         }
       }
 
       // LLM + Answer (step 8)
       if (stepIdx >= 8) {
-        const llmX = 350, llmW = 64, llmH = 44
+        const llmX = 420, llmW = 64, llmH = 44
         const llmY = r3y + 6
         drawBox(llmX, llmY, llmW, llmH, accent, t.llm, null, stepIdx === 8)
 
         // Arrow: sandwich → LLM
         if (stepIdx === 8) {
-          drawArrow(340, r3y + 32, llmX - 2, llmY + llmH / 2, Math.min(inStep * 2, 1), accent)
+          drawArrow(402, r3y + 32, llmX - 2, llmY + llmH / 2, Math.min(inStep * 2, 1), accent)
         } else {
-          drawStaticArrow(342, r3y + 32, llmX - 2, llmY + llmH / 2, accent + '30')
+          drawStaticArrow(404, r3y + 32, llmX - 2, llmY + llmH / 2, accent + '30')
         }
 
         // Thinking
@@ -719,7 +719,7 @@ export default function RAGBeforeAfter() {
 
         // Answer
         if (stepIdx >= 8 && inStep > 0.6) {
-          const ansX = llmX + llmW + 16, ansW = 100, ansH = 36
+          const ansX = llmX + llmW + 20, ansW = 150, ansH = 44
           const ansY = r3y + 10
           roundRect(ansX, ansY, ansW, ansH, 8)
           ctx.fillStyle = green + '15'

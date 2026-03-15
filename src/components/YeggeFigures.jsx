@@ -71,8 +71,8 @@ export default function YeggeFigures({ variant } = {}) {
               </span>
               <div style={{ flex: 1, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
                 <span>
-                  <span style={{ fontWeight: 600, color: 'var(--heading)' }}>{f.title}</span>
-                  <span style={{ color: 'var(--text-soft)', marginInlineStart: 6, fontSize: 13 }}>— {f.desc}</span>
+                  <span dir="rtl" style={{ fontWeight: 600, color: 'var(--heading)', unicodeBidi: 'isolate' }}>{f.title}</span>
+                  <span dir="rtl" style={{ color: 'var(--text-soft)', marginInlineStart: 6, fontSize: 13, unicodeBidi: 'isolate' }}>— {f.desc}</span>
                 </span>
                 {f.num === 1 && variant !== 'epilogue' && (
                   <span style={{
