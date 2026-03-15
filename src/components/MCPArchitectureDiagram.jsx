@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useLang } from '../App'
 
 const W = 720
-const H = 400
+const H = 360
 
 const cyan = '#06B6D4'
 const accent = '#6366F1'
@@ -11,13 +11,12 @@ const amber = '#F59E0B'
 
 const labels = {
   he: {
-    title: 'ארכיטקטורת MCP — שלושת השחקנים',
+    title: 'ארכיטקטורת MCP',
     host: 'Host',
     hostSub: '(מארח)',
     hostDesc: ['Claude Desktop', '/ VS Code'],
+    aiModel: 'מודל AI',
     client: 'Client',
-    clientSub: '(לקוח)',
-    clientDesc: 'מודל ה-AI',
     server1: 'MCP Server',
     server1Desc: 'קבצים',
     server2: 'MCP Server',
@@ -25,20 +24,17 @@ const labels = {
     server3: 'MCP Server',
     server3Desc: 'Google Drive',
     ask: 'מה כתוב בקובץ?',
-    need: 'מבקש לקרוא קובץ',
-    read: 'קרא קובץ',
-    data: 'תוכן הקובץ',
-    answer: 'התשובה',
+    read: 'בקשה',
+    data: 'תשובה',
     protocol: 'פרוטוקול אחיד',
   },
   en: {
-    title: 'MCP Architecture — The Three Players',
+    title: 'MCP Architecture',
     host: 'Host',
     hostSub: '(App)',
     hostDesc: ['Claude Desktop', '/ VS Code'],
+    aiModel: 'AI Model',
     client: 'Client',
-    clientSub: '(AI)',
-    clientDesc: 'The AI Model',
     server1: 'MCP Server',
     server1Desc: 'Files',
     server2: 'MCP Server',
@@ -46,10 +42,8 @@ const labels = {
     server3: 'MCP Server',
     server3Desc: 'Google Drive',
     ask: '"What\'s in the file?"',
-    need: 'Need file tool',
-    read: 'Read file',
-    data: 'File content',
-    answer: 'Answer',
+    read: 'Request',
+    data: 'Response',
     protocol: 'Unified Protocol',
   },
 }
@@ -72,7 +66,6 @@ export default function MCPArchitectureDiagram() {
     const textColor = cs.getPropertyValue('--text').trim() || '#1a1a1a'
     const textSoft = cs.getPropertyValue('--text-soft').trim() || '#888'
     const border = cs.getPropertyValue('--border').trim() || '#e5e5e5'
-    const surface = cs.getPropertyValue('--surface').trim() || '#f5f5f5'
 
     ctx.clearRect(0, 0, W, H)
 
@@ -82,191 +75,207 @@ export default function MCPArchitectureDiagram() {
     ctx.textAlign = 'center'
     ctx.fillText(t.title, W / 2, 22)
 
-    // Layout
-    const boxW = 150
-    const boxH = 110
-    const topY = 50
-
-    // === User question (top) ===
-    const userY = topY - 5
+    // === User (left side) ===
+    const userX = 55
+    const userY = 155
     ctx.font = 'bold 12px "Heebo", sans-serif'
     ctx.fillStyle = textSoft
     ctx.textAlign = 'center'
-    ctx.fillText(t.ask, 75, userY)
+    ctx.fillText(t.ask, userX, userY - 30)
 
-    // Small user icon
+    // User icon
     ctx.fillStyle = textSoft
     ctx.beginPath()
-    ctx.arc(75, userY + 18, 8, 0, Math.PI * 2)
+    ctx.arc(userX, userY, 8, 0, Math.PI * 2)
     ctx.fill()
     ctx.beginPath()
-    ctx.ellipse(75, userY + 40, 14, 8, 0, 0, Math.PI)
+    ctx.ellipse(userX, userY + 22, 14, 8, 0, 0, Math.PI)
     ctx.fill()
 
     // Arrow from user to Host
-    drawArrow(ctx, 100, userY + 25, 145, userY + 25, textSoft, false)
+    drawArrow(ctx, userX + 20, userY, 120, userY, textSoft, false)
 
-    // === Host box (center-left) ===
-    const hostX = 150
-    const hostY = topY
-    ctx.fillStyle = cyan + '10'
-    ctx.strokeStyle = cyan + '40'
-    ctx.lineWidth = 1.5
-    roundRect(ctx, hostX, hostY, boxW, boxH, 10)
+    // === Host box (large container) ===
+    const hostX = 125
+    const hostY = 45
+    const hostW = 250
+    const hostH = 270
 
-    // Host icon (shield)
-    const hcx = hostX + boxW / 2
-    ctx.fillStyle = cyan + '25'
-    ctx.strokeStyle = cyan + '60'
-    ctx.lineWidth = 1.5
-    ctx.beginPath()
-    ctx.moveTo(hcx, hostY + 15)
-    ctx.lineTo(hcx + 16, hostY + 25)
-    ctx.lineTo(hcx + 14, hostY + 42)
-    ctx.quadraticCurveTo(hcx, hostY + 50, hcx - 14, hostY + 42)
-    ctx.lineTo(hcx - 16, hostY + 25)
-    ctx.closePath()
-    ctx.fill()
-    ctx.stroke()
+    // Host background
+    ctx.fillStyle = cyan + '08'
+    ctx.strokeStyle = cyan + '35'
+    ctx.lineWidth = 2
+    roundRect(ctx, hostX, hostY, hostW, hostH, 12)
 
-    ctx.font = 'bold 14px "Heebo", sans-serif'
+    // Host label at top
+    ctx.font = 'bold 15px "Heebo", sans-serif'
     ctx.fillStyle = textColor
     ctx.textAlign = 'center'
-    ctx.fillText(t.host, hcx, hostY + 65)
-    ctx.font = 'bold 12px "Heebo", sans-serif'
+    ctx.fillText(t.host + ' ' + t.hostSub, hostX + hostW / 2, hostY + 20)
+    ctx.font = 'bold 11px "Heebo", sans-serif'
     ctx.fillStyle = textSoft
-    ctx.fillText(t.hostSub, hcx, hostY + 78)
     if (Array.isArray(t.hostDesc)) {
-      t.hostDesc.forEach((line, i) => ctx.fillText(line, hcx, hostY + 92 + i * 13))
-    } else {
-      ctx.fillText(t.hostDesc, hcx, hostY + 92)
+      t.hostDesc.forEach((line, i) => ctx.fillText(line, hostX + hostW / 2, hostY + 34 + i * 13))
     }
 
-    // === Client/AI box (left of Host) ===
-    const clientX = hostX
-    const clientY = hostY + boxH + 60
+    // === AI Model inside Host ===
+    const aiX = hostX + 20
+    const aiY = hostY + 58
+    const aiW = hostW - 40
+    const aiH = 60
+
     ctx.fillStyle = accent + '10'
     ctx.strokeStyle = accent + '40'
     ctx.lineWidth = 1.5
-    roundRect(ctx, clientX, clientY, boxW, boxH, 10)
+    roundRect(ctx, aiX, aiY, aiW, aiH, 8)
 
-    // AI brain icon
-    const ccx = clientX + boxW / 2
-    ctx.fillStyle = accent + '25'
-    ctx.strokeStyle = accent + '60'
+    // Brain icon
+    const brainCx = aiX + 30
+    const brainCy = aiY + aiH / 2
+    ctx.fillStyle = accent + '20'
+    ctx.strokeStyle = accent + '50'
     ctx.lineWidth = 1.5
     ctx.beginPath()
-    ctx.arc(ccx, clientY + 32, 18, 0, Math.PI * 2)
+    ctx.arc(brainCx, brainCy, 14, 0, Math.PI * 2)
     ctx.fill()
     ctx.stroke()
     // Brain lines
-    ctx.strokeStyle = accent + '80'
+    ctx.strokeStyle = accent + '70'
     ctx.lineWidth = 1
     ctx.beginPath()
-    ctx.moveTo(ccx - 8, clientY + 25)
-    ctx.quadraticCurveTo(ccx, clientY + 32, ccx + 8, clientY + 25)
+    ctx.moveTo(brainCx - 6, brainCy - 4)
+    ctx.quadraticCurveTo(brainCx, brainCy + 2, brainCx + 6, brainCy - 4)
     ctx.stroke()
     ctx.beginPath()
-    ctx.moveTo(ccx - 10, clientY + 34)
-    ctx.quadraticCurveTo(ccx, clientY + 28, ccx + 10, clientY + 34)
+    ctx.moveTo(brainCx - 8, brainCy + 3)
+    ctx.quadraticCurveTo(brainCx, brainCy - 3, brainCx + 8, brainCy + 3)
     ctx.stroke()
 
-    ctx.font = 'bold 14px "Heebo", sans-serif'
-    ctx.fillStyle = textColor
-    ctx.textAlign = 'center'
-    ctx.fillText(t.client, ccx, clientY + 65)
-    ctx.font = 'bold 12px "Heebo", sans-serif'
-    ctx.fillStyle = textSoft
-    ctx.fillText(t.clientSub, ccx, clientY + 78)
-    ctx.fillText(t.clientDesc, ccx, clientY + 92)
-
-    // Arrow Host <-> Client (vertical)
-    const midX = hcx
-    drawArrow(ctx, midX - 5, hostY + boxH + 5, midX - 5, clientY - 5, accent, false)
-    drawArrow(ctx, midX + 5, clientY - 5, midX + 5, hostY + boxH + 5, cyan, true)
-    // Labels
-    ctx.font = 'bold 12px "Heebo", sans-serif'
+    // AI label
+    ctx.font = 'bold 13px "Heebo", sans-serif'
     ctx.fillStyle = accent
-    ctx.textAlign = 'right'
-    ctx.fillText(t.need, midX - 12, hostY + boxH + 35)
-    ctx.fillStyle = cyan
-    ctx.textAlign = 'left'
-    ctx.fillText(t.answer, midX + 12, hostY + boxH + 35)
+    ctx.textAlign = 'center'
+    ctx.fillText(t.aiModel, aiX + aiW / 2 + 15, aiY + aiH / 2 + 5)
 
-    // === MCP Servers (right side, 3 stacked) ===
-    const srvX = 460
-    const srvW = 140
-    const srvH = 60
-    const srvGap = 20
+    // === Client connectors inside Host ===
     const servers = [
-      { desc: t.server1Desc, color: green, icon: '📁' },
-      { desc: t.server2Desc, color: '#9B4F96', icon: '🔧' },
-      { desc: t.server3Desc, color: amber, icon: '☁️' },
+      { desc: t.server1Desc, color: green },
+      { desc: t.server2Desc, color: '#9B4F96' },
+      { desc: t.server3Desc, color: amber },
     ]
 
+    const clientStartY = aiY + aiH + 18
+    const clientGap = 46
+    const clientW = 70
+    const clientH = 28
+    const clientX = hostX + hostW / 2 - clientW / 2
+
+    const aiBottomY = aiY + aiH
+    const aiCenterX = aiX + aiW / 2
+
     servers.forEach((srv, i) => {
-      const sy = topY + i * (srvH + srvGap)
+      const cy = clientStartY + i * clientGap
+      const clientCenterX = clientX + clientW / 2
+
+      // Line from AI model to Client connector
+      ctx.strokeStyle = srv.color + '70'
+      ctx.lineWidth = 1.5
+      ctx.setLineDash([4, 3])
+      ctx.beginPath()
+      ctx.moveTo(aiCenterX, aiBottomY)
+      ctx.lineTo(clientCenterX, cy)
+      ctx.stroke()
+      ctx.setLineDash([])
+
+      // Client connector box — color matches its server
+      ctx.fillStyle = srv.color + '12'
+      ctx.strokeStyle = srv.color + '50'
+      ctx.lineWidth = 1
+      roundRect(ctx, clientX, cy, clientW, clientH, 6)
+
+      ctx.font = 'bold 11px "Heebo", sans-serif'
+      ctx.fillStyle = srv.color
+      ctx.textAlign = 'center'
+      ctx.fillText(t.client, clientX + clientW / 2, cy + clientH / 2 + 4)
+    })
+
+    // === MCP Servers (right side) ===
+    const srvX = 470
+    const srvW = 140
+    const srvH = 55
+    const srvStartY = 60
+    const srvGap = 25
+
+    servers.forEach((srv, i) => {
+      const sy = srvStartY + i * (srvH + srvGap)
 
       ctx.fillStyle = srv.color + '10'
       ctx.strokeStyle = srv.color + '40'
       ctx.lineWidth = 1.5
       roundRect(ctx, srvX, sy, srvW, srvH, 8)
 
-      ctx.font = 'bold 14px "Heebo", sans-serif'
+      ctx.font = 'bold 13px "Heebo", sans-serif'
       ctx.fillStyle = textColor
       ctx.textAlign = 'center'
-      ctx.fillText(t.server1, srvX + srvW / 2, sy + 25)
+      ctx.fillText(t.server1, srvX + srvW / 2, sy + 22)
       ctx.font = 'bold 12px "Heebo", sans-serif'
       ctx.fillStyle = srv.color
-      ctx.fillText(srv.desc, srvX + srvW / 2, sy + 42)
+      ctx.fillText(srv.desc, srvX + srvW / 2, sy + 40)
     })
 
-    // Arrows from Host to servers
-    const hostRightX = hostX + boxW
+    // === Connection lines: Client connectors → Servers ===
     servers.forEach((srv, i) => {
-      const sy = topY + i * (srvH + srvGap) + srvH / 2
+      const cy = clientStartY + i * clientGap + clientH / 2
+      const sy = srvStartY + i * (srvH + srvGap) + srvH / 2
+      const fromX = hostX + hostW
+      const toX = srvX
+
+      // Dashed line from host edge to server
       ctx.strokeStyle = border
       ctx.lineWidth = 1.5
       ctx.setLineDash([4, 3])
       ctx.beginPath()
-      ctx.moveTo(hostRightX + 5, hostY + boxH / 2)
-      ctx.lineTo(hostRightX + 40, hostY + boxH / 2)
-      ctx.lineTo(hostRightX + 40, sy)
-      ctx.lineTo(srvX - 5, sy)
+      ctx.moveTo(fromX, cy)
+      ctx.lineTo(fromX + 20, cy)
+      ctx.quadraticCurveTo(fromX + 30, cy, fromX + 30, (cy + sy) / 2)
+      ctx.quadraticCurveTo(fromX + 30, sy, fromX + 40, sy)
+      ctx.lineTo(toX - 5, sy)
       ctx.stroke()
       ctx.setLineDash([])
 
-      // Small arrowhead
+      // Arrowhead
       ctx.fillStyle = border
       ctx.beginPath()
-      ctx.moveTo(srvX - 5, sy)
-      ctx.lineTo(srvX - 12, sy - 4)
-      ctx.lineTo(srvX - 12, sy + 4)
+      ctx.moveTo(toX - 5, sy)
+      ctx.lineTo(toX - 12, sy - 4)
+      ctx.lineTo(toX - 12, sy + 4)
       ctx.closePath()
       ctx.fill()
     })
 
-    // Protocol label on the connection line
-    ctx.fillStyle = surface
-    ctx.strokeStyle = border
+    // Protocol label on middle connection
+    const plX = hostX + hostW + 5
+    const plY = clientStartY + clientGap + clientH / 2 - 11
+    const plW = lang === 'he' ? 90 : 82
+    ctx.fillStyle = cyan + '10'
+    ctx.strokeStyle = cyan + '30'
     ctx.lineWidth = 1
-    const plX = hostRightX + 15
-    const plY = hostY + boxH / 2 - 10
-    const plW = lang === 'he' ? 95 : 85
     roundRect(ctx, plX, plY, plW, 22, 4)
-    ctx.font = 'bold 12px "Heebo", sans-serif'
+    ctx.font = 'bold 11px "Heebo", sans-serif'
     ctx.fillStyle = cyan
     ctx.textAlign = 'center'
-    ctx.fillText(t.protocol, plX + plW / 2, plY + 16)
+    ctx.fillText(t.protocol, plX + plW / 2, plY + 15)
 
-    // Flow labels on first server connection
-    ctx.font = 'bold 12px "Heebo", sans-serif'
-    const s1y = topY + srvH / 2
+    // Flow labels on first connection
+    const s1cy = clientStartY + clientH / 2
+    const s1sy = srvStartY + srvH / 2
+    const midConnX = (hostX + hostW + srvX) / 2 + 15
+    ctx.font = 'bold 11px "Heebo", sans-serif'
     ctx.fillStyle = green
     ctx.textAlign = 'center'
-    ctx.fillText(t.read, (hostRightX + 40 + srvX) / 2, s1y - 8)
+    ctx.fillText(t.read, midConnX, Math.min(s1cy, s1sy) - 6)
     ctx.fillStyle = textSoft
-    ctx.fillText(t.data, (hostRightX + 40 + srvX) / 2, s1y + 16)
+    ctx.fillText(t.data, midConnX, Math.max(s1cy, s1sy) + 16)
 
   }, [lang])
 
@@ -306,7 +315,6 @@ function drawArrow(ctx, x1, y1, x2, y2, color, dashed) {
   ctx.stroke()
   ctx.setLineDash([])
 
-  // Arrowhead
   const angle = Math.atan2(y2 - y1, x2 - x1)
   ctx.fillStyle = color
   ctx.beginPath()
