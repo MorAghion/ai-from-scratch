@@ -321,6 +321,24 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
                           }
                         </span>
                       )}
+                      {isGastown && ch.id === 'epilogue' && (
+                        <span style={{
+                          position: 'absolute',
+                          top: '0%',
+                          left: '50%',
+                          background: '#c36f01',
+                          color: '#fff',
+                          fontFamily: 'var(--font-code)',
+                          fontSize: 11,
+                          fontWeight: 700,
+                          padding: '3px 8px',
+                          borderRadius: 4,
+                          whiteSpace: 'nowrap',
+                          pointerEvents: 'none',
+                        }}>
+                          {lang === 'he' ? 'אח שלי עדיין כאן חחחחחח ↓' : 'My brother is still here lol ↓'}
+                        </span>
+                      )}
                     </div>
                   )
                 }
@@ -631,6 +649,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
+        alignItems: 'center',
         marginTop: 40,
         paddingTop: 20,
         borderTop: '1px solid var(--border)',
@@ -655,25 +674,24 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
           {dir === 'rtl' ? '→' : '←'} {lang === 'he' ? 'הקודם' : 'Previous'}
         </button>
         {ch.id === 'epilogue' && visibleTabs.findIndex(t => t.id === activeTab) === visibleTabs.length - 1 ? (
-          <button
-            disabled
-            style={{
-              padding: '12px 28px',
-              borderRadius: 10,
-              border: 'none',
-              background: '#9B4F96',
+          <div style={{ position: 'relative', display: 'inline-block', marginTop: 14 }}>
+            <button disabled style={{
+              padding: '10px 16px', borderRadius: 8, border: 'none', background: '#9B4F96',
               fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
-              fontSize: 15,
-              fontWeight: 700,
-              color: '#fff',
-              cursor: 'default',
-              opacity: 0.7,
-              transition: 'all 0.2s ease',
-              letterSpacing: lang === 'he' ? 0 : 0.3,
-            }}
-          >
-            {lang === 'he' ? 'למדריך Vibe Coding' : 'To the Vibe Coding Notebook'} {dir === 'rtl' ? '←' : '→'}
-          </button>
+              fontSize: 14, fontWeight: 600, color: '#fff', cursor: 'default', opacity: 0.7,
+              transition: 'all 0.2s ease', letterSpacing: lang === 'he' ? 0 : 0.3,
+            }}>
+              {lang === 'he' ? 'למדריך Vibe Coding' : 'To the Vibe Coding Notebook'} {dir === 'rtl' ? '←' : '→'}
+            </button>
+            <span style={{
+              position: 'absolute', top: -10, [dir === 'rtl' ? 'left' : 'right']: 8,
+              background: '#7f0c90', color: '#fff',
+              fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
+              fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 12, whiteSpace: 'nowrap',
+            }}>
+              {lang === 'he' ? 'בקרוב!' : 'Soon!'}
+            </span>
+          </div>
         ) : (
           <button
             onClick={handleNext}
