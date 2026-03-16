@@ -107,6 +107,7 @@ export default function App() {
     const chapters = getNotebookChapters(notebooks[notebookId])
     const firstChapterId = chapters.length > 0 ? chapters[0].id : ''
     window.location.hash = `#/${notebookId}/${firstChapterId}`
+    setNavState({ notebookId, chapterId: firstChapterId })
     setView('chapter')
   }
 
@@ -177,6 +178,7 @@ export default function App() {
                     totalChapters={notebookChapters.length}
                     onPrev={() => setActiveChapter(i => Math.max(0, i - 1))}
                     onNext={() => setActiveChapter(i => Math.min(notebookChapters.length - 1, i + 1))}
+                    onNavigateToNotebook={handleSelectNotebook}
                     onNavigate={(chapterId, sectionSlug) => {
                       const idx = notebookChapters.findIndex(c => c.id === chapterId)
                       if (idx !== -1) {
