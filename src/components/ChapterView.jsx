@@ -139,14 +139,13 @@ function renderTextWithLinks(text, onNavigate, onTabSwitch) {
       // [text](#tab:tabId) — switch tab within current chapter
       const tabId = match[15]
       parts.push(
-        <a key={match.index} href="#" onClick={(e) => {
-          e.preventDefault()
+        <span key={match.index} role="button" tabIndex={0} onClick={() => {
           onTabSwitch?.(tabId)
           window.scrollTo(0, 0)
         }}
           style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3, cursor: 'pointer' }}>
           {match[14]}
-        </a>
+        </span>
       )
     }
     lastIdx = match.index + match[0].length
@@ -175,12 +174,34 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
   const { lang, dir } = useLang()
   const ch = chapter
   const visibleTabs = allTabs.filter(tab => hasTabContent(ch, tab.id, lang))
-  const [activeTab, setActiveTab] = useState('content')
+  const [activeTab, setActiveTabRaw] = useState('content')
+
+  // Wrap setActiveTab to push history for back-button support
+  const setActiveTab = (tabId) => {
+    if (tabId !== activeTab) {
+      window.history.pushState({ tab: tabId }, '')
+    }
+    setActiveTabRaw(tabId)
+  }
+
+  // Handle browser back/forward for tab changes
+  useEffect(() => {
+    const onPopState = (e) => {
+      if (e.state?.tab) {
+        setActiveTabRaw(e.state.tab)
+        window.scrollTo(0, 0)
+      }
+    }
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
 
   // Reset tab and scroll to top when chapter changes
   useEffect(() => {
-    setActiveTab('content')
+    setActiveTabRaw('content')
     window.scrollTo(0, 0)
+    // Ensure scroll works after render on mobile
+    requestAnimationFrame(() => window.scrollTo(0, 0))
   }, [chapterIndex])
 
   // Navigate through tabs first, then chapters
@@ -189,6 +210,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
     if (tabIdx < visibleTabs.length - 1) {
       setActiveTab(visibleTabs[tabIdx + 1].id)
       window.scrollTo(0, 0)
+      requestAnimationFrame(() => window.scrollTo(0, 0))
     } else {
       onNext()
     }
@@ -199,6 +221,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
     if (tabIdx > 0) {
       setActiveTab(visibleTabs[tabIdx - 1].id)
       window.scrollTo(0, 0)
+      requestAnimationFrame(() => window.scrollTo(0, 0))
     } else {
       onPrev()
     }

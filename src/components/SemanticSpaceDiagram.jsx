@@ -14,7 +14,7 @@ const labels = {
   he: {
     title: 'Semantic Space — מרחב המשמעות',
     axisX: 'קשר לפשע →',
-    axisY: '← רעילות',
+    axisY: 'רעילות →',
     cyanide: 'ציאניד',
     poison: 'רעל',
     portWine: 'יין פורט',
@@ -27,7 +27,7 @@ const labels = {
   en: {
     title: 'Semantic Space — Meaning Space',
     axisX: 'Crime Connection →',
-    axisY: '← Toxicity',
+    axisY: 'Toxicity →',
     cyanide: 'Cyanide',
     poison: 'Poison',
     portWine: 'Port Wine',

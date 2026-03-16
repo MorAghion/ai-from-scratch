@@ -81,11 +81,15 @@ export default function App() {
       setView('chapter')
       setSidebarOpen(false)
     }
+    const onPopState = (e) => {
+      if (e.state?.tab) return // handled by ChapterView for tab navigation
+      onHashChange()
+    }
     window.addEventListener('hashchange', onHashChange)
-    window.addEventListener('popstate', onHashChange)
+    window.addEventListener('popstate', onPopState)
     return () => {
       window.removeEventListener('hashchange', onHashChange)
-      window.removeEventListener('popstate', onHashChange)
+      window.removeEventListener('popstate', onPopState)
     }
   }, [])
 
