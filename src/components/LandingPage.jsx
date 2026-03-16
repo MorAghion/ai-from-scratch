@@ -84,8 +84,8 @@ export default function LandingPage({ onSelectNotebook }) {
           ? 'המסע שלי לעולם הבינה המלאכותית'
           : 'An interactive learning notebook built from scratch'}
       </h2> */}
-      {/* Fade-edge gradient divider */}
-      <div style={{
+      {/* Fade-edge gradient divider with shimmer on mobile */}
+      <div className="mobile-divider-shimmer" style={{
         position: 'relative', zIndex: 1,
         minHeight: 3,
         height: 3,
@@ -94,6 +94,7 @@ export default function LandingPage({ onSelectNotebook }) {
         margin: '4px 0 14px',
         borderRadius: 3,
         background: 'linear-gradient(90deg, transparent, #3D8B80, #9B4F96, transparent)',
+        overflow: 'hidden',
       }} />
       <div style={{
         fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
@@ -184,9 +185,8 @@ export default function LandingPage({ onSelectNotebook }) {
           return (
             <button
               key={nb.id}
-              onClick={() => !nb.comingSoon && onSelectNotebook(nb.id)}
+              onClick={() => onSelectNotebook(nb.id)}
               className="notebook-card"
-              disabled={nb.comingSoon}
               style={{
                 flex: '1 1 280px',
                 maxWidth: 320,
@@ -194,7 +194,7 @@ export default function LandingPage({ onSelectNotebook }) {
                 borderRadius: 16,
                 border: `2px solid ${nb.color}22`,
                 background: 'var(--surface)',
-                cursor: nb.comingSoon ? 'default' : 'pointer',
+                cursor: 'pointer',
                 textAlign: 'center',
                 direction: dir,
                 display: 'flex',
@@ -203,16 +203,13 @@ export default function LandingPage({ onSelectNotebook }) {
                 transition: 'all 0.2s ease',
                 position: 'relative',
                 overflow: 'hidden',
-                opacity: nb.comingSoon ? 0.7 : 1,
               }}
               onMouseEnter={e => {
-                if (nb.comingSoon) return
                 e.currentTarget.style.borderColor = nb.color
                 e.currentTarget.style.transform = 'translateY(-2px)'
                 e.currentTarget.style.boxShadow = `0 8px 24px ${nb.color}15`
               }}
               onMouseLeave={e => {
-                if (nb.comingSoon) return
                 e.currentTarget.style.borderColor = `${nb.color}22`
                 e.currentTarget.style.transform = 'translateY(0)'
                 e.currentTarget.style.boxShadow = 'none'
@@ -242,7 +239,7 @@ export default function LandingPage({ onSelectNotebook }) {
                 }}>
                   {nb.title[lang]}
                 </h2>
-                {nb.comingSoon && (
+                {nb.teaserCount && (
                   <span style={{
                     fontFamily: 'var(--font-code)',
                     fontSize: 10,
