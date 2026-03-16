@@ -118,7 +118,7 @@ export default function LandingPage({ onSelectNotebook }) {
           >
             <span style={{ borderBottom: '1px dashed var(--accent)', cursor: 'default' }}>המונחים החדשים</span>
             {showBuzz && (
-              <span style={{
+              <span className="buzzword-tooltip" style={{
                 position: 'absolute',
                 top: -40,
                 left: -296,
