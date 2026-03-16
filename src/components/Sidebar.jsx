@@ -51,35 +51,60 @@ export default function Sidebar({ chapters, notebook, activeChapter, onSelect, o
 
       {arcs.map((arc, arcIdx) => (
         <div key={arcIdx} style={{ marginBottom: 16 }}>
+          {/* "Coming soon" tag above locked arcs */}
+          {arcIdx === 1 && notebook?.teaserCount != null && (
+            <div style={{ padding: '12px 8px 2px' }}>
+              <span style={{
+                fontSize: 10,
+                fontFamily: 'var(--font-code)',
+                color: '#9B4F96',
+                fontWeight: 600,
+                letterSpacing: 0.5,
+                textTransform: 'uppercase',
+                background: 'rgba(155, 79, 150, 0.1)',
+                border: '1px solid rgba(155, 79, 150, 0.25)',
+                borderRadius: 4,
+                padding: '2px 8px',
+              }}>
+                {lang === 'he' ? 'בקרוב...' : 'Coming soon'}
+              </span>
+            </div>
+          )}
+
           {/* Arc header */}
-          <div style={{
-            fontSize: 12,
-            fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
-            color: 'var(--accent)',
-            fontWeight: 600,
-            letterSpacing: lang === 'he' ? 0 : 0.5,
-            padding: '8px 8px 4px',
-            marginTop: arcIdx > 0 ? 4 : 0,
-            borderTop: arcIdx > 0 ? '1px solid var(--border)' : 'none',
-            paddingTop: arcIdx > 0 ? 12 : 8,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6,
-          }}>
-            <span>{arc.label[lang]}</span>
-          </div>
+          {arc.label[lang] ? (
+            <div style={{
+              fontSize: 12,
+              fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
+              color: 'var(--accent)',
+              fontWeight: 600,
+              letterSpacing: lang === 'he' ? 0 : 0.5,
+              padding: '8px 8px 4px',
+              marginTop: arcIdx > 0 ? 4 : 0,
+              borderTop: arcIdx > 0 ? '1px solid var(--border)' : 'none',
+              paddingTop: arcIdx > 0 ? 12 : 8,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+            }}>
+              <span>{arc.label[lang]}</span>
+            </div>
+          ) : arcIdx > 0 ? (
+            <div style={{ borderTop: '1px solid var(--border)', margin: '8px 8px 4px' }} />
+          ) : null}
 
           {/* Chapters in this arc */}
           {chapters.slice(arc.startIndex, arc.endIndex + 1).map((ch, localIdx) => {
             const i = arc.startIndex + localIdx
             const isEpilogue = ch.id === 'epilogue'
+            const isLocked = notebook?.teaserCount != null && i >= notebook.teaserCount
             return (
               <React.Fragment key={ch.id}>
                 {isEpilogue && (
                   <div style={{ borderTop: '1px solid var(--border)', margin: '8px 8px 4px' }} />
                 )}
                 <button
-                  onClick={() => onSelect(i)}
+                  onClick={() => !isLocked && onSelect(i)}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -89,12 +114,12 @@ export default function Sidebar({ chapters, notebook, activeChapter, onSelect, o
                     borderRadius: 8,
                     border: 'none',
                     background: i === activeChapter ? 'var(--accent-soft)' : 'transparent',
-                    color: i === activeChapter ? 'var(--accent)' : 'var(--text-soft)',
+                    color: isLocked ? 'var(--text-soft)' : i === activeChapter ? 'var(--accent)' : 'var(--text-soft)',
                     fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
                     fontSize: 14,
                     fontWeight: i === activeChapter ? 600 : 400,
-                    cursor: 'pointer',
-                    opacity: 1,
+                    cursor: isLocked ? 'default' : 'pointer',
+                    opacity: isLocked ? 0.4 : 1,
                     textAlign: lang === 'he' ? 'right' : 'left',
                     direction: lang === 'he' ? 'rtl' : 'ltr',
                     transition: 'all 0.15s ease',

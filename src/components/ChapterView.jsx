@@ -171,7 +171,7 @@ function hasTabContent(ch, tabId, lang) {
   return false
 }
 
-export default function ChapterView({ chapter, chapterIndex, totalChapters, onPrev, onNext, onNavigate }) {
+export default function ChapterView({ chapter, chapterIndex, totalChapters, onPrev, onNext, onNavigate, onNavigateToNotebook }) {
   const { lang, dir } = useLang()
   const ch = chapter
   const visibleTabs = allTabs.filter(tab => hasTabContent(ch, tab.id, lang))
@@ -653,8 +653,8 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
         <DetectiveExercise content={ch.detective && ch.detective[lang]} files={ch.detectiveFiles} />
       )}
 
-      {/* Navigation */}
-      <div style={{
+      {/* Navigation — hidden for teaser chapters */}
+      {ch.id !== 'vibe-coding-teaser' && <div style={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -682,24 +682,17 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
           {dir === 'rtl' ? '→' : '←'} {lang === 'he' ? 'הקודם' : 'Previous'}
         </button>
         {ch.id === 'epilogue' && visibleTabs.findIndex(t => t.id === activeTab) === visibleTabs.length - 1 ? (
-          <div style={{ position: 'relative', display: 'inline-block', marginTop: 14 }}>
-            <button disabled style={{
+          <button
+            onClick={() => onNavigateToNotebook?.('vibe-coding')}
+            style={{
               padding: '10px 16px', borderRadius: 8, border: 'none', background: '#9B4F96',
               fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
-              fontSize: 14, fontWeight: 600, color: '#fff', cursor: 'default', opacity: 0.7,
+              fontSize: 14, fontWeight: 600, color: '#fff', cursor: 'pointer',
               transition: 'all 0.2s ease', letterSpacing: lang === 'he' ? 0 : 0.3,
+              marginTop: 14,
             }}>
-              {lang === 'he' ? 'למדריך Vibe Coding' : 'To the Vibe Coding Notebook'} {dir === 'rtl' ? '←' : '→'}
-            </button>
-            <span style={{
-              position: 'absolute', top: -10, [dir === 'rtl' ? 'left' : 'right']: 8,
-              background: '#7f0c90', color: '#fff',
-              fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
-              fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 12, whiteSpace: 'nowrap',
-            }}>
-              {lang === 'he' ? 'בקרוב!' : 'Soon!'}
-            </span>
-          </div>
+            {lang === 'he' ? 'למדריך Vibe Coding' : 'To the Vibe Coding Notebook'} {dir === 'rtl' ? '←' : '→'}
+          </button>
         ) : (
           <button
             onClick={handleNext}
@@ -721,7 +714,7 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
             {lang === 'he' ? 'הבא' : 'Next'} {dir === 'rtl' ? '←' : '→'}
           </button>
         )}
-      </div>
-    </article>
+      </div>}
+      </article>
   )
 }

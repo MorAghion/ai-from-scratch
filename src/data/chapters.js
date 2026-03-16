@@ -147,6 +147,17 @@ const chapterMeta = [
     exercise: null,
   },
 
+  // === Vibe Coding - Teaser ===
+  {
+    id: 'vibe-coding-teaser',
+    icon: 'Popcorn',
+    iconColor: '#D72638',
+    title: { he: 'טיזר', en: 'Teaser' },
+    status: 'not-started',
+    videos: [],
+    exercise: null,
+  },
+
   // === Vibe Coding - Arc 1: Getting Ready ===
   {
     id: 'vibe-coding-intro',

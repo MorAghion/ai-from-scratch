@@ -25,16 +25,18 @@ export const notebooks = {
     subtitle: { he: 'רעיונות הופכים למציאות · ריבוי סוכנים · אורקסטרציה', en: 'Ideas become reality · Multi-agent · Orchestration' },
     icon: 'CodeBlock',
     color: '#9B4F96',
-    comingSoon: true,
+    teaserCount: 1,
     chapterIds: [
+      'vibe-coding-teaser',
       'vibe-coding-intro', 'getting-started',
       'homehub-mvp', 'homehub-leveling-up',
       'orchestration', 'mini-gastown',
     ],
     arcs: [
-      { label: { he: 'להתכונן', en: 'Getting Ready' }, startIndex: 0, endIndex: 1 },
-      { label: { he: 'בונים את HomeHub', en: 'Building HomeHub' }, startIndex: 2, endIndex: 3 },
-      { label: { he: 'ה-Gas Town הקטן שלי', en: 'My Mini Gas Town' }, startIndex: 4, endIndex: 5 },
+      { label: { he: '', en: '' }, startIndex: 0, endIndex: 0 },
+      { label: { he: 'התחלה', en: 'Getting Ready' }, startIndex: 1, endIndex: 2 },
+      { label: { he: 'בונים את HomeHub', en: 'Building HomeHub' }, startIndex: 3, endIndex: 4 },
+      { label: { he: 'ה-Gas Town הקטן שלי', en: 'My Mini Gas Town' }, startIndex: 5, endIndex: 6 },
     ],
   },
 }

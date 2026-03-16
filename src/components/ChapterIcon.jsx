@@ -24,6 +24,7 @@ import {
   TrendUp,
   Compass,
   Waves,
+  Popcorn,
 } from '@phosphor-icons/react'
 
 const iconMap = {
@@ -51,6 +52,7 @@ const iconMap = {
   TrendUp,
   Compass,
   Waves,
+  Popcorn,
 }
 
 export default function ChapterIcon({ name, color, size = 28, weight = 'duotone' }) {
