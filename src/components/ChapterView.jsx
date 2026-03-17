@@ -170,7 +170,7 @@ function hasTabContent(ch, tabId, lang) {
   return false
 }
 
-export default function ChapterView({ chapter, chapterIndex, totalChapters, onPrev, onNext, onNavigate, onNavigateToNotebook }) {
+export default function ChapterView({ chapter, nextChapter, chapterIndex, totalChapters, onPrev, onNext, onNavigate, onNavigateToNotebook }) {
   const { lang, dir } = useLang()
   const ch = chapter
   const visibleTabs = allTabs.filter(tab => hasTabContent(ch, tab.id, lang))
@@ -717,27 +717,35 @@ export default function ChapterView({ chapter, chapterIndex, totalChapters, onPr
             }}>
             {lang === 'he' ? 'למדריך Vibe Coding' : 'To the Vibe Coding Notebook'} {dir === 'rtl' ? '←' : '→'}
           </button>
-        ) : (
-          <button
-            onClick={handleNext}
-            disabled={chapterIndex === totalChapters - 1 && visibleTabs.findIndex(t => t.id === activeTab) === visibleTabs.length - 1}
-            style={{
-              padding: '10px 16px',
-              borderRadius: 8,
-              border: 'none',
-              background: 'var(--accent)',
-              fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
-              fontSize: 14,
-              fontWeight: 600,
-              color: '#fff',
-              cursor: 'pointer',
-              opacity: (chapterIndex === totalChapters - 1 && visibleTabs.findIndex(t => t.id === activeTab) === visibleTabs.length - 1) ? 0.3 : 1,
-              transition: 'all 0.15s ease',
-            }}
-          >
-            {lang === 'he' ? 'הבא' : 'Next'} {dir === 'rtl' ? '←' : '→'}
-          </button>
-        )}
+        ) : (() => {
+            const isLastTab = visibleTabs.findIndex(t => t.id === activeTab) === visibleTabs.length - 1
+            const isLastChapter = chapterIndex === totalChapters - 1
+            const goesToNextChapter = isLastTab && !isLastChapter && nextChapter
+            return (
+              <button
+                onClick={handleNext}
+                disabled={isLastTab && isLastChapter}
+                style={{
+                  padding: '10px 16px',
+                  borderRadius: 8,
+                  border: 'none',
+                  background: goesToNextChapter ? '#8A4619' : 'var(--accent)',
+                  fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: '#fff',
+                  cursor: 'pointer',
+                  opacity: (isLastTab && isLastChapter) ? 0.3 : 1,
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                {goesToNextChapter
+                  ? <>{lang === 'he' ? 'הלאה ל:' : 'Next:'} {nextChapter.title[lang] || nextChapter.title.he} {dir === 'rtl' ? '←' : '→'}</>
+                  : <>{lang === 'he' ? 'הבא' : 'Next'} {dir === 'rtl' ? '←' : '→'}</>
+                }
+              </button>
+            )
+          })()}
       </div>}
       </article>
   )

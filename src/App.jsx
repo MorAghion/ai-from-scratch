@@ -178,6 +178,7 @@ export default function App() {
                 ) : (
                   <ChapterView
                     chapter={notebookChapters[activeChapter]}
+                    nextChapter={notebookChapters[activeChapter + 1] || null}
                     chapterIndex={activeChapter}
                     totalChapters={notebookChapters.length}
                     onPrev={() => setActiveChapter(i => Math.max(0, i - 1))}
