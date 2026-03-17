@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { track } from '@vercel/analytics/react'
 import { MagicWand, Heart } from '@phosphor-icons/react'
 import { useLang } from '../App'
 import CollapsibleBubble from './CollapsibleBubble'
@@ -200,8 +201,8 @@ export default function ChapterView({ chapter, nextChapter, chapterIndex, totalC
   useEffect(() => {
     setActiveTabRaw('content')
     window.scrollTo(0, 0)
-    // Ensure scroll works after render on mobile
     requestAnimationFrame(() => window.scrollTo(0, 0))
+    track('chapter_view', { chapter: ch.id, title: ch.title?.he || ch.id })
   }, [chapterIndex])
 
   // Navigate through tabs first, then chapters
