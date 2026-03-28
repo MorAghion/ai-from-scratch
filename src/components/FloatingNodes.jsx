@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useTheme } from '../App'
 
 const COLORS = ['#3D8B80', '#9B4F96', '#C2652A']
+const COLORS_DUSK = ['#8CD4DF', '#A47ED8', '#E8B96F']
 
 // Neural network layer config: diamond shape (narrow→wide→narrow)
 const LAYERS = [3, 4, 5, 6, 5, 4, 3]
@@ -14,6 +15,15 @@ const LAYER_COLORS = [
   '#B65A60',   // purple-terracotta blend
   '#C2652A',   // terracotta
   '#8B5E3C',   // brown
+]
+const LAYER_COLORS_DUSK = [
+  '#8CD4DF',   // bright teal
+  '#9CC4AB',   // light sage
+  '#A47ED8',   // bright purple
+  '#B898E0',   // lavender
+  '#E8B96F',   // bright gold
+  '#D4956E',   // warm copper
+  '#C08060',   // terracotta
 ]
 
 // Bunches: each is a small cluster of 2-4 nodes that float together
@@ -73,7 +83,7 @@ export default function FloatingNodes({ nnOnly = false }) {
           layerNodes.push({
             baseX: x, baseY: y, x, y,
             r: nodeRadius,
-            color: LAYER_COLORS[l],
+            color: (isDusk ? LAYER_COLORS_DUSK : LAYER_COLORS)[l],
             phaseX: Math.random() * Math.PI * 2,
             phaseY: Math.random() * Math.PI * 2,
             ampX: 1.5 + Math.random() * 2.5,
@@ -99,7 +109,7 @@ export default function FloatingNodes({ nnOnly = false }) {
           vy: (Math.random() - 0.5) * 0.25,
           nodes: [],
         }
-        const color = COLORS[i % COLORS.length]
+        const color = (isDusk ? COLORS_DUSK : COLORS)[i % COLORS.length]
         for (let n = 0; n < cfg.count; n++) {
           const angle = (Math.PI * 2 * n) / cfg.count + Math.random() * 0.5
           const dist = cfg.spread * (0.5 + Math.random() * 0.5)
@@ -150,7 +160,7 @@ export default function FloatingNodes({ nnOnly = false }) {
 
       for (let ti = 0; ti < traceDefs.length; ti++) {
         const def = traceDefs[ti]
-        const color = COLORS[ti % COLORS.length]
+        const color = (isDusk ? COLORS_DUSK : COLORS)[ti % COLORS.length]
         const points = []
         let x = ox + def.start[0] * s
         let y = oy + def.start[1] * s
