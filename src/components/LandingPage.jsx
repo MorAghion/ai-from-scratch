@@ -68,7 +68,7 @@ export default function LandingPage({ onSelectNotebook }) {
         marginBottom: 8,
         textAlign: 'center',
       }}>
-        AI, מההתחלה
+        <span style={{ fontFamily: 'var(--font-heading)' }}>AI</span><span style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}>,</span> מההתחלה
       </h1>
       {/* <h2 style={{
         position: 'relative', zIndex: 1,

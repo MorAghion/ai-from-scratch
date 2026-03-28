@@ -336,7 +336,7 @@ export default function Header({ onMenuToggle, onHome, onSelectNotebook, noteboo
                 fontSize: 17,
                 letterSpacing: '-0.02em',
               }}>
-                AI, מההתחלה
+                <span style={{ fontFamily: 'var(--font-heading)' }}>AI</span><span style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}>,</span> מההתחלה
               </span>
             </button>
             <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,0.2)', margin: '0 2px' }} />
