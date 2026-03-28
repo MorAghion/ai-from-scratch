@@ -201,7 +201,7 @@ function AuthorPhoto({ showName = false }) {
       />
       {showName && (
         <>
-          <span style={{
+          <span className="header-author-name" style={{
             fontFamily: 'var(--font-body)',
             fontSize: 15,
             fontWeight: 500,
@@ -209,7 +209,7 @@ function AuthorPhoto({ showName = false }) {
           }}>
             Mor Aghion
           </span>
-          <SocialIcons size={14} />
+          <span className="header-social-icons"><SocialIcons size={14} /></span>
         </>
       )}
     </div>

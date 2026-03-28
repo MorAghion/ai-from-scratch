@@ -105,6 +105,10 @@ body {
   .floating-nodes-canvas {
     display: none !important;
   }
+  .header-author-name,
+  .header-social-icons {
+    display: none !important;
+  }
   .mobile-divider-shimmer::after {
     content: '';
     position: absolute;
