@@ -111,11 +111,14 @@ body {
   .header-author-popup {
     display: flex !important;
   }
-  .header-notebook-author {
-    display: none !important;
-  }
   .header-notebook-divider {
     display: none !important;
+  }
+  header {
+    padding: 10px 12px !important;
+  }
+  header > div {
+    gap: 8px !important;
   }
   .mobile-divider-shimmer::after {
     content: '';
