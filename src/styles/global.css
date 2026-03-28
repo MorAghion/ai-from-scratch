@@ -105,9 +105,11 @@ body {
   .floating-nodes-canvas {
     display: none !important;
   }
-  .header-author-name,
-  .header-social-icons {
+  .header-author-extras {
     display: none !important;
+  }
+  .header-author-popup {
+    display: flex !important;
   }
   .mobile-divider-shimmer::after {
     content: '';

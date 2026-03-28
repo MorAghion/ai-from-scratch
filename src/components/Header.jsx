@@ -187,30 +187,84 @@ const SocialIcons = ({ size = 14 }) => (
   </div>
 )
 
-// Author photo + optional name and social icons
-function AuthorPhoto({ showName = false }) {
+// Author section — landing: always full, notebook: full on desktop, photo+popup on mobile
+function AuthorSection({ isLanding }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
+
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 8, direction: 'ltr' }}>
-      <img
-        src="/images/profile.jpeg"
-        alt="Mor Aghion"
+    <div ref={ref} style={{ display: 'flex', alignItems: 'center', gap: 8, direction: 'ltr', position: 'relative' }}>
+      {/* Photo — always visible, clickable on mobile notebooks */}
+      <button
+        onClick={() => !isLanding && setOpen(v => !v)}
+        className={isLanding ? '' : 'header-author-photo-btn'}
         style={{
-          width: 28, height: 28, borderRadius: '50%', objectFit: 'cover',
-          border: '1.5px solid rgba(255,255,255,0.25)',
+          background: 'none', border: 'none', padding: 0,
+          cursor: isLanding ? 'default' : 'pointer',
+          display: 'flex', alignItems: 'center',
         }}
-      />
-      {showName && (
-        <>
-          <span className="header-author-name" style={{
+      >
+        <img
+          src="/images/profile.jpeg"
+          alt="Mor Aghion"
+          style={{
+            width: 28, height: 28, borderRadius: '50%', objectFit: 'cover',
+            border: '1.5px solid rgba(255,255,255,0.25)',
+          }}
+        />
+      </button>
+
+      {/* Name + icons — always on landing, hidden on mobile for notebooks */}
+      <div className={isLanding ? '' : 'header-author-extras'} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <span style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: 15,
+          fontWeight: 500,
+          color: 'var(--nav-text)',
+        }}>
+          Mor Aghion
+        </span>
+        <SocialIcons size={14} />
+      </div>
+
+      {/* Mobile popup — only for notebook pages */}
+      {!isLanding && open && (
+        <div style={{
+          position: 'absolute',
+          top: '100%',
+          left: 0,
+          marginTop: 8,
+          background: 'var(--surface)',
+          border: '1px solid var(--border)',
+          borderRadius: 10,
+          padding: '12px 16px',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
+          zIndex: 200,
+          display: 'none',
+          alignItems: 'center',
+          gap: 12,
+          whiteSpace: 'nowrap',
+        }}
+        className="header-author-popup"
+        >
+          <span style={{
             fontFamily: 'var(--font-body)',
-            fontSize: 15,
+            fontSize: 13,
+            color: 'var(--text)',
             fontWeight: 500,
-            color: 'var(--nav-text)',
           }}>
             Mor Aghion
           </span>
-          <span className="header-social-icons"><SocialIcons size={14} /></span>
-        </>
+          <SocialIcons size={14} />
+        </div>
       )}
     </div>
   )
@@ -287,7 +341,7 @@ export default function Header({ onMenuToggle, onHome, onSelectNotebook, noteboo
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, direction: 'ltr' }}>
             <Controls themeId={themeId} toggleTheme={toggleTheme} />
             <div style={{ width: 2, height: 22, background: 'rgba(255,255,255,0.35)' }} />
-            <AuthorPhoto showName />
+            <AuthorSection isLanding />
           </div>
         ) : RIGHT_SIDE_OPTION === 'A' ? (
           /* A: Icons only, no name */
@@ -301,7 +355,7 @@ export default function Header({ onMenuToggle, onHome, onSelectNotebook, noteboo
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, direction: 'ltr' }}>
             <Controls themeId={themeId} toggleTheme={toggleTheme} />
             <div style={{ width: 2, height: 22, background: 'rgba(255,255,255,0.35)' }} />
-            <AuthorPhoto showName />
+            <AuthorSection isLanding />
           </div>
         ) : RIGHT_SIDE_OPTION === 'C' ? (
           /* C: Controls only */
