@@ -136,8 +136,10 @@ export default function App() {
           <Header
             onMenuToggle={() => setSidebarOpen(!sidebarOpen)}
             onHome={handleHome}
+            onSelectNotebook={handleSelectNotebook}
             notebook={activeNotebook}
             showMenu={currentView === 'notebook'}
+            isLanding={currentView === 'landing'}
           />
 
           {currentView === 'landing' ? (
