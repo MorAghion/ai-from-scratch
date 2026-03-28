@@ -111,6 +111,12 @@ body {
   .header-author-popup {
     display: flex !important;
   }
+  .header-notebook-author {
+    display: none !important;
+  }
+  .header-notebook-divider {
+    display: none !important;
+  }
   .mobile-divider-shimmer::after {
     content: '';
     position: absolute;

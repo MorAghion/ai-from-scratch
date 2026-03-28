@@ -354,8 +354,8 @@ export default function Header({ onMenuToggle, onHome, onSelectNotebook, noteboo
           /* B: same as landing */
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, direction: 'ltr' }}>
             <Controls themeId={themeId} toggleTheme={toggleTheme} />
-            <div style={{ width: 2, height: 22, background: 'rgba(255,255,255,0.35)' }} />
-            <AuthorSection isLanding />
+            <div className="header-notebook-divider" style={{ width: 2, height: 22, background: 'rgba(255,255,255,0.35)' }} />
+            <span className="header-notebook-author"><AuthorSection isLanding={false} /></span>
           </div>
         ) : RIGHT_SIDE_OPTION === 'C' ? (
           /* C: Controls only */
