@@ -51,8 +51,8 @@ const tiers = [
 ]
 
 const disclaimer = {
-  he: 'המחירים נכונים לתחילת 2025 ועשויים להשתנות. בדקו באתר הספק לפני רכישה.',
-  en: 'Prices are as of early 2025 and may change. Check the provider\'s website before purchasing.',
+  he: 'המחירים נכונים לתחילת 2026 ועשויים להשתנות. בדקו באתר הספק לפני רכישה.',
+  en: 'Prices are as of early 2026 and may change. Check the provider\'s website before purchasing.',
 }
 
 export default function PricingTable() {

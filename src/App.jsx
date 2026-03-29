@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, createContext, useContext } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import { themes } from './data/themes'
-import { notebooks } from './data/notebooks'
+import { notebooks, notebookOrder } from './data/notebooks'
 import { getNotebookChapters } from './data/chapters'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
@@ -172,7 +172,10 @@ export default function App() {
                       if (sectionSlug) {
                         setTimeout(() => {
                           const el = document.getElementById(`section-${sectionSlug}`)
-                          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                          if (el) {
+                            const y = el.getBoundingClientRect().top + window.scrollY - 80
+                            window.scrollTo({ top: y, behavior: 'smooth' })
+                          }
                         }, 300)
                       }
                     }}
@@ -187,6 +190,7 @@ export default function App() {
                     onNext={() => setActiveChapter(i => Math.min(notebookChapters.length - 1, i + 1))}
                     onNavigateToNotebook={handleSelectNotebook}
                     onNavigate={(chapterId, sectionSlug) => {
+                      // Try current notebook first
                       const idx = notebookChapters.findIndex(c => c.id === chapterId)
                       if (idx !== -1) {
                         const chapter = notebookChapters[idx]
@@ -195,12 +199,26 @@ export default function App() {
                           setNavState(prev => ({ ...prev, chapterId: chapter.id }))
                         }
                         setView('chapter')
-                        if (sectionSlug) {
-                          setTimeout(() => {
-                            const el = document.getElementById(`section-${sectionSlug}`)
-                            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                          }, 300)
+                      } else {
+                        // Search other notebooks
+                        for (const nbId of notebookOrder) {
+                          const nbChapters = getNotebookChapters(notebooks[nbId])
+                          if (nbChapters.find(c => c.id === chapterId)) {
+                            window.location.hash = `#/${nbId}/${chapterId}`
+                            setNavState({ notebookId: nbId, chapterId })
+                            setView('chapter')
+                            break
+                          }
                         }
+                      }
+                      if (sectionSlug) {
+                        setTimeout(() => {
+                          const el = document.getElementById(`section-${sectionSlug}`)
+                          if (el) {
+                            const y = el.getBoundingClientRect().top + window.scrollY - 80
+                            window.scrollTo({ top: y, behavior: 'smooth' })
+                          }
+                        }, 300)
                       }
                     }}
                   />

@@ -310,7 +310,7 @@ export default function ChapterView({ chapter, nextChapter, chapterIndex, totalC
                   const isGastown = section.src.includes('gastown')
                   const isTeaser = section.src.includes('teaser')
                   return (
-                    <div key={i} style={{ position: 'relative', marginBottom: 20, marginTop: 12 }}>
+                    <div key={i} id={isGastown ? 'section-yegge-diagram' : undefined} style={{ position: 'relative', marginBottom: 20, marginTop: 12 }}>
                       <img src={section.src} alt={section.alt} style={{ width: '100%', borderRadius: isTeaser ? 0 : 10, border: isTeaser ? 'none' : '1px solid var(--border)', background: isTeaser ? 'var(--bg)' : undefined }} />
                       {section.src.includes('claude.png') && (
                         <div style={{

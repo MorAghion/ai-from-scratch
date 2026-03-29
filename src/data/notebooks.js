@@ -25,7 +25,7 @@ export const notebooks = {
     subtitle: { he: 'רעיונות הופכים למציאות · ריבוי סוכנים · אורקסטרציה', en: 'Ideas become reality · Multi-agent · Orchestration' },
     icon: 'CodeBlock',
     color: '#9B4F96',
-    teaserCount: 1,
+    // teaserCount: 1, // uncomment to lock chapters
     chapterIds: [
       'vibe-coding-teaser',
       'vibe-coding-intro', 'getting-started',
