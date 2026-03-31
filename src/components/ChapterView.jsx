@@ -32,6 +32,7 @@ import VibingDays from './VibingDays'
 import CostBreakdown from './CostBreakdown'
 import CommitTimeline from './CommitTimeline'
 import WaveTable from './WaveTable'
+import MVPShowcase from './MVPShowcase'
 
 // Registry of embeddable components (referenced via @@component:Name in .txt files)
 const componentRegistry = {
@@ -62,6 +63,7 @@ const componentRegistry = {
   CostBreakdown,
   CommitTimeline,
   WaveTable,
+  MVPShowcase,
 }
 
 // Generate a stable slug from heading text (supports Hebrew + English)
