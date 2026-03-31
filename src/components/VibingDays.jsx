@@ -7,14 +7,14 @@ const days = [
     weekday: { he: 'שלישי', en: 'Tue' },
     commits: 9,
     mood: 'fire',
-    apiCost: 30,
-    apiNote: { he: 'חיוב מ-10.2', en: 'Billed 10.2' },
+    apiCost: 92,
+    apiNote: { he: 'כולל 62₪ מ-2.2', en: 'Including 62₪ from 2.2' },
     title: { he: 'יום 1 — ״זה עובד?!״', en: 'Day 1 — "It works?!"' },
     details: {
-      he: 'רשימת קניות עם צבעים, קטגוריות, מחיקה וניקוי. הסוכן כתב הכל. תיארתי מה אני רוצה, הוא בנה. ההרגשה? מטורפת.',
-      en: 'Shopping list with colors, categories, delete and clear. The agent wrote everything. I described what I wanted, it built. The feeling? Insane.',
+      he: 'רשימת קניות עם צבעים, קטגוריות, מחיקה וניקוי. הסוכן כתב הכל. תיארתי מה אני רוצה, הוא בנה. ההרגשה מטורפת.',
+      en: 'Shopping list with colors, categories, delete and clear. The agent wrote everything. I described what I wanted, it built. The feeling is insane.',
     },
-    commits_sample: [
+    _commits_sample: [
       'Shopping List: delete, clear, categorize',
       'Create: MasterList feature',
     ],
@@ -25,13 +25,13 @@ const days = [
     commits: 10,
     mood: 'warning',
     apiCost: 153,
-    apiNote: { he: 'חיוב מ-11.2', en: 'Billed 11.2' },
-    title: { he: 'יום 2 — חור הארנב', en: 'Day 2 — The rabbit hole' },
+    apiNote: { he: '', en: '' },
+    title: { he: 'יום 2 — שוברת ומתקנת ואז שוב שוברת', en: 'Day 2 — The rabbit hole' },
     details: {
-      he: '10 קומיטים על פיצ׳ר אחד. רציתי מנגנון שמזהה הקשר ומציע פריטים. התחיל ב-Smart Suggestions, הפך ל-Context Engine, אז Bubbles, אז Flexible Memory — ואז: fix, break, fix, break, fix.',
-      en: '10 commits on one feature. Wanted a context-aware suggestion engine. Started as Smart Suggestions, became Context Engine, then Bubbles, then Flexible Memory — then: fix, break, fix, break, fix.',
+      he: 'רציתי מנגנון שמזהה את ההקשר של הרשימה ומציע פריטים מתאימים. התחלנו ב-Smart Suggestions, הפך ל-Context Engine, ואז Flexible Memory — וכל פעם שמשהו עבד, שברתי אותו בניסיון לשפר. היום הזה עלה לי 153 ש״ח בטוקנים. על פיצ׳ר אחד.',
+      en: 'Wanted a context-aware suggestion engine. Started as Smart Suggestions, became Context Engine, then Flexible Memory — and every time something worked, I broke it trying to improve. This day cost me 153 ILS in tokens. On a single feature.',
     },
-    commits_sample: [
+    _commits_sample: [
       'Create Context Recognition Mapping Engine',
       'Implement Flexible Memory',
       'Fix: Remove fallback default items',
@@ -45,10 +45,10 @@ const days = [
     mood: 'calm',
     title: { he: 'יום 3 — רפקטור וסדר', en: 'Day 3 — Refactor & order' },
     details: {
-      he: 'עצרתי לרגע לסדר. הוספתי טיפוסים (BaseItem, Task), שיפרתי את מבנה ה-MasterList. יום שקט יחסית.',
-      en: 'Paused to organize. Added types (BaseItem, Task), improved MasterList structure. A relatively quiet day.',
+      he: 'אחרי הכאוס של אתמול, עצרתי לנשום. במקום לרוץ לפיצ׳ר הבא, ביקשתי מהסוכן לסדר את מה שכבר קיים — מבנה נקי יותר, טיפוסים ברורים, ובניית ה-Task Hub. יום שקט, אבל חשוב.',
+      en: 'After yesterday\'s chaos, I paused to breathe. Instead of rushing to the next feature, I asked the agent to organize what already existed — cleaner structure, clear types, and building the Task Hub. A quiet day, but an important one.',
     },
-    commits_sample: [
+    _commits_sample: [
       'refactor: add BaseItem and Task types',
       'Create Task Hub and Urgent Task SubHub',
     ],
@@ -58,12 +58,12 @@ const days = [
     weekday: { he: 'שבת', en: 'Sat' },
     commits: 7,
     mood: 'explosion',
-    title: { he: 'ימים 4-6 — פיצוץ סקופ', en: 'Days 4-6 — Scope explosion' },
+    title: { he: 'ימים 4-6 — מרשימת קניות לאפליקציה שלמה', en: 'Days 4-6 — From shopping list to full app' },
     details: {
-      he: 'OCR עם תמיכה בעברית, ניווט קרוסלה, ואז — "Architecture overhaul" ו-"Complete UI/UX overhaul". קפיצות ענק בלי תכנון. מרשימת קניות לארבעה הבים ב-5 ימים.',
-      en: 'OCR with Hebrew support, carousel navigation, then — "Architecture overhaul" and "Complete UI/UX overhaul". Huge jumps with no plan. From a shopping list to four hubs in 5 days.',
+      he: 'יום הסדר ב-12.2 לא ממש החזיק מעמד, ככל שהתקדמנו בפיתוח, הכאוס חזר: תוך 4 שעות האפליקציה עברה מהפך - סריקת ברקודים בעברית, מערכת אייקונים, עיצוב מחדש מלא, ואז עוד עיצוב מחדש כי הראשון שבר דברים. הכל רץ, אבל בלי שום תכנון.',
+      en: 'The cleanup day on 12.2 didn\'t last. As development progressed, the chaos returned: within 4 hours the app was transformed - Hebrew barcode scanning, icon system, full redesign, then another redesign because the first one broke things. Everything ran, but with zero planning.',
     },
-    commits_sample: [
+    _commits_sample: [
       'Fix voucher type stability and enhance OCR',
       'Architecture overhaul: Smart icons, compact header',
       'Complete UI/UX overhaul: Ghost UI, centered header',
@@ -74,13 +74,13 @@ const days = [
     weekday: { he: 'שני', en: 'Mon' },
     commits: 10,
     mood: 'danger',
-    subscription: 370,
+    subscription: 320,
     title: { he: 'יום 7 — ה-Migration הגדול', en: 'Day 7 — The Big Migration' },
     details: {
-      he: 'commit אחד: "Migrate all data storage from localStorage to Supabase". שינוי מאסיבי. ואז 10 תיקונים ברצף — auth שבור, מובייל שבור, קרוסלה שבורה. באותו יום עברתי ל-Claude Max.',
-      en: 'One commit: "Migrate all data storage from localStorage to Supabase". Massive change. Then 10 consecutive fixes — auth broken, mobile broken, carousel broken. Same day I switched to Claude Max.',
+      he: 'הבנתי שצריך להתחיל לתמוך במידע עם Database — שינוי מאסיבי בלחיצה אחת. ואז הכל התפרק: ההתחברות שבורה, המובייל שבור, הקרוסלה שבורה. שעות של תיקונים ברצף. באותו יום הסתכלתי על החשבון של הטוקנים והבנתי שאני צריכה לעבור ל-Claude Max — מנוי של $100 לחודש עם שימוש בלתי מוגבל.',
+      en: 'I realized I needed database support — a massive change in one go. Then everything fell apart: auth broken, mobile broken, carousel broken. Hours of fixes in a row. That same day I looked at the token bill and realized I needed Claude Max — $100/month subscription with unlimited usage.',
     },
-    commits_sample: [
+    _commits_sample: [
       'Migrate all data storage to Supabase',
       'Fix AuthScreen not scrollable on mobile',
       'Fix household join race condition',
@@ -95,10 +95,10 @@ const days = [
     mood: 'danger',
     title: { he: 'יום 8 — יום התיקונים', en: 'Day 8 — Fix day' },
     details: {
-      he: '19 קומיטים. אפס פיצ׳רים חדשים. כולם תיקונים. מקלדת חוסמת, מודאלים שוברים גבולות, טפסים גולשים ב-iOS. הבנתי: צריך לעצור ולחשוב.',
-      en: '19 commits. Zero new features. All fixes. Keyboard blocking content, modals breaking bounds, forms overflowing on iOS. I realized: need to stop and think.',
+      he: 'יום שלם של תיקוני UI בלבד: מקלדת שחוסמת תוכן, חלונות קופצים שנשברים, טפסים שגולשים ב-iOS. אף פיצ׳ר חדש — רק כיבוי שריפות. בסוף היום הבנתי: אי אפשר להמשיך ככה. צריך לעצור, לחשוב, ולתכנן.',
+      en: 'A full day of UI fixes only: keyboard blocking content, popups breaking, forms overflowing on iOS. No new features — just putting out fires. By the end of the day I realized: I can\'t keep going like this. I need to stop, think, and plan.',
     },
-    commits_sample: [
+    _commits_sample: [
       'Fix mobile keyboard obstruction',
       'Fix carousel light-up broken by scroll listener',
       'Fix date/priority overflow on iOS',
@@ -107,12 +107,13 @@ const days = [
   },
 ]
 
-// Pre-compute cumulative costs
+// Pre-compute cumulative costs — subscription persists once purchased
 const cumulativeCosts = days.reduce((acc, day, i) => {
-  const prev = i > 0 ? acc[i - 1] : { api: 62, total: 62 } // starts with 62 ILS from Feb 2 exploration
+  const prev = i > 0 ? acc[i - 1] : { api: 0, sub: 0, total: 0 }
   const api = prev.api + (day.apiCost || 0)
-  const total = api + (day.subscription || 0)
-  acc.push({ api, total, dayApi: day.apiCost || 0, subscription: day.subscription || 0 })
+  const sub = day.subscription ? prev.sub + day.subscription : prev.sub
+  const total = api + sub
+  acc.push({ api, sub, total, dayApi: day.apiCost || 0, hasSub: sub > 0 })
   return acc
 }, [])
 
@@ -187,134 +188,6 @@ export default function VibingDays() {
         })}
       </div>
 
-      {/* Cost bar — always visible, fills based on selected day */}
-      <div style={{
-        margin: '0 0 12px',
-        borderRadius: 8,
-        border: '1px solid var(--border)',
-        overflow: 'hidden',
-        background: 'var(--bg-elevated, #fafafa)',
-      }}>
-        {/* Label */}
-        <div style={{
-          padding: '5px 12px 0',
-          fontFamily,
-          fontSize: 11,
-          fontWeight: 600,
-          color: 'var(--text-soft)',
-          direction: isRtl ? 'rtl' : 'ltr',
-        }}>
-          {isRtl ? 'כמה זה עלה לי?' : 'How much did it cost me?'}
-        </div>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 8,
-          padding: '4px 12px 6px',
-          direction: isRtl ? 'rtl' : 'ltr',
-        }}>
-          <span style={{
-            fontFamily: 'var(--font-code)',
-            fontSize: 10,
-            color: 'var(--text-soft)',
-            whiteSpace: 'nowrap',
-          }}>
-            ₪
-          </span>
-
-          {/* Bar tracks */}
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
-            {/* API bar */}
-            <div style={{
-              height: 14,
-              borderRadius: 4,
-              background: 'var(--border)',
-              position: 'relative',
-              overflow: 'hidden',
-            }}>
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                borderRadius: 4,
-                width: cumulative ? `${Math.max((cumulative.api / maxTotal) * 100, 3)}%` : '0%',
-                background: 'linear-gradient(90deg, #F59E0B60, #EF444480)',
-                transition: 'width 0.4s ease',
-              }} />
-            </div>
-            {/* Max subscription bar — only when active */}
-            {cumulative?.subscription > 0 && (
-              <div style={{
-                height: 14,
-                borderRadius: 4,
-                background: 'var(--border)',
-                position: 'relative',
-                overflow: 'hidden',
-                animation: 'fadeIn 0.3s ease',
-              }}>
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  borderRadius: 4,
-                  width: `${(cumulative.subscription / maxTotal) * 100}%`,
-                  background: 'linear-gradient(90deg, #9B4F9660, #9B4F96)',
-                  transition: 'width 0.4s ease',
-                }} />
-                <span style={{
-                  position: 'absolute',
-                  insetInlineStart: 6,
-                  top: 0,
-                  bottom: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  fontFamily: 'var(--font-code)',
-                  fontSize: 9,
-                  fontWeight: 700,
-                  color: '#fff',
-                }}>
-                  Claude Max $100/mo
-                </span>
-              </div>
-            )}
-          </div>
-
-          {/* Total number */}
-          <span style={{
-            fontFamily: 'var(--font-code)',
-            fontSize: 12,
-            fontWeight: 700,
-            color: cumulative
-              ? cumulative.subscription > 0 ? '#9B4F96' : '#F59E0B'
-              : 'var(--text-soft)',
-            minWidth: 45,
-            textAlign: isRtl ? 'left' : 'right',
-            transition: 'color 0.3s ease',
-          }}>
-            {cumulative ? `${cumulative.total} ₪` : '—'}
-          </span>
-        </div>
-
-        {/* Breakdown labels */}
-        {cumulative && (
-          <div style={{
-            padding: '0 12px 6px',
-            display: 'flex',
-            gap: 12,
-            direction: isRtl ? 'rtl' : 'ltr',
-          }}>
-            <span style={{
-              fontFamily: 'var(--font-code)',
-              fontSize: 9,
-              color: '#F59E0B',
-            }}>
-              API: {cumulative.api} ₪
-              {cumulative.dayApi > 0 && (
-                <span style={{ opacity: 0.6 }}> (+{cumulative.dayApi})</span>
-              )}
-            </span>
-          </div>
-        )}
-      </div>
-
       {/* Expanded day detail */}
       {activeDay !== null && (() => {
         const day = days[activeDay]
@@ -381,31 +254,123 @@ export default function VibingDays() {
               {day.details[lang]}
             </div>
 
-            {/* Sample commits */}
-            <div style={{
-              padding: '8px 14px 10px',
-              borderTop: `1px solid ${color}10`,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 3,
-            }}>
-              {day.commits_sample.map((commit, j) => (
-                <div key={j} style={{
-                  fontFamily: 'var(--font-code)',
-                  fontSize: 10,
-                  color: 'var(--text-soft)',
-                  lineHeight: 1.5,
-                  direction: 'ltr',
-                  textAlign: isRtl ? 'right' : 'left',
-                }}>
-                  <span style={{ color: color, opacity: 0.6 }}>{'>'}</span>{' '}
-                  {commit}
-                </div>
-              ))}
-            </div>
           </div>
         )
       })()}
+
+      {/* Cost bar — fills based on selected day */}
+      <div style={{
+        margin: '12px 0 0',
+        borderRadius: 8,
+        border: '1px solid var(--border)',
+        overflow: 'hidden',
+        background: 'var(--bg-elevated, #fafafa)',
+      }}>
+        {/* Label */}
+        <div style={{
+          padding: '5px 12px 0',
+          fontFamily,
+          fontSize: 11,
+          fontWeight: 600,
+          color: 'var(--text-soft)',
+          direction: isRtl ? 'rtl' : 'ltr',
+        }}>
+          {isRtl ? 'כמה זה עלה לי?' : 'How much did it cost me?'}
+        </div>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
+          padding: '4px 12px 6px',
+          direction: isRtl ? 'rtl' : 'ltr',
+        }}>
+          <span style={{
+            fontFamily: 'var(--font-code)',
+            fontSize: 10,
+            color: 'var(--text-soft)',
+            whiteSpace: 'nowrap',
+          }}>
+            ₪
+          </span>
+
+          {/* Stacked bar */}
+          <div style={{
+            flex: 1,
+            height: 18,
+            borderRadius: 4,
+            background: 'var(--border)',
+            position: 'relative',
+            overflow: 'hidden',
+            display: 'flex',
+            direction: isRtl ? 'rtl' : 'ltr',
+          }}>
+            {/* API segment */}
+            {cumulative && cumulative.api > 0 && (
+              <div style={{
+                width: `${(cumulative.api / maxTotal) * 100}%`,
+                height: '100%',
+                background: 'linear-gradient(90deg, #F59E0B, #EF4444cc)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'width 0.4s ease',
+                position: 'relative',
+                minWidth: 50,
+              }}>
+                <span style={{
+                  fontFamily: 'var(--font-code)',
+                  fontSize: 9,
+                  fontWeight: 700,
+                  color: '#fff',
+                  whiteSpace: 'nowrap',
+                }}>
+                  API {cumulative.api} ₪
+                </span>
+              </div>
+            )}
+            {/* Max segment */}
+            {cumulative?.hasSub && (
+              <div style={{
+                width: `${(cumulative.sub / maxTotal) * 100}%`,
+                height: '100%',
+                background: 'linear-gradient(90deg, #9B4F96, #7C3AED)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'width 0.4s ease',
+                animation: 'fadeIn 0.3s ease',
+                minWidth: 80,
+              }}>
+                <span style={{
+                  fontFamily: 'var(--font-code)',
+                  fontSize: 9,
+                  fontWeight: 700,
+                  color: '#fff',
+                  whiteSpace: 'nowrap',
+                }}>
+                  Max $100
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* Total number */}
+          <span style={{
+            fontFamily: 'var(--font-code)',
+            fontSize: 12,
+            fontWeight: 700,
+            color: cumulative
+              ? cumulative.hasSub ? '#9B4F96' : '#F59E0B'
+              : 'var(--text-soft)',
+            minWidth: 45,
+            textAlign: isRtl ? 'left' : 'right',
+            transition: 'color 0.3s ease',
+          }}>
+            {cumulative ? `${cumulative.total} ₪` : '—'}
+          </span>
+        </div>
+
+      </div>
 
       <style>{`
         @keyframes fadeIn {
