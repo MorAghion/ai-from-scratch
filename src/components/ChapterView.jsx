@@ -33,6 +33,7 @@ import CostBreakdown from './CostBreakdown'
 import CommitTimeline from './CommitTimeline'
 import WaveTable from './WaveTable'
 import MVPShowcase from './MVPShowcase'
+import ArchDocChecklist from './ArchDocChecklist'
 
 // Registry of embeddable components (referenced via @@component:Name in .txt files)
 const componentRegistry = {
@@ -64,6 +65,7 @@ const componentRegistry = {
   CommitTimeline,
   WaveTable,
   MVPShowcase,
+  ArchDocChecklist,
 }
 
 // Generate a stable slug from heading text (supports Hebrew + English)
@@ -88,10 +90,10 @@ function splitCodeBlocks(text) {
   return parts
 }
 
-// Render text with inline **bold**, [text](url) external links, [text](#chapter:id:section) internal links, and [text](#tab:tabId) tab links
+// Render text with inline **bold**, __underline__, [text](url) external links, [text](#chapter:id:section) internal links, and [text](#tab:tabId) tab links
 function renderTextWithLinks(text, onNavigate, onTabSwitch) {
   const inlineIconMap = { MagicWand, Heart }
-  const inlineRegex = /@@ltr:([^@]+)@@|::icon:(\w+)::|{(#[0-9a-fA-F]{6}):([^}]+)\}|{big:([^}]+)\}|`([^`]+)`|\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\((https?:\/\/[^)]+)\)|\[([^\]]+)\]\(#chapter:([^):]+)(?::([^)]+))?\)|\[([^\]]+)\]\(#tab:([^)]+)\)/g
+  const inlineRegex = /@@ltr:([^@]+)@@|::icon:(\w+)::|{(#[0-9a-fA-F]{6}):([^}]+)\}|{big:([^}]+)\}|`([^`]+)`|\*\*([^*]+)\*\*|\*([^*]+)\*|__([^_]+)__|\[([^\]]+)\]\((https?:\/\/[^)]+)\)|\[([^\]]+)\]\(#chapter:([^):]+)(?::([^)]+))?\)|\[([^\]]+)\]\(#tab:([^)]+)\)/g
   const parts = []
   let lastIdx = 0
   let match
@@ -119,41 +121,44 @@ function renderTextWithLinks(text, onNavigate, onTabSwitch) {
       // *italic* — single asterisk
       parts.push(<em key={match.index} style={{ fontStyle: 'italic' }}>{match[8]}</em>)
     } else if (match[9]) {
+      // __underline__ — recursively render inner content so **bold** etc. still works
+      parts.push(<span key={match.index} style={{ textDecoration: 'underline', textUnderlineOffset: 3 }}>{renderTextWithLinks(match[9], onNavigate, onTabSwitch)}</span>)
+    } else if (match[10]) {
       parts.push(
-        <a key={match.index} href={match[10]} target="_blank" rel="noopener noreferrer"
+        <a key={match.index} href={match[11]} target="_blank" rel="noopener noreferrer"
           style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3 }}>
-          {match[9]}
+          {match[10]}
         </a>
       )
-    } else if (match[11] && match[12]) {
-      const chapterId = match[12]
-      const sectionSlug = match[13] || null
+    } else if (match[12] && match[13]) {
+      const chapterId = match[13]
+      const sectionSlug = match[14] || null
       parts.push(
         <a key={match.index} href="#" onClick={(e) => {
           e.preventDefault()
           onNavigate?.(chapterId, sectionSlug)
         }}
           style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3, cursor: 'pointer' }}>
-          {match[11]}
+          {match[12]}
         </a>
       )
-    } else if (match[14] && match[15]) {
+    } else if (match[15] && match[16]) {
       // [text](#tab:tabId) — switch tab within current chapter
-      const tabId = match[15]
+      const tabId = match[16]
       parts.push(
         <span key={match.index} role="button" tabIndex={0} onClick={() => {
           onTabSwitch?.(tabId)
           window.scrollTo(0, 0)
         }}
           style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3, cursor: 'pointer' }}>
-          {match[14]}
+          {match[15]}
         </span>
       )
     }
     lastIdx = match.index + match[0].length
   }
   if (lastIdx < text.length) parts.push(text.substring(lastIdx))
-  return parts.length > 1 ? parts : text
+  return parts.length > 0 ? parts : text
 }
 
 
@@ -498,9 +503,36 @@ export default function ChapterView({ chapter, nextChapter, chapterIndex, totalC
                           fontSize: 16,
                           lineHeight: 1.85,
                           color: 'var(--text)',
-                          whiteSpace: 'pre-line',
                         }}>
-                          {renderTextWithLinks(block.content, onNavigate, setActiveTab)}
+                          {(() => {
+                            const lines = block.content.split('\n')
+                            const chunks = []
+                            let textAcc = []
+                            for (const line of lines) {
+                              if (line.startsWith('-- ')) {
+                                if (textAcc.length > 0) {
+                                  chunks.push({ type: 'text', content: textAcc.join('\n') })
+                                  textAcc = []
+                                }
+                                chunks.push({ type: 'sub', content: line.slice(3) })
+                              } else {
+                                textAcc.push(line)
+                              }
+                            }
+                            if (textAcc.length > 0) chunks.push({ type: 'text', content: textAcc.join('\n') })
+                            return chunks.map((chunk, k) =>
+                              chunk.type === 'sub' ? (
+                                <div key={k} style={{ paddingInlineStart: 20, display: 'flex', alignItems: 'baseline', gap: 6 }}>
+                                  <span style={{ color: 'var(--text-soft)', fontSize: 10, flexShrink: 0 }}>◦</span>
+                                  <span>{renderTextWithLinks(chunk.content, onNavigate, setActiveTab)}</span>
+                                </div>
+                              ) : (
+                                <span key={k} style={{ display: 'block', whiteSpace: 'pre-line' }}>
+                                  {renderTextWithLinks(chunk.content, onNavigate, setActiveTab)}
+                                </span>
+                              )
+                            )
+                          })()}
                         </div>
                       )
                     )}
