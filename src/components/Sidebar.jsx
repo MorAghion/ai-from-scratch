@@ -123,7 +123,7 @@ export default function Sidebar({ chapters, notebook, activeChapter, onSelect, o
                     textAlign: lang === 'he' ? 'right' : 'left',
                     direction: lang === 'he' ? 'rtl' : 'ltr',
                     transition: 'all 0.15s ease',
-                    marginBottom: 2,
+                    marginBottom: 4,
                   }}
                 >
                   <span style={{ flexShrink: 0 }}><ChapterIcon name={ch.icon} color={ch.iconColor} size={20} /></span>

@@ -29,14 +29,16 @@ export const notebooks = {
     chapterIds: [
       'vibe-coding-teaser',
       'vibe-coding-intro', 'getting-started',
-      'homehub-mvp', 'homehub-leveling-up',
-      'orchestration', 'mini-gastown',
+      'homehub-mvp', 'homehub-leveling-up', 'naive-orchestration',
+      'gastown', 'vision',
+      'all-things-claude',
     ],
     arcs: [
       { label: { he: '', en: '' }, startIndex: 0, endIndex: 0 },
       { label: { he: 'התחלה', en: 'Getting Ready' }, startIndex: 1, endIndex: 2 },
-      { label: { he: 'בונים את HomeHub', en: 'Building HomeHub' }, startIndex: 3, endIndex: 4 },
-      { label: { he: 'ה-Gas Town הקטן שלי', en: 'My Mini Gas Town' }, startIndex: 5, endIndex: 6 },
+      { label: { he: 'בונים את HomeHub', en: 'Building HomeHub' }, startIndex: 3, endIndex: 5 },
+      { label: { he: 'מערכות תזמור סוכנים', en: 'Orchestration Frameworks' }, startIndex: 6, endIndex: 7 },
+      { label: { he: '', en: '' }, startIndex: 8, endIndex: 8 },
     ],
   },
 }

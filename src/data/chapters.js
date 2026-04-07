@@ -192,27 +192,48 @@ const chapterMeta = [
     id: 'homehub-leveling-up',
     icon: 'TrendUp',
     iconColor: '#cb3c7a',
-    title: { he: 'Leveling Up - תכנון, ביצוע, מולטי-אייג׳נט', en: 'Leveling Up - Plan, Execute, Multi-Agent' },
+    title: { he: 'Leveling Up - תכנון, ביצוע, וקלוד-קוד', en: 'Leveling Up - Plan, Execute, Multi-Agent' },
     status: 'not-started',
     videos: [],
     exercise: null,
   },
 
-  // === Vibe Coding - Arc 3: Mini Gas Town ===
   {
-    id: 'orchestration',
+    id: 'naive-orchestration',
     icon: 'TreeStructure',
-    iconColor: '#9B4F96',
-    title: { he: 'תזמור ופריימוורקים', en: 'Orchestration & Frameworks' },
+    iconColor: '#2DD4BF',
+    title: { he: 'Multi-Agents — הגרסה הנאיבית', en: 'Multi-Agent — The Naive Version' },
+    status: 'not-started',
+    videos: [],
+    exercise: null,
+  },
+
+  // === Vibe Coding - Arc 3: Gastown ===
+  {
+    id: 'gastown',
+    icon: 'City',
+    iconColor: '#EF4444',
+    title: { he: 'Gastown — בונים עם תזמור', en: 'Gastown — Building with Orchestration' },
     status: 'not-started',
     videos: [],
     exercise: null,
   },
   {
-    id: 'mini-gastown',
-    icon: 'Compass',
-    iconColor: '#EF4444',
-    title: { he: 'ה-Gas Town הקטן שלי', en: 'My Mini Gas Town' },
+    id: 'vision',
+    icon: 'CompassRose',
+    iconColor: '#0F766E',
+    title: { he: 'מערכת התזמור שלי', en: 'My Orchestration System' },
+    status: 'not-started',
+    videos: [],
+    exercise: null,
+  },
+
+  // === Bonus ===
+  {
+    id: 'all-things-claude',
+    icon: 'Asterisk',
+    iconColor: '#CC785C',
+    title: { he: 'All Things Claude — המדריך המעודכן', en: 'All Things Claude — The Updated Guide' },
     status: 'not-started',
     videos: [],
     exercise: null,

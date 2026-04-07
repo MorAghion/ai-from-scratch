@@ -25,6 +25,9 @@ import {
   Compass,
   Waves,
   Popcorn,
+  AsteriskIcon as Asterisk,
+  City,
+  CompassRose,
 } from '@phosphor-icons/react'
 
 const iconMap = {
@@ -51,8 +54,11 @@ const iconMap = {
   Wrench,
   TrendUp,
   Compass,
+  CompassRose,
+  City,
   Waves,
   Popcorn,
+  Asterisk,
 }
 
 export default function ChapterIcon({ name, color, size = 28, weight = 'duotone' }) {
