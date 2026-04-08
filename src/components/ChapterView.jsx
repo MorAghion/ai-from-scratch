@@ -34,6 +34,11 @@ import CommitTimeline from './CommitTimeline'
 import WaveTable from './WaveTable'
 import MVPShowcase from './MVPShowcase'
 import ArchDocChecklist from './ArchDocChecklist'
+import AgentsTable from './AgentsTable'
+import TaskJsonExample from './TaskJsonExample'
+import BoardExample from './BoardExample'
+import HandoffExample from './HandoffExample'
+import ColorPaletteDemo from './ColorPaletteDemo'
 
 // Registry of embeddable components (referenced via @@component:Name in .txt files)
 const componentRegistry = {
@@ -66,6 +71,11 @@ const componentRegistry = {
   WaveTable,
   MVPShowcase,
   ArchDocChecklist,
+  AgentsTable,
+  TaskJsonExample,
+  BoardExample,
+  HandoffExample,
+  ColorPaletteDemo,
 }
 
 // Generate a stable slug from heading text (supports Hebrew + English)
@@ -457,6 +467,20 @@ export default function ChapterView({ chapter, nextChapter, chapterIndex, totalC
                     </h2>
                   )
                 }
+                if (section.type === 'subheading') {
+                  return (
+                    <h3 key={i} style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: 'clamp(15px, 2vw, 17px)',
+                      fontWeight: 600,
+                      color: 'var(--heading)',
+                      marginTop: 24,
+                      marginBottom: 8,
+                    }}>
+                      {renderTextWithLinks(section.content, onNavigate, setActiveTab)}
+                    </h3>
+                  )
+                }
                 if (section.type === 'image') {
                   return (
                     <div key={i} style={{ marginBottom: 20, marginTop: 12 }}>
@@ -474,11 +498,11 @@ export default function ChapterView({ chapter, nextChapter, chapterIndex, totalC
                 }
                 if (section.type === 'component') {
                   const Comp = componentRegistry[section.name]
-                  return Comp ? <div key={i} style={{ maxWidth: '100%', overflowX: 'auto' }}><Comp /></div> : null
+                  return Comp ? <div key={i} style={{ maxWidth: '100%', overflowX: 'auto', margin: '20px 0' }}><Comp /></div> : null
                 }
                 const blocks = splitCodeBlocks(section.content)
                 return (
-                  <div key={i} style={{ marginBottom: 16 }}>
+                  <div key={i} style={{ marginBottom: 16, marginTop: i > 0 ? 20 : 0 }}>
                     {blocks.map((block, j) =>
                       block.type === 'code' ? (
                         <pre key={j} dir="ltr" style={{
@@ -582,6 +606,20 @@ export default function ChapterView({ chapter, nextChapter, chapterIndex, totalC
                 }}>
                   {renderTextWithLinks(section.content, onNavigate, setActiveTab)}
                 </h2>
+              )
+            }
+            if (section.type === 'subheading') {
+              return (
+                <h3 key={i} style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: 17,
+                  fontWeight: 600,
+                  color: 'var(--heading)',
+                  marginTop: 24,
+                  marginBottom: 8,
+                }}>
+                  {renderTextWithLinks(section.content, onNavigate, setActiveTab)}
+                </h3>
               )
             }
             if (section.type === 'image') {

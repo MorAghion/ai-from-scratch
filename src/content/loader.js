@@ -11,7 +11,7 @@ function folderToId(folderName) {
 // Recognizes ![alt](src) for images, @@component:Name for React components,
 // and @@yegge / @@endyegge for Yegge progression callout boxes
 function pushTextAndImages(sections, text) {
-  const specialRegex = /^(?:!\[([^\]]*)\]\(([^)]+)\)|@@component:(\w+)|@@yegge)$/gm
+  const specialRegex = /^(?:!\[([^\]]*)\]\(([^)]+)\)|@@component:(\w+)|@@yegge|### (.+))$/gm
   let lastIdx = 0
   let match
   while ((match = specialRegex.exec(text)) !== null) {
@@ -30,6 +30,9 @@ function pushTextAndImages(sections, text) {
       } else {
         lastIdx = match.index + match[0].length
       }
+    } else if (match[4]) {
+      sections.push({ type: 'subheading', content: match[4] })
+      lastIdx = match.index + match[0].length
     } else if (match[3]) {
       sections.push({ type: 'component', name: match[3] })
       lastIdx = match.index + match[0].length
@@ -48,14 +51,15 @@ function parseContent(raw) {
   if (!raw || raw.startsWith('<!--')) return []
 
   const sections = []
-  const parts = raw.split(/^## /m)
+  // Split on ## but not ### (negative lookbehind)
+  const parts = raw.split(/^(?<!#)## (?!#)/m)
 
   for (let i = 0; i < parts.length; i++) {
     const part = parts[i].trim()
     if (!part) continue
 
     if (i === 0) {
-      // Text before the first ## header — may contain images
+      // Text before the first ## header — may contain images/subheadings
       pushTextAndImages(sections, part)
     } else {
       // First line is the heading, rest is text
