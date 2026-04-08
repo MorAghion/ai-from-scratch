@@ -39,6 +39,7 @@ import TaskJsonExample from './TaskJsonExample'
 import BoardExample from './BoardExample'
 import HandoffExample from './HandoffExample'
 import ColorPaletteDemo from './ColorPaletteDemo'
+import TDDExample from './TDDExample'
 
 // Registry of embeddable components (referenced via @@component:Name in .txt files)
 const componentRegistry = {
@@ -76,6 +77,7 @@ const componentRegistry = {
   BoardExample,
   HandoffExample,
   ColorPaletteDemo,
+  TDDExample,
 }
 
 // Generate a stable slug from heading text (supports Hebrew + English)
@@ -493,6 +495,16 @@ export default function ChapterView({ chapter, nextChapter, chapterIndex, totalC
                           border: '1px solid var(--border)',
                         }}
                       />
+                      {section.alt && (
+                        <div style={{
+                          fontFamily: lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)',
+                          fontSize: 12,
+                          color: 'var(--text-soft)',
+                          textAlign: 'center',
+                          marginTop: 6,
+                          direction: lang === 'he' ? 'rtl' : 'ltr',
+                        }}>{section.alt}</div>
+                      )}
                     </div>
                   )
                 }
