@@ -40,6 +40,9 @@ import BoardExample from './BoardExample'
 import HandoffExample from './HandoffExample'
 import ColorPaletteDemo from './ColorPaletteDemo'
 import TDDExample from './TDDExample'
+import PolecatsTable from './PolecatsTable'
+import GTCastTable from './GTCastTable'
+import PlanningDocsTable from './PlanningDocsTable'
 
 // Registry of embeddable components (referenced via @@component:Name in .txt files)
 const componentRegistry = {
@@ -78,6 +81,9 @@ const componentRegistry = {
   HandoffExample,
   ColorPaletteDemo,
   TDDExample,
+  PolecatsTable,
+  GTCastTable,
+  PlanningDocsTable,
 }
 
 // Generate a stable slug from heading text (supports Hebrew + English)
