@@ -43,6 +43,13 @@ import TDDExample from './TDDExample'
 import PolecatsTable from './PolecatsTable'
 import GTCastTable from './GTCastTable'
 import PlanningDocsTable from './PlanningDocsTable'
+import ClaudeProductsTable from './ClaudeProductsTable'
+import ClaudeModelsTable from './ClaudeModelsTable'
+import PermissionModesTable from './PermissionModesTable'
+import SlashCommandsTable from './SlashCommandsTable'
+import MCPServersTable from './MCPServersTable'
+import ClaudePricingTable from './ClaudePricingTable'
+import CommunityProjectsTable from './CommunityProjectsTable'
 
 // Registry of embeddable components (referenced via @@component:Name in .txt files)
 const componentRegistry = {
@@ -84,11 +91,188 @@ const componentRegistry = {
   PolecatsTable,
   GTCastTable,
   PlanningDocsTable,
+  ClaudeProductsTable,
+  ClaudeModelsTable,
+  PermissionModesTable,
+  SlashCommandsTable,
+  MCPServersTable,
+  ClaudePricingTable,
+  CommunityProjectsTable,
 }
 
 // Generate a stable slug from heading text (supports Hebrew + English)
 function headingSlug(text) {
   return text.replace(/[^\w\u0590-\u05FF\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-{2,}/g, '-').toLowerCase()
+}
+
+// Group content sections into preamble + heading-based groups (for collapsible rendering)
+function groupContentByHeadings(sections) {
+  const preamble = []
+  const groups = []
+  let current = null
+  for (const section of sections) {
+    if (section.type === 'heading') {
+      if (current) groups.push(current)
+      current = { heading: section, items: [] }
+    } else if (current) {
+      current.items.push(section)
+    } else {
+      preamble.push(section)
+    }
+  }
+  if (current) groups.push(current)
+  return { preamble, groups }
+}
+
+// Collapsible accordion renderer for reference chapters (collapsibleSections: true)
+function CollapsibleContentRenderer({ sections, lang, onNavigate, onTabSwitch, fontFamily }) {
+  const [openSections, setOpenSections] = useState(new Set())
+  const { preamble, groups } = groupContentByHeadings(sections)
+
+  const toggle = (i) => setOpenSections(prev => {
+    const next = new Set(prev)
+    next.has(i) ? next.delete(i) : next.add(i)
+    return next
+  })
+
+  const renderItem = (section, i) => {
+    if (section.type === 'subheading') {
+      return (
+        <h3 key={i} style={{
+          fontFamily: 'var(--font-heading)',
+          fontSize: 'clamp(15px, 2vw, 17px)',
+          fontWeight: 600,
+          color: 'var(--heading)',
+          marginTop: 20,
+          marginBottom: 8,
+        }}>
+          {renderTextWithLinks(section.content, onNavigate, onTabSwitch)}
+        </h3>
+      )
+    }
+    if (section.type === 'image') {
+      return (
+        <div key={i} style={{ marginBottom: 20, marginTop: 12 }}>
+          <img src={section.src} alt={section.alt} style={{ width: '100%', borderRadius: 10, border: '1px solid var(--border)' }} />
+          {section.alt && (
+            <div style={{ fontFamily, fontSize: 12, color: 'var(--text-soft)', textAlign: 'center', marginTop: 6, direction: lang === 'he' ? 'rtl' : 'ltr' }}>
+              {section.alt}
+            </div>
+          )}
+        </div>
+      )
+    }
+    if (section.type === 'component') {
+      const Comp = componentRegistry[section.name]
+      return Comp ? <div key={i} style={{ maxWidth: '100%', overflowX: 'auto', margin: '16px 0' }}><Comp /></div> : null
+    }
+    // text with code blocks
+    const blocks = splitCodeBlocks(section.content)
+    return (
+      <div key={i} style={{ marginBottom: 14, marginTop: i > 0 ? 16 : 0 }}>
+        {blocks.map((block, j) =>
+          block.type === 'code' ? (
+            <pre key={j} dir="ltr" style={{
+              fontFamily: 'var(--font-code)',
+              fontSize: 13,
+              lineHeight: 1.6,
+              backgroundColor: 'var(--bg)',
+              border: '1px solid var(--border)',
+              borderRadius: 8,
+              padding: '12px 16px',
+              margin: '12px 0',
+              overflowX: 'auto',
+              whiteSpace: 'pre-wrap',
+              textAlign: 'left',
+              color: 'var(--text)',
+            }}>
+              {block.content}
+            </pre>
+          ) : (
+            <div key={j} style={{ fontFamily, fontSize: 16, lineHeight: 1.85, color: 'var(--text)' }}>
+              {(() => {
+                const lines = block.content.split('\n')
+                const chunks = []
+                let textAcc = []
+                for (const line of lines) {
+                  if (line.startsWith('-- ')) {
+                    if (textAcc.length > 0) { chunks.push({ type: 'text', content: textAcc.join('\n') }); textAcc = [] }
+                    chunks.push({ type: 'sub', content: line.slice(3) })
+                  } else {
+                    textAcc.push(line)
+                  }
+                }
+                if (textAcc.length > 0) chunks.push({ type: 'text', content: textAcc.join('\n') })
+                return chunks.map((chunk, k) =>
+                  chunk.type === 'sub' ? (
+                    <div key={k} style={{ paddingInlineStart: 20, display: 'flex', alignItems: 'baseline', gap: 6 }}>
+                      <span style={{ color: 'var(--text-soft)', fontSize: 10, flexShrink: 0 }}>◦</span>
+                      <span>{renderTextWithLinks(chunk.content, onNavigate, onTabSwitch)}</span>
+                    </div>
+                  ) : (
+                    <span key={k} style={{ display: 'block', whiteSpace: 'pre-line' }}>
+                      {renderTextWithLinks(chunk.content, onNavigate, onTabSwitch)}
+                    </span>
+                  )
+                )
+              })()}
+            </div>
+          )
+        )}
+      </div>
+    )
+  }
+
+  return (
+    <div style={{ marginBottom: 24 }}>
+      {preamble.map((section, i) => renderItem(section, i))}
+      <div style={{ borderTop: '1px solid var(--border)', marginTop: preamble.length > 0 ? 16 : 0 }}>
+        {groups.map((group, gi) => {
+          const isOpen = openSections.has(gi)
+          return (
+            <div key={gi} style={{ borderBottom: '1px solid var(--border)' }}>
+              <button
+                onClick={() => toggle(gi)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  width: '100%',
+                  padding: '14px 0',
+                  border: 'none',
+                  background: 'transparent',
+                  cursor: 'pointer',
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: 'clamp(17px, 2.5vw, 21px)',
+                  fontWeight: 600,
+                  color: 'var(--heading)',
+                  direction: lang === 'he' ? 'rtl' : 'ltr',
+                  textAlign: lang === 'he' ? 'right' : 'left',
+                  gap: 12,
+                }}
+              >
+                <span style={{ flex: 1 }}>
+                  {renderTextWithLinks(group.heading.content, onNavigate, onTabSwitch)}
+                </span>
+                <span style={{
+                  fontSize: 11,
+                  opacity: 0.4,
+                  flexShrink: 0,
+                  transition: 'transform 0.2s ease',
+                  transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                }}>▼</span>
+              </button>
+              {isOpen && (
+                <div style={{ paddingBottom: 20 }}>
+                  {group.items.map((section, si) => renderItem(section, si))}
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
 }
 
 // Split text into regular paragraphs and fenced code blocks
@@ -292,6 +476,22 @@ export default function ChapterView({ chapter, nextChapter, chapterIndex, totalC
           </span>
           {ch.title[lang] || ch.title.he}
         </h1>
+        {ch.updatedAt && (
+          <div style={{ marginTop: 10, direction: 'ltr', textAlign: 'left' }}>
+            <span style={{
+              fontFamily: 'var(--font-code)',
+              fontSize: 11,
+              fontWeight: 500,
+              color: '#059669',
+              background: 'rgba(5, 150, 105, 0.08)',
+              border: '1px solid rgba(5, 150, 105, 0.3)',
+              padding: '2px 10px',
+              borderRadius: 20,
+            }}>
+              {lang === 'he' ? 'עדכון אחרון:' : 'Last updated:'} {ch.updatedAt[lang]}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Tab switcher */}
@@ -459,7 +659,15 @@ export default function ChapterView({ chapter, nextChapter, chapterIndex, totalC
           {/* Content sections */}
           {ch.content && ch.content[lang] && ch.content[lang].length > 0 ? (
             <div style={{ marginBottom: 24 }}>
-              {ch.content[lang].map((section, i) => {
+              {ch.collapsibleSections ? (
+                <CollapsibleContentRenderer
+                  sections={ch.content[lang]}
+                  lang={lang}
+                  onNavigate={onNavigate}
+                  onTabSwitch={setActiveTab}
+                  fontFamily={lang === 'he' ? 'var(--font-hebrew)' : 'var(--font-body)'}
+                />
+              ) : ch.content[lang].map((section, i) => {
                 if (section.type === 'heading') {
                   return (
                     <h2 key={i} id={`section-${headingSlug(section.content)}`} style={{

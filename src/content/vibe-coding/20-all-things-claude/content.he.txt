@@ -1,0 +1,297 @@
+## המוצרים של Anthropic
+
+Anthropic משיקה כמה מוצרים שונים - ולא כולם לאותו קהל. כדאי להכיר את ההבדלים.
+
+@@component:ClaudeProductsTable
+
+אני בעיקר ב-Claude Code ו-Claude.ai. Desktop בשביל MCP.
+
+[לאתר הרשמי של Claude](https://claude.ai)
+
+
+## המודלים - Opus, Sonnet, Haiku
+
+שלושה מודלים, שלוש מטרות שונות. זה לא "טוב-בינוני-גרוע" - זה "עמוק-מאוזן-מהיר".
+
+@@component:ClaudeModelsTable
+
+**מה זה אומר בפועל - 1M tokens?** בערך 500 קבצי קוד, ספר שלם, או שנה של לוגים - בשאילתה אחת.
+
+**הנחות שכדאי לדעת:**
+- **Batch API** - 50% הנחה על עיבוד אסינכרוני (לא זמן-אמת)
+- **Prompt Caching** - עד 90% הנחה על תוכן שחוזר שוב ושוב באותו session
+
+הברירת המחדל שלי - Sonnet 4.6. לתכנון ארכיטקטורה ומשימות עמוקות - Opus 4.6. לפייפליינים שצריכים לרוץ מהר ובזול - Haiku.
+
+[כל המודלים ותיעוד מלא](https://docs.anthropic.com/en/docs/about-claude/models/overview)
+
+
+## Claude Code - צלילה עמוקה
+
+זה הכלי שסביבו בנוי כל המסע הזה. אבל הרבה מהפיצ'רים שלו נשארים מוסתרים.
+
+### CLAUDE.md - הזיכרון הקבוע של הפרויקט
+
+קובץ markdown שיושב בשורש הפרויקט, ו-Claude Code קורא אותו אוטומטית בתחילת כל session. זה המקום שבו אתם מגדירים:
+- חוקי הפרויקט (איך לעשות commits, מה אסור לגעת בו)
+- ה-stack הטכני והארכיטקטורה
+- prefernces אישיות (שפת תגובות, רמת verbose)
+- פרוטוקולים חוזרים (איך לדווח באגים, איך לפתוח PR)
+
+הכלי `/init` מייצר CLAUDE.md ראשוני אוטומטית על ידי סריקת הפרויקט.
+
+אצלי ה-CLAUDE.md התחיל ריק. אחרי 10 ימים - 12,500 מילים. כל פעם שClaude עשה משהו שלא רציתי, הוספתי כלל.
+
+[תיעוד CLAUDE.md](https://docs.anthropic.com/en/docs/claude-code/memory)
+
+### Skills - פקודות מותאמות אישית
+
+Skills הן slash commands שאתם מגדירים בעצמכם, כקבצי markdown בתיקיית `.claude/commands/`. שם הקובץ = שם הפקודה.
+
+**איך מגדירים skill:**
+- צרו קובץ `.claude/commands/commit.md`
+- כתבו בו הוראות בפורמט markdown רגיל
+- קראו לו בשיחה עם `/commit`
+
+**דוגמה - skill לכתיבת commit messages:**
+
+```
+Write a git commit message for the staged changes.
+Use conventional commits format: type(scope): description
+Types: feat, fix, docs, refactor, test, chore
+Keep subject line under 72 chars.
+Add Co-Authored-By: Claude at the end.
+```
+
+Skills יכולות לקבל ארגומנטים דינמיים עם `$ARGUMENTS`, להפנות לקבצים אחרים, ולהיות משותפות לכל הצוות דרך ה-repo.
+
+Claude יכול גם להחליט בעצמו מתי להפעיל skill - אם ביקשתם "תעשה commit מסוגנן", הוא יידע לרוץ על ה-commit skill שלכם.
+
+[תיעוד Skills](https://docs.anthropic.com/en/docs/claude-code/tutorials#create-custom-slash-commands)
+
+### Hooks - אוטומציה על גבי האוטומציה
+
+Hooks הם פקודות shell שרצות אוטומטית לפני או אחרי כל פעולה של Claude Code. מוגדרים ב-CLAUDE.md או בהגדרות.
+
+**PreToolUse** - רץ לפני שClaude מבצע פעולה. יכול לאשר, לדחות, או לשנות.
+**PostToolUse** - רץ אחרי כל עריכה. שימושי ל: auto-format, type checking, הרצת טסטים.
+
+דוגמה לשימוש: כל פעם שClaude עורך קובץ TypeScript - `tsc --noEmit` רץ אוטומטית. אם יש שגיאה, Claude רואה אותה ומתקן לפני שממשיך.
+
+זה מה שהופך את Claude Code מכלי לinfrastructure.
+
+[תיעוד Hooks](https://docs.anthropic.com/en/docs/claude-code/hooks)
+
+### מצבי הרשאה - כמה שליטה נותנים לClaude
+
+@@component:PermissionModesTable
+
+הדרך שלי: Default כשמתחילים בקוד לא מוכר, AcceptEdits לאיטרציות מהירות, Plan לפני שינויים גדולים. Auto רק כשאני מכירה את הקוד טוב ויש לי CLAUDE.md חזק.
+
+Auto על קוד לא מוכר = כאוס ב-3 בלילה.
+
+[תיעוד מצבי הרשאה](https://docs.anthropic.com/en/docs/claude-code/security)
+
+### Slash Commands המובנים
+
+@@component:SlashCommandsTable
+
+[כל הפקודות](https://docs.anthropic.com/en/docs/claude-code/cli-reference)
+
+
+## פיצ'רים מתקדמים ב-Claude Code
+
+### Tool Search - כשיש יותר מדי כלים
+
+כשמחברים הרבה MCP servers (GitHub + Slack + Postgres + Filesystem...) הגדרות הכלים לבדן אוכלות ~55K tokens עוד לפני שהתחלתם לעבוד. Tool Search פותר את זה.
+
+במקום לטעון את כל הכלים לכל שאילתה, Tool Search טוען דינמית רק את 3-5 הכלים הרלוונטיים לכל בקשה ספציפית. הדיוק עלה מ-49% ל-74% בבדיקות של Anthropic.
+
+הבשורה: **זה כבר פועל אצלכם ברירת מחדל** - Claude Code מפעיל Tool Search אוטומטית. אתם כבר נהנים ממנו בלי לדעת.
+
+[תיעוד Tool Search](https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/tool-search-tool)
+
+### Agent Teams - הצוות המובנה
+
+זכרו את הרעיון מפרק 17 - כמה סוכנים במקביל, כל אחד על המשימה שלו? Anthropic בנו את זה ישירות לתוך Claude Code.
+
+**Agent Teams** מאפשרות לספawn כמה instances של Claude Code, כל אחד עם context window משלו, שמתקשרים ישירות אחד עם השני ועובדים על task list משותף. אחד מהם הוא Team Lead שמתאם.
+
+**הפעלה:**
+```
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+claude
+```
+
+הכי שימושי ל: code review מקביל (security + performance + tests בו-זמנית), בניית מודולים עצמאיים, debugging עם השערות מתחרות.
+
+עדיין experimental. אבל כבר עובד.
+
+[תיעוד Agent Teams](https://code.claude.com/docs/en/agent-teams)
+
+### Chrome Integration - Claude פותח דפדפן
+
+דרך extension בשם "Claude in Chrome" ופקודת `claude --chrome`, Claude מקבל גישה חיה ל:
+- ה-DOM של הדף
+- console logs ו-stack traces
+- network requests
+- יכולת לקלিק, להקליד ולמלא טפסים - על דפים שאתם כבר מחוברים אליהם
+
+זה לא MCP - זה Chrome DevTools Protocol ישירות.
+
+**דוגמאות לשימוש של vibe coder:**
+- "פתח את localhost:3000 ובדוק שהטופס מציג שגיאות נכון"
+- "עבור על דף המוצרים ושלוף את כל המחירים ל-CSV"
+- "בנה את ה-UI לפי העיצוב ואז פתח בדפדפן כדי לוודא שזה תואם"
+
+Beta מאז מרץ 2026. עובד על Chrome ו-Edge בלבד (לא Brave, לא Arc).
+
+[תיעוד Chrome Integration](https://code.claude.com/docs/en/chrome)
+
+
+## יכולות מפתח של Claude
+
+**חלון הקשר של 1M tokens** - זמין ב-Opus 4.6 ו-Sonnet 4.6. מאפשר לטעון קודבייס שלם, מסמך משפטי ארוך, או שנה של logs בשאילתה אחת. שימו לב: context גדול מאוד עלול להוריד דיוק בקצוות - הנקודה המתוקה היא עד ~200K לעבודה פרציזית.
+
+**Vision - Claude רואה תמונות** - הדביקו screenshot של UI, שגיאה, או wireframe ישירות לשיחה. Claude מבין מה הוא רואה ומגיב בהתאם. עובד ב-Claude.ai, Claude Desktop, ודרך ה-API.
+
+**Adaptive Thinking** - Claude מחליט בעצמו כמה לחשוב על כל בקשה. משימות מורכבות מקבלות chain-of-thought מלא, שאלות פשוטות מקבלות תשובה ישירה. זה המודל החדש - לא "extended thinking" שמפעילים ידנית. זמין ב-Opus 4.6 ו-Sonnet 4.6.
+
+[תיעוד Adaptive Thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
+
+**Computer Use (Beta)** - Claude שולט במחשב ממש - פותח דפדפן, לוחץ על כפתורים, ממלא טפסים, מנווט בממשקים גרפיים. שימושי לאוטומציה של משימות שאין להן API. עדיין experimental - לא כדאי לסמוך עליו לפרודקשן.
+
+[תיעוד Computer Use](https://docs.anthropic.com/en/docs/build-with-claude/computer-use)
+
+**זיכרון מתמשך** - מאז מרץ 2026, Claude זוכר מידע עליכם בין שיחות - שם, סגנון תקשורת, העדפות, הקשר פרויקטים. זמין לכולם כולל Free tier. אפשר גם לייבא זיכרון מ-ChatGPT או Gemini. שווה לבדוק מה הוא שומר עליכם ולנהל את זה.
+
+**Web Search** - Claude יכול לחפש באינטרנט לקבלת מידע עדכני. זמין ב-Claude.ai וב-Claude Desktop. בטרמינל (Claude Code) - לא זמין ברירת מחדל, אבל אפשר דרך MCP server של Fetch.
+
+**Projects** - סביבות עבודה עם זיכרון ייעודי ב-Claude.ai. כל Project מקבל: context window של 200K לקבצי הפרויקט, הוראות מותאמות, וזיכרון שנשמר בין sessions. שימושי לפרויקטים עם הרבה הקשר קבוע.
+
+**PDF Support** - Claude קורא PDF ישירות דרך ה-API (עד 100 עמודים, כולל טקסט, תמונות וטבלאות). שימושי לבניית כלים לעיבוד מסמכים.
+
+**Google Workspace** - חיבורים רשמיים ל-Gmail, Google Drive, Google Calendar ו-Google Sheets. לא רק MCP - connectors מובנים שזמינים ב-Claude Desktop ו-Claude.ai.
+
+
+## MCP - פרוטוקול החיבורים
+
+### מה זה MCP בעצם
+
+תחשבו על MCP כמו שקעי USB עבור AI. לפני MCP, כל חיבור בין Claude לכלי חיצוני דרש אינטגרציה מותאמת. MCP הוא התקן שמאפשר לכל כלי להתחבר לכל מודל AI עם אותו interface.
+
+**לפני MCP:** אתם מדביקים נתונים לשיחה ידנית.
+**עם MCP:** Claude מתחבר ישירות למקור ומושך מה שצריך.
+
+MCP הוא open standard - אומץ גם על ידי OpenAI ו-Google DeepMind.
+
+[תיעוד MCP](https://docs.anthropic.com/en/docs/mcp)
+
+### שרתי MCP שכדאי להכיר
+
+@@component:MCPServersTable
+
+[ספריית שרתי MCP](https://github.com/modelcontextprotocol/servers)
+
+### איך מוסיפים MCP ל-Claude Code
+
+פתחו או צרו את הקובץ `~/.claude.json` והוסיפו:
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/path/to/dir"]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": { "GITHUB_TOKEN": "your-token" }
+    }
+  }
+}
+```
+
+אחרי הוספה, הפעילו מחדש את Claude Code. הקלידו `/help` לראות שהשרת הופיע. זה באמת יותר קל ממה שנשמע.
+
+
+## מחיר ותוכניות
+
+@@component:ClaudePricingTable
+
+**הנחות על ה-API:**
+- **Batch API** - 50% הנחה לעיבוד אסינכרוני. מתאים לפייפליינים שלא צריכים תוצאה מיידית.
+- **Prompt Caching** - עד 90% הנחה כשאותו context חוזר שוב ושוב באותו session. שימושי מאוד לסוכנים.
+
+[מחירון מלא](https://www.anthropic.com/pricing)
+
+
+## השוואה כנה - איפה Claude מוביל ואיפה לא
+
+**Claude מוביל ב:**
+- **חלון הקשר** - 1M tokens במחיר רגיל, עדיין מוביל את השוק
+- **Claude Code** - הכלי ה-CLI הבשל ביותר לפיתוח עם AI. אין תחרות אמיתית כרגע
+- **כתיבה ועריכה** - הפלט הטקסטואלי של Claude מרגיש הכי טבעי ומעודן
+- **ביצוע הוראות מורכבות** - Claude מצטיין במשימות עם הרבה אילוצים ו-edge cases
+- **בטיחות ואמינות** - Constitutional AI עם פילוסופיה שקופה
+
+**אחרים חזקים יותר ב:**
+- **Gemini** - זול יותר על משימות multimodal עם הרבה תמונות, אינטגרציה טובה יותר עם Google Workspace
+- **GPT** - אקוסיסטם plugins גדול יותר, מחיר API נמוך קצת יותר למשימות פשוטות
+- **Grok** - גישה לנתוני X בזמן אמת
+
+אני לא משתמשת ב-Claude כי הוא מושלם - אני משתמשת בו כי הוא הכי טוב בדברים שאני עושה הכי הרבה: כתיבת קוד, ניהול projects מורכבים, ועבודה עם הרבה context בו-זמנית.
+
+
+## עדכונים אחרונים - 2026
+
+### Claude Cowork - סביבת עבודה משותפת
+
+הושק בינואר 2026 (research preview), זמין כעת ב-Claude Desktop.
+
+Cowork הוא שכבה מעל Projects שמוסיפה: הוראות מותאמות לכל workspace, משימות מתוזמנות (scheduled tasks), וגישה לקבצים מקומיים. במקום session חד-פעמית, אתם בונים workspace שClaude לומד לאורך זמן.
+
+שימושי ל: research projects שנמשכים שבועות, בסיסי ידע צוותיים, סיכומים אוטומטיים יומיים.
+
+[אתר Claude Cowork](https://claude.com/product/cowork)
+
+### שאר העדכונים:
+
+- **פברואר 2026** - Opus 4.6 עם 1M context במחיר רגיל (הוסרה תוספת המחיר לcontext ארוך). [הכרזה](https://www.anthropic.com/news/claude-opus-4-6)
+- **פברואר 2026** - Sonnet 4.6 עם Adaptive Thinking מובנה
+- **מרץ 2026** - זיכרון מתמשך לכולם, כולל Free tier
+- **מרץ 2026** - Computer Use - גלגול Beta רחב יותר
+- **פברואר 2026** - Claude Code Security - סריקת zero-day vulnerabilities אוטומטית בקוד
+- **נובמבר 2024** - MCP הושק כ-open standard ואומץ על ידי OpenAI ו-Google DeepMind
+
+
+## קהילה וקוד פתוח - 5 פרויקטים שכדאי להכיר
+
+האקוסיסטם סביב Claude Code גדל מהר. אלה 5 הפרויקטים הכי שימושיים שהקהילה בנתה - מאומתים לפי מספר כוכבים ב-GitHub, אפריל 2026.
+
+@@component:CommunityProjectsTable
+
+[awesome-claude-code - האינדקס המלא של האקוסיסטם](https://github.com/hesreallyhim/awesome-claude-code)
+
+
+## איך אני משתמשת ב-Claude - הסיכום האישי
+
+**ה-setup שלי:**
+- **Claude Code** ב-terminal לכל עבודת פיתוח
+- **Claude.ai Max** לשיחות, מחקר, וכל מה שלא קשור לקוד ספציפי
+- **Sonnet 4.6** כ-default, **Opus 4.6** לתכנון ארכיטקטורה
+- **CLAUDE.md** עם חוקי הפרויקט בכל repo
+- **Skills** לcommits, code review, ו-PR descriptions
+- **Hooks** להרצת type-check אחרי כל עריכה
+- **MCP** עם GitHub ו-Filesystem
+
+**מה עדיין מתסכל:**
+- refactors גדולים שחוצים הרבה קבצים לפעמים מאבדים את ה-thread
+- Computer Use עדיין מגושם - לא סומכת עליו לדברים חשובים
+- לפעמים Claude מחליט להיות יצירתי כשביקשתם משהו ספציפי - CLAUDE.md הוא הפתרון
+
+**מה שכבר לא יכולה בלעדיו:**
+כתיבת PRs, קריאה לתוך codebases לא מוכרים, תכנון ארכיטקטורה, כתיבת תיעוד. Claude הפך מ"עוזר" ל"חלק מהתהליך". לא קיצור דרך - שינוי בדרך שבה אני חושבת על עבודה.
+
+תגידו לי מה אני מפספסת - הפרק הזה מתעדכן.

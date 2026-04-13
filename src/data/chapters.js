@@ -237,6 +237,8 @@ const chapterMeta = [
     status: 'not-started',
     videos: [],
     exercise: null,
+    updatedAt: { he: 'אפריל 2026', en: 'April 2026' },
+    collapsibleSections: true,
   },
 
   // === Appendix ===
