@@ -215,6 +215,26 @@ export default function LandingPage({ onSelectNotebook }) {
                 e.currentTarget.style.boxShadow = 'none'
               }}
             >
+              {/* "חדש!" badge for vibe-coding */}
+              {nb.id === 'vibe-coding' && (
+                <span className="new-badge" style={{
+                  position: 'absolute',
+                  top: 12,
+                  right: 12,
+                  fontFamily: 'var(--font-hebrew)',
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color: '#fff',
+                  background: '#EF4444',
+                  padding: '3px 9px',
+                  borderRadius: 20,
+                  letterSpacing: '0.03em',
+                  pointerEvents: 'none',
+                }}>
+                  חדש!
+                </span>
+              )}
+
               {/* Icon */}
               <div style={{
                 width: 48,
