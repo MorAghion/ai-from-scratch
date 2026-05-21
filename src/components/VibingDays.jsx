@@ -43,6 +43,8 @@ const days = [
     weekday: { he: 'חמישי', en: 'Thu' },
     commits: 3,
     mood: 'calm',
+    apiCost: 38,
+    apiNote: { he: '', en: '' },
     title: { he: 'יום 3 — רפקטור וסדר', en: 'Day 3 — Refactor & order' },
     details: {
       he: 'אחרי הכאוס של אתמול, עצרתי לנשום. במקום לרוץ לפיצ׳ר הבא, ביקשתי מהסוכן לסדר את מה שכבר קיים — מבנה נקי יותר, משתנים ברורים, ובניית ה-Task Hub. יום שקט, אבל חשוב.',
@@ -58,6 +60,8 @@ const days = [
     weekday: { he: 'שבת', en: 'Sat' },
     commits: 7,
     mood: 'explosion',
+    apiCost: 200,
+    apiNote: { he: 'מצטבר ל-3 ימים', en: 'Cumulative for 3 days' },
     title: { he: 'ימים 4-6 — מרשימת קניות לאפליקציה שלמה', en: 'Days 4-6 — From shopping list to full app' },
     details: {
       he: 'יום הסדר ב-12.2 לא ממש החזיק מעמד, ככל שהתקדמנו בפיתוח, הכאוס חזר: תוך 4 שעות האפליקציה עברה מהפך - סריקת ברקודים בעברית, מערכת אייקונים, עיצוב מחדש, ואז עוד עיצוב מחדש כי הראשון שבר דברים. הכל רץ, אבל בלי שום תכנון.',
@@ -285,8 +289,9 @@ export default function VibingDays() {
           direction: isRtl ? 'rtl' : 'ltr',
         }}>
           <span style={{
-            fontFamily: 'var(--font-code)',
-            fontSize: 10,
+            fontFamily: 'var(--font-hebrew)',
+            fontSize: 13,
+            fontWeight: 600,
             color: 'var(--text-soft)',
             whiteSpace: 'nowrap',
           }}>
@@ -317,14 +322,15 @@ export default function VibingDays() {
                 position: 'relative',
                 minWidth: 50,
               }}>
-                <span style={{
-                  fontFamily: 'var(--font-code)',
-                  fontSize: 9,
+                <span dir="ltr" style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 10,
                   fontWeight: 700,
                   color: '#fff',
                   whiteSpace: 'nowrap',
+                  unicodeBidi: 'isolate',
                 }}>
-                  API {cumulative.api} ₪
+                  API {cumulative.api}₪
                 </span>
               </div>
             )}
@@ -341,12 +347,13 @@ export default function VibingDays() {
                 animation: 'fadeIn 0.3s ease',
                 minWidth: 80,
               }}>
-                <span style={{
-                  fontFamily: 'var(--font-code)',
-                  fontSize: 9,
+                <span dir="ltr" style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 10,
                   fontWeight: 700,
                   color: '#fff',
                   whiteSpace: 'nowrap',
+                  unicodeBidi: 'isolate',
                 }}>
                   Max $100
                 </span>
@@ -355,18 +362,19 @@ export default function VibingDays() {
           </div>
 
           {/* Total number */}
-          <span style={{
-            fontFamily: 'var(--font-code)',
-            fontSize: 12,
+          <span dir="ltr" style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: 13,
             fontWeight: 700,
             color: cumulative
               ? cumulative.hasSub ? '#9B4F96' : '#F59E0B'
               : 'var(--text-soft)',
-            minWidth: 45,
+            minWidth: 50,
             textAlign: isRtl ? 'left' : 'right',
             transition: 'color 0.3s ease',
+            unicodeBidi: 'isolate',
           }}>
-            {cumulative ? `${cumulative.total} ₪` : '—'}
+            {cumulative ? `${cumulative.total}₪` : '—'}
           </span>
         </div>
 

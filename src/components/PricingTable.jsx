@@ -10,7 +10,7 @@ const tiers = [
       { name: 'ChatGPT', note: { he: 'מוגבל בכמות שאילתות', en: 'Limited queries' } },
       { name: 'Gemini', note: { he: 'נדיב יחסית', en: 'Relatively generous' } },
       { name: 'Claude.ai', note: { he: 'מספר שיחות ליום', en: 'A few conversations/day' } },
-      { name: 'GitHub Copilot', note: { he: 'לסטודנטים ו-open source', en: 'Students & open source' } },
+      { name: 'GitHub Copilot Free', note: { he: '50 בקשות agent ו-2K השלמות לחודש', en: '50 agent requests + 2K completions/month' } },
     ],
   },
   {
@@ -19,21 +19,24 @@ const tiers = [
     color: '#0EA5E9',
     price: { he: '$10-20/חודש', en: '$10-20/mo' },
     items: [
-      { name: 'ChatGPT Plus', price: '$20', note: { he: 'מודלים חזקים יותר', en: 'Stronger models' } },
-      { name: 'Claude Pro', price: '$20', note: { he: 'יותר שיחות, מודלים מתקדמים', en: 'More chats, advanced models' } },
+      { name: 'ChatGPT Plus', price: '$20', note: { he: 'מודלים חזקים יותר, כולל Codex', en: 'Stronger models, includes Codex' } },
+      { name: 'Claude Pro', price: '$20', note: { he: 'יותר שיחות, מודלים מתקדמים, Claude Code', en: 'More chats, advanced models, Claude Code' } },
       { name: 'Cursor Pro', price: '$20', note: { he: 'סוכן IDE מלא', en: 'Full IDE agent' } },
-      { name: 'GitHub Copilot', price: '$10-19', note: { he: 'השלמות קוד ב-IDE', en: 'Code completions in IDE' } },
+      { name: 'GitHub Copilot Pro', price: '$10', note: { he: 'השלמות קוד ב-IDE', en: 'Code completions in IDE' } },
+      { name: 'Codex (CLI)', note: { he: 'סוכן הקוד של OpenAI - כלול ב-ChatGPT Plus', en: "OpenAI's coding agent - included with ChatGPT Plus" } },
     ],
   },
   {
     key: 'premium',
     label: { he: 'מנוי פרימיום', en: 'Premium Subscription' },
     color: '#9B4F96',
-    price: { he: '$100-200/חודש', en: '$100-200/mo' },
+    price: { he: '$40-200/חודש', en: '$40-200/mo' },
     items: [
       { name: 'Claude Max', price: '$100-200', note: { he: 'שימוש כבד עם Claude Code', en: 'Heavy use with Claude Code' } },
-      { name: 'ChatGPT Pro', price: '$200', note: { he: 'גישה למודלים החזקים ביותר', en: 'Access to strongest models' } },
-      { name: 'Cursor Business', price: '$40', note: { he: 'לצוותים, יותר שימוש', en: 'For teams, more usage' } },
+      { name: 'ChatGPT Pro', price: '$200', note: { he: 'גישה למודלים החזקים ביותר + Codex Pro', en: 'Access to strongest models + Codex Pro' } },
+      { name: 'GitHub Copilot Pro+', price: '$39', note: { he: '1,500 בקשות פרימיום, כולל Claude Opus', en: '1,500 premium requests, includes Claude Opus' } },
+      { name: 'Cursor Teams', price: '$40', note: { he: 'לצוותים, יותר שימוש', en: 'For teams, more usage' } },
+      { name: 'Codex (Pro)', note: { he: 'שימוש מורחב - כלול ב-ChatGPT Pro', en: 'Extended usage - included with ChatGPT Pro' } },
     ],
   },
   {
@@ -51,8 +54,8 @@ const tiers = [
 ]
 
 const disclaimer = {
-  he: 'המחירים נכונים לתחילת 2026 ועשויים להשתנות. בדקו באתר הספק לפני רכישה.',
-  en: 'Prices are as of early 2026 and may change. Check the provider\'s website before purchasing.',
+  he: 'המחירים נכונים למאי 2026 ועשויים להשתנות. בדקו באתר הספק לפני רכישה.',
+  en: 'Prices are as of May 2026 and may change. Check the provider\'s website before purchasing.',
 }
 
 export default function PricingTable() {

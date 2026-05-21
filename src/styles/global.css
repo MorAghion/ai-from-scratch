@@ -38,6 +38,8 @@ body {
   --bubble-exercise-bg: rgba(74, 124, 89, 0.06);
   --bubble-deep-dive: #C2652A;
   --bubble-deep-dive-bg: rgba(194, 101, 42, 0.06);
+  --bubble-warning: #B45309;
+  --bubble-warning-bg: rgba(245, 158, 11, 0.1);
 
   --font-heading: 'Fraunces', serif;
   --font-body: 'Atkinson Hyperlegible', sans-serif;

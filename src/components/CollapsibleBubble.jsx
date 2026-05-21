@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useLang } from '../App'
-import { MonitorPlay, Barbell, Flask, Ruler, Wrench } from '@phosphor-icons/react'
+import { MonitorPlay, Barbell, Flask, Ruler, Wrench, Warning } from '@phosphor-icons/react'
 
 const bubbleConfig = {
   video: {
@@ -33,10 +33,16 @@ const bubbleConfig = {
     colorVar: '--text-soft',
     bgVar: '--surface',
   },
+  warning: {
+    Icon: Warning,
+    label: { he: 'אזהרה', en: 'Warning' },
+    colorVar: '--bubble-warning',
+    bgVar: '--bubble-warning-bg',
+  },
 }
 
-export default function CollapsibleBubble({ type, label: customLabel, children }) {
-  const [open, setOpen] = useState(false)
+export default function CollapsibleBubble({ type, label: customLabel, children, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen)
   const { lang } = useLang()
   const config = bubbleConfig[type]
 

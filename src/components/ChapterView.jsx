@@ -50,6 +50,11 @@ import SlashCommandsTable from './SlashCommandsTable'
 import MCPServersTable from './MCPServersTable'
 import ClaudePricingTable from './ClaudePricingTable'
 import CommunityProjectsTable from './CommunityProjectsTable'
+import GitHubSetupGuide from './GitHubSetupGuide'
+import Ch14Warning from './Ch14Warning'
+import AuthorNote from './AuthorNote'
+import ClaudeMdExample from './ClaudeMdExample'
+import SkillMdExample from './SkillMdExample'
 
 // Registry of embeddable components (referenced via @@component:Name in .txt files)
 const componentRegistry = {
@@ -98,6 +103,11 @@ const componentRegistry = {
   MCPServersTable,
   ClaudePricingTable,
   CommunityProjectsTable,
+  GitHubSetupGuide,
+  Ch14Warning,
+  AuthorNote,
+  ClaudeMdExample,
+  SkillMdExample,
 }
 
 // Generate a stable slug from heading text (supports Hebrew + English)
