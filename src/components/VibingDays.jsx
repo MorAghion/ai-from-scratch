@@ -28,7 +28,7 @@ const days = [
     apiNote: { he: '', en: '' },
     title: { he: 'יום 2 — שוברת ומתקנת ואז שוב שוברת', en: 'Day 2 — The rabbit hole' },
     details: {
-      he: 'רציתי מנגנון שמזהה את ההקשר של הרשימה ומציע פריטים מתאימים. התחלנו ב-Smart Suggestions, הפך ל-Context Engine, ואז Flexible Memory — וכל פעם שמשהו עבד, שברתי אותו בניסיון לשפר. היום הזה עלה לי 153 ש״ח בטוקנים. על פיצ׳ר אחד.',
+      he: 'רציתי מנגנון שמזהה את ההקשר של הרשימה ומציע פריטים מתאימים. כל פעם שמשהו עבד, שברתי אותו בניסיון לשפר. היום הזה עלה לי 153 ש״ח בטוקנים. על פיצ׳ר אחד.',
       en: 'Wanted a context-aware suggestion engine. Started as Smart Suggestions, became Context Engine, then Flexible Memory — and every time something worked, I broke it trying to improve. This day cost me 153 ILS in tokens. On a single feature.',
     },
     _commits_sample: [
@@ -45,7 +45,7 @@ const days = [
     mood: 'calm',
     title: { he: 'יום 3 — רפקטור וסדר', en: 'Day 3 — Refactor & order' },
     details: {
-      he: 'אחרי הכאוס של אתמול, עצרתי לנשום. במקום לרוץ לפיצ׳ר הבא, ביקשתי מהסוכן לסדר את מה שכבר קיים — מבנה נקי יותר, טיפוסים ברורים, ובניית ה-Task Hub. יום שקט, אבל חשוב.',
+      he: 'אחרי הכאוס של אתמול, עצרתי לנשום. במקום לרוץ לפיצ׳ר הבא, ביקשתי מהסוכן לסדר את מה שכבר קיים — מבנה נקי יותר, משתנים ברורים, ובניית ה-Task Hub. יום שקט, אבל חשוב.',
       en: 'After yesterday\'s chaos, I paused to breathe. Instead of rushing to the next feature, I asked the agent to organize what already existed — cleaner structure, clear types, and building the Task Hub. A quiet day, but an important one.',
     },
     _commits_sample: [
@@ -60,7 +60,7 @@ const days = [
     mood: 'explosion',
     title: { he: 'ימים 4-6 — מרשימת קניות לאפליקציה שלמה', en: 'Days 4-6 — From shopping list to full app' },
     details: {
-      he: 'יום הסדר ב-12.2 לא ממש החזיק מעמד, ככל שהתקדמנו בפיתוח, הכאוס חזר: תוך 4 שעות האפליקציה עברה מהפך - סריקת ברקודים בעברית, מערכת אייקונים, עיצוב מחדש מלא, ואז עוד עיצוב מחדש כי הראשון שבר דברים. הכל רץ, אבל בלי שום תכנון.',
+      he: 'יום הסדר ב-12.2 לא ממש החזיק מעמד, ככל שהתקדמנו בפיתוח, הכאוס חזר: תוך 4 שעות האפליקציה עברה מהפך - סריקת ברקודים בעברית, מערכת אייקונים, עיצוב מחדש, ואז עוד עיצוב מחדש כי הראשון שבר דברים. הכל רץ, אבל בלי שום תכנון.',
       en: 'The cleanup day on 12.2 didn\'t last. As development progressed, the chaos returned: within 4 hours the app was transformed - Hebrew barcode scanning, icon system, full redesign, then another redesign because the first one broke things. Everything ran, but with zero planning.',
     },
     _commits_sample: [

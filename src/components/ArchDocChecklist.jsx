@@ -5,7 +5,7 @@ import { Ruler } from '@phosphor-icons/react'
 const items = [
   { he: 'סטאק טכנולוגי', en: 'Tech stack', desc: { he: 'אילו כלים ולמה (ולמה לא האלטרנטיבות)', en: 'which tools and why (and why not the alternatives)' } },
   { he: 'סכמת בסיס הנתונים', en: 'Database schema', desc: { he: 'טבלאות, קשרים, הרשאות', en: 'tables, relationships, permissions' } },
-  { he: 'זרימת אימות', en: 'Auth flow', desc: { he: 'איך המשתמש נכנס, מה קורה מאחורי הקלעים', en: 'how users log in, what happens behind the scenes' } },
+  { he: 'אותנטיקציה', en: 'Auth flow', desc: { he: 'איך המשתמש נכנס, מה קורה מאחורי הקלעים', en: 'how users log in, what happens behind the scenes' } },
   { he: 'היררכיית קומפוננטות', en: 'Component hierarchy', desc: { he: 'איך ה-UI מאורגן', en: 'how the UI is structured' } },
   { he: 'לוגיקת שרת', en: 'Server logic', desc: { he: 'מה רץ ב server-side ולמה', en: 'what runs server-side and why' } },
 ]

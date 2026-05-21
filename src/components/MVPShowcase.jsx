@@ -22,7 +22,7 @@ const missingGroups = [
   {
     label: { he: 'תהליך', en: 'Process' },
     items: {
-      he: ['בלי טסטים, בלי בקשות משיכה, בלי ענפים', 'כל הקוד נדחף ישירות לענף הראשי'],
+      he: ['בלי טסטים, בלי ענפים', 'כל הקוד נדחף ישירות לענף הראשי'],
       en: ['No tests, no pull requests, no branches', 'All code pushed straight to main'],
     },
   },
